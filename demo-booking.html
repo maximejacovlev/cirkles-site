@@ -744,26 +744,72 @@
   </div>
 
   <script>
-    // ---- Config ----
+    // ── Config ───────────────────────────────────────────────────────────
     const EVENT_TYPE_SLUG = "30min";
+    /** L’API Calendly borne souvent une requête à ~7 jours : on découpe le mois. */
+    const MAX_RANGE_DAYS = 7;
 
-    // ---- State ----
-    let eventTypeUri   = null;
-    let currentYear    = new Date().getFullYear();
-    let currentMonth   = new Date().getMonth();
-    let selectedDate   = null;
-    let selectedSlot   = null;
-    let availableSlots = {};
+    // ── State ────────────────────────────────────────────────────────────
+    let eventTypeUri = null;
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+    let selectedDate = null;
+    /** ISO UTC renvoyé par Calendly pour le créneau choisi */
+    let selectedSlot = null;
+    /** clé jour local YYYY-MM-DD → tableaux start_time ISO, triés */
+    let slotsByDay = {};
 
-    const DAYS_FR   = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
-    const MONTHS_FR = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+    const DAYS_FR = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+    const MONTHS_FR = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
-    // ---- API helpers — appelle ta Vercel Function, pas Calendly directement ----
+    // ── Dates (toujours en calendrier local visiteur) ─────────────────────
+    function localYMD(dt) {
+      const y = dt.getFullYear();
+      const m = String(dt.getMonth() + 1).padStart(2, "0");
+      const d = String(dt.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + d;
+    }
+
+    function tz() {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris";
+    }
+
+    function startOfMonthLocal(y, mo) {
+      return new Date(y, mo, 1, 0, 0, 0, 0);
+    }
+
+    function endOfMonthLocal(y, mo) {
+      return new Date(y, mo + 1, 0, 23, 59, 59, 999);
+    }
+
+    /** Milieu du jour local (évite les dérives UTC sur YYYY-MM-DD parsé à minuit) */
+    function parseDayKey(dayKey) {
+      const parts = dayKey.split("-").map(Number);
+      return new Date(parts[0], parts[1] - 1, parts[2], 12, 0, 0);
+    }
+
+    function mergeAvailabilityIntoBuckets(collection) {
+      (collection || []).forEach(s => {
+        if (!s || !s.start_time) return;
+        const key = localYMD(new Date(s.start_time));
+        if (!slotsByDay[key]) slotsByDay[key] = [];
+        if (!slotsByDay[key].includes(s.start_time)) slotsByDay[key].push(s.start_time);
+      });
+      Object.keys(slotsByDay).forEach(k => {
+        slotsByDay[k].sort();
+      });
+    }
+
+    // ── API (proxy Vercel) ────────────────────────────────────────────────
     async function calendlyGet(path, params = {}) {
       const qs = new URLSearchParams({ path, ...params }).toString();
       const r = await fetch("/api/calendly?" + qs);
-      if (!r.ok) throw new Error("API " + r.status);
-      return r.json();
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok)
+        throw new Error(
+          ((data.title || "") + " " + (data.message || data.error || "HTTP " + r.status)).trim()
+        );
+      return data;
     }
 
     async function calendlyPost(path, body) {
@@ -772,60 +818,108 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-      if (!r.ok) {
-        const err = await r.json().catch(() => ({}));
-        throw new Error(err.message || err.error || "Erreur " + r.status);
-      }
-      return r.json();
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error((data.title || "") + " " + (data.message || data.error || "Erreur " + r.status).trim());
+      return data;
     }
 
-    // ---- Init ----
+    // ── Chargement dispos ────────────────────────────────────────────────
     async function initEventType() {
       const me = await calendlyGet("/users/me");
-      const userUri = me.resource.uri;
+      const userUri = me.resource && me.resource.uri;
+      if (!userUri) throw new Error("Profil Calendly introuvable.");
+
       const events = await calendlyGet("/event_types", {
         user: userUri,
-        count: "100"
+        count: "100",
       });
-      const match = events.collection.find(e =>
-        e.slug === EVENT_TYPE_SLUG || e.scheduling_url.includes(EVENT_TYPE_SLUG)
-      );
-      eventTypeUri = match ? match.uri : (events.collection[0]?.uri || null);
+
+      const col = events.collection || [];
+      if (!col.length) throw new Error("Aucun type d’événement Calendly.");
+
+      const match = col.find(function (e) {
+        return (
+          e.slug === EVENT_TYPE_SLUG ||
+          (e.scheduling_url && e.scheduling_url.includes(EVENT_TYPE_SLUG))
+        );
+      });
+      eventTypeUri = match ? match.uri : col[0].uri;
+      if (!eventTypeUri) throw new Error("Type d’événement introuvable.");
     }
 
-    // ---- Fetch slots ----
-    async function fetchMonthSlots(year, month) {
+    async function fetchAvailabilityWindow(startInclusive, endInclusive) {
       if (!eventTypeUri) return;
-      const start    = new Date(year, month, 1);
-      const end      = new Date(year, month + 1, 0, 23, 59, 59);
-      const startISO = start.toISOString().split("T")[0] + "T00:00:00.000000Z";
-      const endISO   = end.toISOString().split("T")[0]   + "T23:59:59.000000Z";
+      const data = await calendlyGet("/event_type_available_times", {
+        event_type: eventTypeUri,
+        start_time: startInclusive.toISOString(),
+        end_time: endInclusive.toISOString(),
+      });
+      mergeAvailabilityIntoBuckets(data.collection || []);
+    }
 
-      setCalLoading(true);
-      try {
-        const data = await calendlyGet("/event_type_available_times", {
-          event_type: eventTypeUri,
-          start_time: startISO,
-          end_time:   endISO
-        });
-        availableSlots = {};
-        (data.collection || []).forEach(slot => {
-          const d = slot.start_time.split("T")[0];
-          if (!availableSlots[d]) availableSlots[d] = [];
-          availableSlots[d].push(slot.start_time);
-        });
-      } catch(e) {
-        console.error("Slots error:", e);
+    /**
+     * Préchargement indication sur le mois affiché (points sur les jours avec créneaux).
+     * Fenêtres de MAX_RANGE_DAYS jours en instants UTC cohérents.
+     */
+    async function prefetchMonth(year, month) {
+      if (!eventTypeUri) return;
+      slotsByDay = {};
+
+      let cur = startOfMonthLocal(year, month);
+      const hardEnd = endOfMonthLocal(year, month);
+
+      while (cur <= hardEnd) {
+        const chunkEnd = new Date(cur);
+        chunkEnd.setDate(chunkEnd.getDate() + (MAX_RANGE_DAYS - 1));
+        chunkEnd.setHours(23, 59, 59, 999);
+        if (chunkEnd > hardEnd) {
+          chunkEnd.setTime(hardEnd.getTime());
+        }
+        await fetchAvailabilityWindow(cur, chunkEnd);
+        cur = new Date(chunkEnd.getFullYear(), chunkEnd.getMonth(), chunkEnd.getDate() + 1, 0, 0, 0, 0);
       }
-      setCalLoading(false);
+
+      purgeOutsideMonth(year, month);
+    }
+
+    function purgeOutsideMonth(year, month) {
+      Object.keys(slotsByDay).forEach(k => {
+        const p = parseDayKey(k);
+        if (p.getFullYear() !== year || p.getMonth() !== month) delete slotsByDay[k];
+      });
+    }
+
+    /** À l’affichage d’un jour : garantit données à jour pour ce jour (re-fetch léger). */
+    async function loadSlotsForDay(dayKey) {
+      if (!eventTypeUri || !dayKey) return [];
+
+      const p = parseDayKey(dayKey);
+      const lo = new Date(p.getFullYear(), p.getMonth(), p.getDate(), 0, 0, 0, 0);
+      const hi = new Date(p.getFullYear(), p.getMonth(), p.getDate(), 23, 59, 59, 999);
+
+      const data = await calendlyGet("/event_type_available_times", {
+        event_type: eventTypeUri,
+        start_time: lo.toISOString(),
+        end_time: hi.toISOString(),
+      });
+
+      const list = [];
+      (data.collection || []).forEach(s => {
+        if (s && s.start_time && localYMD(new Date(s.start_time)) === dayKey && !list.includes(s.start_time)) {
+          list.push(s.start_time);
+        }
+      });
+      list.sort();
+      slotsByDay[dayKey] = list;
+      return list;
     }
 
     function setCalLoading(on) {
       document.getElementById("calLoading").style.display = on ? "block" : "none";
-      document.getElementById("calGrid").style.display    = on ? "none"  : "grid";
+      document.getElementById("calGrid").style.display = on ? "none" : "grid";
     }
 
-    // ---- Render calendar ----
+    // ── Calendrier ────────────────────────────────────────────────────────
     function renderCalendar() {
       document.getElementById("calMonthTitle").textContent =
         MONTHS_FR[currentMonth] + " " + currentYear;
@@ -840,10 +934,11 @@
         grid.appendChild(el);
       });
 
-      const firstDay    = new Date(currentYear, currentMonth, 1);
+      const firstDay = new Date(currentYear, currentMonth, 1);
       const startOffset = (firstDay.getDay() + 6) % 7;
       const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-      const today       = new Date();
+
+      const today = new Date();
       today.setHours(0, 0, 0, 0);
 
       for (let i = 0; i < startOffset; i++) {
@@ -854,62 +949,118 @@
       }
 
       for (let d = 1; d <= daysInMonth; d++) {
-        const date    = new Date(currentYear, currentMonth, d);
-        const dateStr = date.toISOString().split("T")[0];
-        const isPast  = date < today;
-        const hasSlots = !!availableSlots[dateStr];
+        const dayDate = new Date(currentYear, currentMonth, d);
+        const dateKey = localYMD(dayDate);
+        const isPast = dayDate < today;
+
+        const hasSlotsPrefetch = !!(slotsByDay[dateKey] && slotsByDay[dateKey].length);
 
         const el = document.createElement("button");
         el.textContent = d;
         el.className = "cal-day";
-        if (isPast) el.classList.add("disabled");
-        if (!isPast && date.getTime() === today.getTime()) el.classList.add("today");
-        if (dateStr === selectedDate) el.classList.add("selected");
-        if (!isPast && hasSlots) el.classList.add("has-slots");
-        if (isPast || !hasSlots) el.disabled = true;
+        if (isPast) {
+          el.classList.add("disabled");
+          el.disabled = true;
+        } else {
+          el.disabled = false;
+          el.addEventListener("click", function () {
+            chooseDay(dateKey);
+          });
+        }
+        if (!isPast && hasSlotsPrefetch) el.classList.add("has-slots");
+        if (!isPast && dayDate.getTime() === today.getTime()) el.classList.add("today");
+        if (dateKey === selectedDate) el.classList.add("selected");
 
-        el.addEventListener("click", () => selectDate(dateStr));
         grid.appendChild(el);
       }
     }
 
-    function selectDate(dateStr) {
-      selectedDate = dateStr;
+    async function chooseDay(dayKey) {
+      selectedDate = dayKey;
       selectedSlot = null;
       document.getElementById("btnNext1").disabled = true;
+
+      document.getElementById("slotsSection").style.display = "block";
+      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      });
+
+      const slotGrid = document.getElementById("slotsGrid");
+      slotGrid.innerHTML = "";
+
+      const load = document.createElement("div");
+      load.className = "slots-empty";
+      load.textContent = "Chargement des horaires…";
+      slotGrid.appendChild(load);
+
       renderCalendar();
-      renderSlots(dateStr);
+
+      try {
+        const slots = await loadSlotsForDay(dayKey);
+        slotGrid.innerHTML = "";
+        if (!slots.length) {
+          const msg = document.createElement("div");
+          msg.className = "slots-empty";
+          msg.textContent = "Aucun créneau disponible ce jour.";
+          slotGrid.appendChild(msg);
+        } else {
+          slots.forEach(function (iso) {
+            const t = new Date(iso);
+            const label = t.toLocaleTimeString("fr-FR", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            const btn = document.createElement("button");
+            btn.className = "slot-btn";
+            if (iso === selectedSlot) btn.classList.add("selected");
+            btn.textContent = label;
+            btn.addEventListener("click", function () {
+              selectSlot(iso);
+            });
+            slotGrid.appendChild(btn);
+          });
+        }
+        renderCalendar();
+      } catch (e) {
+        console.error(e);
+        slotGrid.innerHTML = "";
+        const msg = document.createElement("div");
+        msg.className = "slots-empty";
+        msg.textContent = "Impossible de charger les horaires.";
+        slotGrid.appendChild(msg);
+      }
     }
 
-    // ---- Render slots ----
-    function renderSlots(dateStr) {
-      const section = document.getElementById("slotsSection");
-      const grid    = document.getElementById("slotsGrid");
-      const title   = document.getElementById("slotsTitle");
-      section.style.display = "block";
-
-      const d = new Date(dateStr + "T00:00:00");
-      title.textContent = d.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
-
+    function renderSlots(dayKey) {
+      const grid = document.getElementById("slotsGrid");
       grid.innerHTML = "";
-      const slots = availableSlots[dateStr] || [];
 
+      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      });
+
+      const slots = slotsByDay[dayKey] || [];
       if (!slots.length) {
         const msg = document.createElement("div");
         msg.className = "slots-empty";
-        msg.textContent = "Aucun créneau disponible ce jour.";
+        msg.textContent = "Sélectionnez un jour.";
         grid.appendChild(msg);
         return;
       }
-
-      slots.forEach(iso => {
-        const t     = new Date(iso);
-        const label = t.toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
-        const btn   = document.createElement("button");
+      slots.forEach(function (iso) {
+        const t = new Date(iso);
+        const label = t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+        const btn = document.createElement("button");
         btn.className = "slot-btn";
         if (iso === selectedSlot) btn.classList.add("selected");
         btn.textContent = label;
-        btn.addEventListener("click", () => selectSlot(iso));
+        btn.addEventListener("click", function () {
+          selectSlot(iso);
+        });
         grid.appendChild(btn);
       });
     }
@@ -918,57 +1069,89 @@
       selectedSlot = iso;
       document.getElementById("btnNext1").disabled = false;
       renderSlots(selectedDate);
+      renderCalendar();
     }
 
-    // ---- Navigation mois ----
-    document.getElementById("prevMonth").addEventListener("click", async () => {
-      const prev = new Date(currentYear, currentMonth - 1, 1);
-      if (prev < new Date(new Date().getFullYear(), new Date().getMonth(), 1)) return;
-      currentMonth = prev.getMonth();
-      currentYear  = prev.getFullYear();
-      await fetchMonthSlots(currentYear, currentMonth);
+    // ── Navigation mois ────────────────────────────────────────────────────
+    document.getElementById("prevMonth").addEventListener("click", async function () {
+      const prevMonthStart = startOfMonthLocal(currentYear, currentMonth - 1);
+      const earliest = startOfMonthLocal(new Date().getFullYear(), new Date().getMonth());
+      if (prevMonthStart < earliest) return;
+      currentMonth = prevMonthStart.getMonth();
+      currentYear = prevMonthStart.getFullYear();
+
+      selectedDate = null;
+      selectedSlot = null;
+      document.getElementById("btnNext1").disabled = true;
+      document.getElementById("slotsSection").style.display = "none";
+
+      setCalLoading(true);
+      try {
+        await prefetchMonth(currentYear, currentMonth);
+      } finally {
+        setCalLoading(false);
+      }
       renderCalendar();
     });
 
-    document.getElementById("nextMonth").addEventListener("click", async () => {
+    document.getElementById("nextMonth").addEventListener("click", async function () {
       currentMonth++;
-      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-      await fetchMonthSlots(currentYear, currentMonth);
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      selectedDate = null;
+      selectedSlot = null;
+      document.getElementById("btnNext1").disabled = true;
+      document.getElementById("slotsSection").style.display = "none";
+
+      setCalLoading(true);
+      try {
+        await prefetchMonth(currentYear, currentMonth);
+      } finally {
+        setCalLoading(false);
+      }
       renderCalendar();
     });
 
-    // ---- Steps ----
-    document.getElementById("btnNext1").addEventListener("click", () => {
+    // ── Étapes ────────────────────────────────────────────────────────────
+    document.getElementById("btnNext1").addEventListener("click", function () {
+      if (!selectedSlot) return;
       goToStep(2);
       const t = new Date(selectedSlot);
       document.getElementById("selectedSlotDisplay").innerHTML =
         "Créneau sélectionné : <strong>" +
-        t.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" }) +
-        " à " + t.toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" }) +
+        t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
+        " à " +
+        t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) +
         "</strong>";
     });
 
-    document.getElementById("btnBack").addEventListener("click", () => goToStep(1));
+    document.getElementById("btnBack").addEventListener("click", function () {
+      goToStep(1);
+    });
 
     function goToStep(n) {
-      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".step").forEach(function (s) {
+        s.classList.remove("active");
+      });
       document.getElementById("step" + n).classList.add("active");
-      [1, 2, 3].forEach(i => {
-        const d  = document.getElementById("dot" + i);
-        const d2 = document.getElementById("dot" + i + "b");
-        if (d)  d.classList.toggle("active", i === n);
-        if (d2) d2.classList.toggle("active", i === n);
+      [1, 2, 3].forEach(function (i) {
+        const dot = document.getElementById("dot" + i);
+        const dotB = document.getElementById("dot" + i + "b");
+        if (dot) dot.classList.toggle("active", i === n);
+        if (dotB) dotB.classList.toggle("active", i === n);
       });
     }
 
-    // ---- Submit ----
-    document.getElementById("btnSubmit").addEventListener("click", async () => {
-      const nom        = document.getElementById("fieldNom").value.trim();
-      const prenom     = document.getElementById("fieldPrenom").value.trim();
+    // ── Confirmation (Scheduling API : POST /invitees) ────────────────────
+    document.getElementById("btnSubmit").addEventListener("click", async function () {
+      const nom = document.getElementById("fieldNom").value.trim();
+      const prenom = document.getElementById("fieldPrenom").value.trim();
       const entreprise = document.getElementById("fieldEntreprise").value.trim();
-      const email      = document.getElementById("fieldEmail").value.trim();
-      const message    = document.getElementById("fieldMessage").value.trim();
-      const errorEl    = document.getElementById("formError");
+      const email = document.getElementById("fieldEmail").value.trim();
+      const message = document.getElementById("fieldMessage").value.trim();
+      const errorEl = document.getElementById("formError");
 
       errorEl.classList.remove("show");
 
@@ -982,59 +1165,49 @@
         errorEl.classList.add("show");
         return;
       }
+      if (!selectedSlot || !eventTypeUri) {
+        errorEl.textContent = "Sélection de créneau manquante. Revenir à l’étape précédente.";
+        errorEl.classList.add("show");
+        return;
+      }
 
       document.getElementById("btnSubmit").disabled = true;
       document.getElementById("submitLabel").textContent = "Confirmation en cours…";
       document.getElementById("submitArrow").style.display = "none";
       document.getElementById("submitSpinner").style.display = "block";
 
+      const displayName = prenom + " " + nom + " — " + entreprise;
+
       try {
-        const payload = {
+        const inviteeBody = {
+          event_type: eventTypeUri,
           start_time: selectedSlot,
-          event_type_uuid: eventTypeUri.split("/").pop(),
           invitee: {
-            name:     prenom + " " + nom,
-            email:    email,
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            email: email,
+            name: displayName.length > 200 ? displayName.slice(0, 200) : displayName,
+            timezone: tz(),
           },
-          questions_and_answers: [
-            { question: "Entreprise", answer: entreprise },
-            ...(message ? [{ question: "Message", answer: message }] : [])
-          ]
         };
 
-        await calendlyPost("/one_off_event_types", {
-          name:            "Démo Cirkles",
-          host:            eventTypeUri,
-          co_hosts:        [],
-          start_time:      selectedSlot,
-          end_time:        new Date(new Date(selectedSlot).getTime() + 30*60000).toISOString(),
-          location:        { kind: "zoom" },
-          invitees_emails: [email]
-        }).catch(() => null);
+        if (message) {
+          inviteeBody.tracking = { utm_content: message.slice(0, 120) };
+        }
 
-        // Booking principal
-        const result = await calendlyPost("/scheduled_events/" + eventTypeUri.split("/").pop() + "/invitees", {
-          email:    email,
-          name:     prenom + " " + nom,
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          custom_question_and_answers: [
-            { question: "Entreprise", answer: entreprise },
-            ...(message ? [{ question: "Message", answer: message }] : [])
-          ]
-        });
+        await calendlyPost("/invitees", inviteeBody);
 
         const t = new Date(selectedSlot);
         document.getElementById("successText").innerHTML =
-          "Un email de confirmation a été envoyé à <strong>" + email + "</strong>.<br>" +
-          "Rendez-vous le " +
-          t.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" }) +
-          " à " + t.toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" }) + ".";
+          "Un email de confirmation a été envoyé à <strong>" +
+          email +
+          "</strong>.<br>Rendez-vous le " +
+          t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
+          " à " +
+          t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) +
+          ".";
 
         document.getElementById("step2").classList.remove("active");
         document.getElementById("successState").classList.add("show");
-
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         document.getElementById("btnSubmit").disabled = false;
         document.getElementById("submitLabel").textContent = "Confirmer le rendez-vous";
@@ -1045,15 +1218,19 @@
       }
     });
 
-    // ---- Boot ----
-    (async () => {
+    // ── Démarrage ──────────────────────────────────────────────────────────
+    (async function boot() {
       try {
         await initEventType();
-        await fetchMonthSlots(currentYear, currentMonth);
+        setCalLoading(true);
+        await prefetchMonth(currentYear, currentMonth);
+        setCalLoading(false);
         renderCalendar();
-      } catch(e) {
+      } catch (e) {
         console.error("Boot error:", e);
-        document.getElementById("calLoading").textContent = "Erreur de chargement. Vérifiez la configuration.";
+        setCalLoading(false);
+        document.getElementById("calLoading").textContent =
+          "Erreur de chargement. Vérifiez Calendly, le token et le slug (« " + EVENT_TYPE_SLUG + " »).";
         document.getElementById("calLoading").style.display = "block";
       }
     })();
