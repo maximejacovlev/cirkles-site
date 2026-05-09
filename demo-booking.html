@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demandez une Démo — Cirkles.ai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter+Tight:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ============================================
+       ⚙️  CONFIG — remplace les deux valeurs ci-dessous
+       dans Cursor avant de déployer
+    ============================================ */
+    /* Les vraies valeurs sont injectées via JS plus bas */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-heading: 'Fraunces', serif;
+      --font-body: 'Inter Tight', sans-serif;
+    }
+
+    html,
+    body {
+      background: #fff;
+      color: #000;
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ---- liquid glass ---- */
+    .glass {
+      background: rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.2px;
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.06) 20%,
+          rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 55%,
+          rgba(0, 0, 0, 0.06) 80%, rgba(0, 0, 0, 0.16) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .glass-strong {
+      background: rgba(0, 0, 0, 0.065);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(0, 0, 0, 0.07);
+    }
+
+    .glass-strong::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.2px;
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.08) 20%,
+          rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 55%,
+          rgba(0, 0, 0, 0.08) 80%, rgba(0, 0, 0, 0.20) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ---- layout ---- */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+
+    /* subtle bg radial */
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(55% 40% at 20% 10%, rgba(0, 0, 0, 0.03) 0%, transparent 60%),
+        radial-gradient(50% 40% at 80% 90%, rgba(0, 0, 0, 0.025) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ---- navbar ---- */
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-back:hover {
+      color: #000;
+    }
+
+    /* ---- booking wrapper ---- */
+    .booking-wrapper {
+      width: 100%;
+      max-width: 960px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 700px) {
+      .booking-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-left {
+        display: none;
+      }
+    }
+
+    /* ---- LEFT PANEL ---- */
+    .booking-left {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.035);
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .booking-left h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: #000;
+    }
+
+    .booking-left p {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.55);
+    }
+
+    .meta-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.50);
+    }
+
+    .meta-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.06);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .meta-icon svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .trust-badges {
+      margin-top: auto;
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.40);
+    }
+
+    .trust-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.20);
+      flex-shrink: 0;
+    }
+
+    /* ---- RIGHT PANEL ---- */
+    .booking-right {
+      padding: 40px 36px;
+      background: #fff;
+    }
+
+    /* ---- STEPS ---- */
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    /* step indicator */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.15);
+      transition: background .3s, transform .3s;
+    }
+
+    .step-dot.active {
+      background: #000;
+      transform: scale(1.3);
+    }
+
+    .step-label {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.35);
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-left: 4px;
+    }
+
+    /* ---- CALENDAR ---- */
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .cal-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 400;
+      color: #000;
+    }
+
+    .cal-nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    .cal-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background .2s;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .cal-btn:hover {
+      background: rgba(0, 0, 0, 0.10);
+    }
+
+    .cal-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+
+    .cal-day-name {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.30);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 0 8px;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s, color .15s, transform .15s;
+      color: rgba(0, 0, 0, 0.75);
+      border: none;
+      background: transparent;
+    }
+
+    .cal-day:hover:not(.disabled):not(.empty) {
+      background: rgba(0, 0, 0, 0.06);
+      transform: scale(1.05);
+    }
+
+    .cal-day.today {
+      background: rgba(0, 0, 0, 0.05);
+      font-weight: 600;
+    }
+
+    .cal-day.selected {
+      background: #000 !important;
+      color: #fff !important;
+      transform: scale(1.05);
+    }
+
+    .cal-day.disabled {
+      color: rgba(0, 0, 0, 0.18);
+      cursor: default;
+    }
+
+    .cal-day.empty {
+      cursor: default;
+    }
+
+    .cal-day.has-slots::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .cal-day {
+      position: relative;
+    }
+
+    .cal-day.selected::after {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ---- SLOTS ---- */
+    .slots-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.35);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-height: 180px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .slots-grid::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .slots-grid::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 999px;
+    }
+
+    .slot-btn {
+      padding: 10px 4px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.04);
+      transition: background .15s, color .15s, transform .15s;
+      text-align: center;
+    }
+
+    .slot-btn:hover {
+      background: rgba(0, 0, 0, 0.09);
+      transform: scale(1.03);
+    }
+
+    .slot-btn.selected {
+      background: #000;
+      color: #fff;
+    }
+
+    .slots-loading,
+    .slots-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.35);
+    }
+
+    /* ---- FORM ---- */
+    .form-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.40);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .form-subtitle strong {
+      color: rgba(0, 0, 0, 0.65);
+      font-weight: 500;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .form-group.full {
+      grid-column: 1/-1;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.40);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: none;
+      background: rgba(0, 0, 0, 0.04);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: #000;
+      outline: none;
+      transition: background .2s, box-shadow .2s;
+      -webkit-appearance: none;
+    }
+
+    .form-input::placeholder {
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    .form-input:focus {
+      background: rgba(0, 0, 0, 0.065);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+    }
+
+    textarea.form-input {
+      resize: none;
+      height: 90px;
+      line-height: 1.5;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      background: #000;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s, transform .15s;
+      margin-top: 8px;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary:disabled {
+      background: rgba(0, 0, 0, 0.25);
+      cursor: default;
+    }
+
+    .btn-next {
+      margin-top: 24px;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.06);
+      color: rgba(0, 0, 0, 0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s, color .2s;
+    }
+
+    .btn-next:hover {
+      background: rgba(0, 0, 0, 0.10);
+      color: #000;
+    }
+
+    .btn-next:disabled {
+      opacity: .4;
+      cursor: default;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.40);
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 20px;
+      transition: color .2s;
+    }
+
+    .btn-back:hover {
+      color: #000;
+    }
+
+    /* ---- SUCCESS ---- */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 32px 0;
+      gap: 16px;
+    }
+
+    .success-state.show {
+      display: flex;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.05);
+      display: grid;
+      place-items: center;
+    }
+
+    .success-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .success-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 400;
+      color: #000;
+    }
+
+    .success-text {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.50);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    /* ---- ERROR ---- */
+    .error-msg {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(200, 0, 0, 0.05);
+      font-size: 12px;
+      color: rgba(180, 0, 0, 0.75);
+    }
+
+    .error-msg.show {
+      display: block;
+    }
+
+    /* ---- SPINNER ---- */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 999px;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+
+    .spinner.dark {
+      border-color: rgba(0, 0, 0, 0.15);
+      border-top-color: #000;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* fade-in */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeUp .4s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="Landing Page.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5" />
+        <path d="M12 5l-7 7 7 7" />
+      </svg>
+      Retour
+    </a>
+    <img src="images/cirkles-logo-white.png" alt="Cirkles.ai" style="height:32px; filter:invert(1); opacity:.7;" />
+  </nav>
+
+  <div class="page">
+    <div class="booking-wrapper glass fade-in">
+
+      <!-- LEFT -->
+      <div class="booking-left">
+        <div>
+          <div
+            style="font-size:11px;font-weight:600;color:rgba(0,0,0,0.35);letter-spacing:.07em;text-transform:uppercase;margin-bottom:16px;">
+            Cirkles.ai</div>
+          <h1>Découvrez comment l'IA collective protège votre organisation.</h1>
+          <p>Une démonstration personnalisée de 30 minutes avec un expert. Sans engagement.</p>
+
+          <div class="meta-list">
+            <div class="meta-item">
+              <div class="meta-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+              </div>
+              30 minutes
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.71a19.86 19.86 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z" />
+                </svg>
+              </div>
+              Visioconférence
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              Conformité RGPD
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="booking-right">
+
+        <!-- SUCCESS -->
+        <div class="success-state" id="successState">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+          <div class="success-title">Rendez-vous confirmé !</div>
+          <p class="success-text" id="successText">Un email de confirmation vous a été envoyé avec le lien de la
+            visioconférence.</p>
+          <a href="Landing Page.html"
+            style="margin-top:8px;font-size:13px;color:rgba(0,0,0,0.4);text-decoration:none;">← Retour à l'accueil</a>
+        </div>
+
+        <!-- STEP 1 — Calendrier -->
+        <div class="step active" id="step1">
+          <div class="step-indicator">
+            <div class="step-dot active" id="dot1"></div>
+            <div class="step-dot" id="dot2"></div>
+            <div class="step-dot" id="dot3"></div>
+            <span class="step-label">Choisissez une date</span>
+          </div>
+
+          <!-- Calendar -->
+          <div class="cal-header">
+            <div class="cal-title" id="calMonthTitle"></div>
+            <div class="cal-nav">
+              <button class="cal-btn" id="prevMonth" title="Mois précédent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button class="cal-btn" id="nextMonth" title="Mois suivant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="cal-grid" id="calGrid"></div>
+
+          <!-- Slots -->
+          <div id="slotsSection" style="display:none;">
+            <div class="slots-title" id="slotsTitle"></div>
+            <div class="slots-grid" id="slotsGrid"></div>
+          </div>
+
+          <button class="btn-next" id="btnNext1" disabled>
+            Continuer
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- STEP 2 — Formulaire -->
+        <div class="step" id="step2">
+          <div class="step-indicator">
+            <div class="step-dot" id="dot1b"></div>
+            <div class="step-dot active" id="dot2b"></div>
+            <div class="step-dot" id="dot3b"></div>
+            <span class="step-label">Vos informations</span>
+          </div>
+
+          <button class="btn-back" id="btnBack">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5" />
+              <path d="M12 5l-7 7 7 7" />
+            </svg>
+            Retour
+          </button>
+
+          <div class="form-title">Vos coordonnées</div>
+          <p class="form-subtitle" id="selectedSlotDisplay"></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fieldNom">Nom</label>
+              <input type="text" id="fieldNom" class="form-input" placeholder="Dupont" autocomplete="family-name" />
+            </div>
+            <div class="form-group">
+              <label for="fieldPrenom">Prénom</label>
+              <input type="text" id="fieldPrenom" class="form-input" placeholder="Marie" autocomplete="given-name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fieldEntreprise">Entreprise</label>
+            <input type="text" id="fieldEntreprise" class="form-input" placeholder="Banque Méridien"
+              autocomplete="organization" />
+          </div>
+
+          <div class="form-group">
+            <label for="fieldEmail">Adresse email</label>
+            <input type="email" id="fieldEmail" class="form-input" placeholder="marie.dupont@banque.fr"
+              autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="fieldMessage">Message <span
+                style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(0,0,0,0.25);">(optionnel)</span></label>
+            <textarea id="fieldMessage" class="form-input" placeholder="Décrivez brièvement votre contexte…"></textarea>
+          </div>
+
+          <div class="error-msg" id="formError"></div>
+
+          <button class="btn-primary" id="btnSubmit">
+            <span id="submitLabel">Confirmer le rendez-vous</span>
+            <div class="spinner" id="submitSpinner"></div>
+            <svg id="submitArrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </button>
+        </div>
+
+      </div><!-- /booking-right -->
+    </div><!-- /booking-wrapper -->
+  </div><!-- /page -->
+
+  <script>
+    // ============================================================
+    //  ⚙️  CONFIG — REMPLACE CES DEUX VALEURS DANS CURSOR
+    // ============================================================
+    const CALENDLY_TOKEN = "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzc4MjYxNzI4LCJqdGkiOiI3YWNiNTA1Mi01Yzg4LTQ3MzctYjg1NC0wOTUyY2NmN2ZjMDQiLCJ1c2VyX3V1aWQiOiI2Yjg5OGEzOC0yYTFlLTQwYWYtYWM1YS0zOTBjYzZiNjI0MGUiLCJzY29wZSI6ImF2YWlsYWJpbGl0eTpyZWFkIGF2YWlsYWJpbGl0eTp3cml0ZSBldmVudF90eXBlczpyZWFkIGV2ZW50X3R5cGVzOndyaXRlIGxvY2F0aW9uczpyZWFkIHJvdXRpbmdfZm9ybXM6cmVhZCBzaGFyZXM6d3JpdGUgc2NoZWR1bGVkX2V2ZW50czpyZWFkIHNjaGVkdWxlZF9ldmVudHM6d3JpdGUgc2NoZWR1bGluZ19saW5rczp3cml0ZSBncm91cHM6cmVhZCBvcmdhbml6YXRpb25zOnJlYWQgb3JnYW5pemF0aW9uczp3cml0ZSB1c2VyczpyZWFkIGFjdGl2aXR5X2xvZzpyZWFkIGRhdGFfY29tcGxpYW5jZTp3cml0ZSBvdXRnb2luZ19jb21tdW5pY2F0aW9uczpyZWFkIHdlYmhvb2tzOnJlYWQgd2ViaG9va3M6d3JpdGUifQ.F2fUiwN4DAUvkWrB-Gm5j-6cn9_NxMj00vZaq0B69Jsu9yUYlzwdLNpEiSOPFMHY0TwUbMZ1RKcf0GZGx43sdA";
+    const CALENDLY_USERNAME = "maxime-jacovlev-cirkles"; // extrait de ton lien calendly.com/...
+    const EVENT_TYPE_SLUG = "30min";                   // extrait de ton lien calendly.com/.../30min
+    // ============================================================
+
+    // ---- State ----
+    let eventTypeUri = null;
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth(); // 0-indexed
+    let selectedDate = null;  // "YYYY-MM-DD"
+    let selectedSlot = null;  // ISO string
+    let availableSlots = {};    // { "YYYY-MM-DD": [iso, iso, ...] }
+
+    const DAYS_FR = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+    const MONTHS_FR = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+    // ---- API helpers ----
+    async function calendlyGet(path) {
+      const fullUrl = "https://api.calendly.com" + path;
+      const r = await fetch("https://corsproxy.io/?" + encodeURIComponent(fullUrl), {
+        headers: {
+          "Authorization": "Bearer " + CALENDLY_TOKEN,
+          "Content-Type": "application/json"
+        }
+      });
+      if (!r.ok) throw new Error("Calendly API " + r.status);
+      return r.json();
+    }
+
+    async function calendlyPost(path, body) {
+      const fullUrl = "https://api.calendly.com" + path;
+      const r = await fetch("https://corsproxy.io/?" + encodeURIComponent(fullUrl), {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + CALENDLY_TOKEN,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        throw new Error(err.message || "Erreur " + r.status);
+      }
+      return r.json();
+    }
+
+    // ---- Init : récupère l'Event Type URI ----
+    async function initEventType() {
+      try {
+        const me = await calendlyGet("/users/me");
+        const userUri = me.resource.uri;
+        const events = await calendlyGet("/event_types?user=" + encodeURIComponent(userUri) + "&count=100");
+        const match = events.collection.find(e =>
+          e.slug === EVENT_TYPE_SLUG || e.scheduling_url.includes(EVENT_TYPE_SLUG)
+        );
+        if (match) eventTypeUri = match.uri;
+        else console.warn("Event type non trouvé, utilisation du premier disponible");
+        if (!eventTypeUri && events.collection.length) eventTypeUri = events.collection[0].uri;
+      } catch (e) {
+        console.error("Init error:", e);
+      }
+    }
+
+    // ---- Fetch slots for a month ----
+    async function fetchMonthSlots(year, month) {
+      if (!eventTypeUri) return;
+      const start = new Date(year, month, 1);
+      const end = new Date(year, month + 1, 0, 23, 59, 59);
+      const startISO = start.toISOString().split("T")[0] + "T00:00:00.000000Z";
+      const endISO = end.toISOString().split("T")[0] + "T23:59:59.000000Z";
+
+      try {
+        const data = await calendlyGet(
+          "/event_type_available_times?event_type=" + encodeURIComponent(eventTypeUri) +
+          "&start_time=" + encodeURIComponent(startISO) +
+          "&end_time=" + encodeURIComponent(endISO)
+        );
+        availableSlots = {};
+        (data.collection || []).forEach(slot => {
+          const d = slot.start_time.split("T")[0];
+          if (!availableSlots[d]) availableSlots[d] = [];
+          availableSlots[d].push(slot.start_time);
+        });
+      } catch (e) {
+        console.error("Slots fetch error:", e);
+      }
+    }
+
+    // ---- Render calendar ----
+    function renderCalendar() {
+      document.getElementById("calMonthTitle").textContent =
+        MONTHS_FR[currentMonth] + " " + currentYear;
+
+      const grid = document.getElementById("calGrid");
+      grid.innerHTML = "";
+
+      // Day headers (lundi = 0)
+      DAYS_FR.forEach(d => {
+        const el = document.createElement("div");
+        el.className = "cal-day-name";
+        el.textContent = d;
+        grid.appendChild(el);
+      });
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      // getDay() : 0=dim, ajuste pour lundi=0
+      let startOffset = (firstDay.getDay() + 6) % 7;
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // empty cells
+      for (let i = 0; i < startOffset; i++) {
+        const el = document.createElement("button");
+        el.className = "cal-day empty";
+        el.disabled = true;
+        grid.appendChild(el);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(currentYear, currentMonth, d);
+        const dateStr = date.toISOString().split("T")[0];
+        const isPast = date < today;
+        const hasSlots = !!availableSlots[dateStr];
+
+        const el = document.createElement("button");
+        el.textContent = d;
+        el.className = "cal-day";
+        if (isPast) el.classList.add("disabled");
+        if (!isPast && date.getTime() === today.getTime()) el.classList.add("today");
+        if (dateStr === selectedDate) el.classList.add("selected");
+        if (!isPast && hasSlots) el.classList.add("has-slots");
+        if (isPast || !hasSlots) el.disabled = true;
+
+        el.addEventListener("click", () => selectDate(dateStr));
+        grid.appendChild(el);
+      }
+    }
+
+    function selectDate(dateStr) {
+      selectedDate = dateStr;
+      selectedSlot = null;
+      document.getElementById("btnNext1").disabled = true;
+      renderCalendar();
+      renderSlots(dateStr);
+    }
+
+    // ---- Render slots ----
+    function renderSlots(dateStr) {
+      const section = document.getElementById("slotsSection");
+      const grid = document.getElementById("slotsGrid");
+      const title = document.getElementById("slotsTitle");
+      section.style.display = "block";
+
+      const d = new Date(dateStr + "T00:00:00");
+      title.textContent = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+
+      grid.innerHTML = "";
+      const slots = availableSlots[dateStr] || [];
+
+      if (!slots.length) {
+        const msg = document.createElement("div");
+        msg.className = "slots-empty";
+        msg.textContent = "Aucun créneau disponible ce jour.";
+        grid.appendChild(msg);
+        return;
+      }
+
+      slots.forEach(iso => {
+        const t = new Date(iso);
+        const label = t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+        const btn = document.createElement("button");
+        btn.className = "slot-btn";
+        if (iso === selectedSlot) btn.classList.add("selected");
+        btn.textContent = label;
+        btn.addEventListener("click", () => selectSlot(iso));
+        grid.appendChild(btn);
+      });
+    }
+
+    function selectSlot(iso) {
+      selectedSlot = iso;
+      document.getElementById("btnNext1").disabled = false;
+      renderSlots(selectedDate);
+    }
+
+    // ---- Navigation ----
+    document.getElementById("prevMonth").addEventListener("click", async () => {
+      const prev = new Date(currentYear, currentMonth - 1, 1);
+      if (prev < new Date(new Date().getFullYear(), new Date().getMonth(), 1)) return;
+      currentMonth = prev.getMonth();
+      currentYear = prev.getFullYear();
+      await fetchMonthSlots(currentYear, currentMonth);
+      renderCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", async () => {
+      currentMonth++;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      await fetchMonthSlots(currentYear, currentMonth);
+      renderCalendar();
+    });
+
+    // ---- Step transitions ----
+    document.getElementById("btnNext1").addEventListener("click", () => {
+      goToStep(2);
+      const t = new Date(selectedSlot);
+      document.getElementById("selectedSlotDisplay").innerHTML =
+        "Créneau sélectionné : <strong>" +
+        t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
+        " à " + t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) +
+        "</strong>";
+    });
+
+    document.getElementById("btnBack").addEventListener("click", () => goToStep(1));
+
+    function goToStep(n) {
+      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.getElementById("step" + n).classList.add("active");
+      // dots
+      [1, 2, 3].forEach(i => {
+        const d = document.getElementById("dot" + i);
+        const d2 = document.getElementById("dot" + i + "b");
+        if (d) d.classList.toggle("active", i === n);
+        if (d2) d2.classList.toggle("active", i === n);
+      });
+    }
+
+    // ---- Submit ----
+    document.getElementById("btnSubmit").addEventListener("click", async () => {
+      const nom = document.getElementById("fieldNom").value.trim();
+      const prenom = document.getElementById("fieldPrenom").value.trim();
+      const entreprise = document.getElementById("fieldEntreprise").value.trim();
+      const email = document.getElementById("fieldEmail").value.trim();
+      const message = document.getElementById("fieldMessage").value.trim();
+      const errorEl = document.getElementById("formError");
+
+      errorEl.classList.remove("show");
+
+      if (!nom || !prenom || !entreprise || !email) {
+        errorEl.textContent = "Merci de remplir tous les champs obligatoires.";
+        errorEl.classList.add("show");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = "Adresse email invalide.";
+        errorEl.classList.add("show");
+        return;
+      }
+
+      // Loading state
+      document.getElementById("btnSubmit").disabled = true;
+      document.getElementById("submitLabel").textContent = "Confirmation en cours…";
+      document.getElementById("submitArrow").style.display = "none";
+      document.getElementById("submitSpinner").style.display = "block";
+
+      try {
+        // Build invitee payload for Calendly Scheduling API
+        const payload = {
+          start_time: selectedSlot,
+          invitee: {
+            name: prenom + " " + nom,
+            email: email,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+          },
+          custom_answers: []
+        };
+
+        // Add custom questions answers if the event type has them
+        if (entreprise) {
+          payload.invitee.custom_answers = payload.invitee.custom_answers || [];
+          payload.questions_and_answers = [
+            { question: "Entreprise", answer: entreprise },
+            ...(message ? [{ question: "Message", answer: message }] : [])
+          ];
+        }
+
+        await calendlyPost("/scheduling_links", {
+          max_event_count: 1,
+          owner: eventTypeUri,
+          owner_type: "EventType"
+        }).catch(() => null); // fallback if scheduling links not needed
+
+        // Direct booking via Scheduling API
+        const result = await calendlyPost("/event_invitees", payload);
+
+        // Success
+        const t = new Date(selectedSlot);
+        document.getElementById("successText").innerHTML =
+          "Un email de confirmation a été envoyé à <strong>" + email + "</strong>.<br>" +
+          "Rendez-vous le " +
+          t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
+          " à " + t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) + ".";
+
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("successState").classList.add("show");
+
+      } catch (e) {
+        console.error(e);
+        document.getElementById("btnSubmit").disabled = false;
+        document.getElementById("submitLabel").textContent = "Confirmer le rendez-vous";
+        document.getElementById("submitArrow").style.display = "";
+        document.getElementById("submitSpinner").style.display = "none";
+        errorEl.textContent = "Une erreur est survenue : " + (e.message || "réessayez.");
+        errorEl.classList.add("show");
+      }
+    });
+
+    // ---- Boot ----
+    (async () => {
+      await initEventType();
+      await fetchMonthSlots(currentYear, currentMonth);
+      renderCalendar();
+    })();
+  </script>
+</body>
+
+</html>
