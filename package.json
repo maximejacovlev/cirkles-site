@@ -1,0 +1,14 @@
+{
+  "name": "cirkles-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "serve . -p 3000",
+    "serve": "serve . -p 3000",
+    "dev:vercel": "vercel dev --listen 3000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5",
+    "vercel": "^41.0.2"
+  }
+}
