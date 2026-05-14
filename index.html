@@ -579,6 +579,946 @@
         cursor: pointer;
         z-index: 2;
       }
+
+      /* POURQUOI CIRKLES — popup plein écran */
+      .pq-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: none;
+        background: #fff;
+      }
+      .pq-modal.open {
+        display: block;
+      }
+      .pq-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+      }
+      .pq-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(0, 0, 0, 0.07);
+        z-index: 210;
+      }
+      .pq-progress-fill {
+        height: 100%;
+        background: #000;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+      .pq-close {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 210;
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.06);
+        color: #000;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .pq-close:hover {
+        background: rgba(0, 0, 0, 0.12);
+        transform: scale(1.05);
+      }
+      .pq-cta-float {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 210;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #000;
+        color: #fff;
+        border-radius: 999px;
+        padding: 12px 20px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.4s ease 0.6s,
+          transform 0.4s ease 0.6s,
+          background 0.2s,
+          box-shadow 0.2s;
+      }
+      .pq-modal.open .pq-cta-float {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pq-cta-float:hover {
+        background: rgba(0, 0, 0, 0.85);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+      }
+      /* scroll instantané : le carrousel 3D est lié au scroll ; le smooth créait du lag */
+      .pq-scroll {
+        position: relative;
+        z-index: 205;
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .pq-scroll::-webkit-scrollbar {
+        width: 4px;
+      }
+      .pq-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 999px;
+      }
+      .pq-section {
+        position: relative;
+        padding: 120px 64px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      @media (max-width: 768px) {
+        .pq-section {
+          padding: 80px 24px;
+        }
+      }
+      .pq-section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.4);
+        margin-bottom: 20px;
+      }
+      .pq-section-label::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.25);
+      }
+      .pq-section-title {
+        font-family: Fraunces, serif;
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        color: #000;
+        margin-bottom: 32px;
+      }
+      .pq-section-title em {
+        font-style: normal;
+        color: rgba(0, 0, 0, 0.35);
+      }
+      .pq-badge {
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.5);
+        margin-bottom: 24px;
+      }
+      .pq-hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: 80px;
+        padding-bottom: 60px;
+        position: relative;
+      }
+      .pq-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(60% 50% at 50% 30%, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .pq-hero-inner {
+        max-width: 760px;
+      }
+      .pq-hero-title {
+        font-family: Fraunces, serif;
+        font-size: clamp(36px, 5.5vw, 72px);
+        font-weight: 400;
+        line-height: 0.9;
+        letter-spacing: -0.025em;
+        color: #000;
+        margin-bottom: 28px;
+      }
+      .pq-hero-title em {
+        font-style: normal;
+        color: rgba(0, 0, 0, 0.3);
+      }
+      .pq-hero-sub {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.65;
+        color: rgba(0, 0, 0, 0.55);
+        max-width: 560px;
+        margin: 0 auto 48px;
+      }
+      .pq-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+      .pq-stat {
+        text-align: center;
+      }
+      .pq-stat-num {
+        font-family: Fraunces, serif;
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 400;
+        color: #000;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .pq-stat-label {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.4);
+        margin-top: 6px;
+        font-weight: 500;
+      }
+      .pq-stat-div {
+        width: 1px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .pq-knows {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+      /*
+        Important : pas align-self stretch sur cette cellule. Sinon sa hauteur = toute la rangée grille
+        (comme la droite avec runway) → le sticky gauche dépasse la phase « pile », et la gauche reste
+        figée alors que les cartes remontent. align-self:start + min-height calibrée au scroll (JS)
+        fait se libérer la gauche en même temps que la sortie commune de la pile.
+      */
+      .pq-knows-left-cell {
+        align-self: start;
+        justify-self: stretch;
+        position: relative;
+        min-width: 0;
+        width: 100%;
+      }
+      .pq-knows-left {
+        position: sticky;
+        top: clamp(3rem, calc(50dvh - 12.5rem), 44dvh);
+      }
+      @media (max-width: 768px) {
+        .pq-knows {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .pq-knows-left-cell {
+          min-height: 0 !important;
+        }
+        .pq-knows-left {
+          position: relative;
+          top: auto;
+        }
+        .pq-sticky-card {
+          top: clamp(56px, 22dvh, 120px);
+          margin-bottom: clamp(140px, 40vh, 300px);
+        }
+        /* Colonne seule : pas d’extension flex (évite trous), mais garde runway sticky */
+        .pq-stack-wrapper {
+          flex: none;
+          padding-bottom: clamp(160px, 38vh, 360px);
+        }
+      }
+      .pq-quote {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+        padding: 24px 28px;
+        margin: 24px 0 32px;
+        border-left: none;
+      }
+      .pq-quote p {
+        font-family: Fraunces, serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: rgba(0, 0, 0, 0.75);
+        font-style: italic;
+      }
+      .pq-quote cite {
+        display: block;
+        margin-top: 12px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.35);
+        font-style: normal;
+        letter-spacing: 0.04em;
+      }
+      /*
+        Étirer la colonne cartes à la hauteur de la rangée grille : sinon, si la colonne gauche
+        est plus haute, le bas du parent (.pq-knows-right) coupe le sticky trop tôt → la 3ᵉ carte
+        ne peut plus se « stacker ».
+      */
+      .pq-knows-right {
+        align-self: stretch;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      /* Sticky stack : pile centrée dans #pq-scroll (pas de scale sur le bloc sticky → bugs moteurs) */
+      .pq-stack-wrapper {
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        /* Défilement après la dernière carte pour que le sticky puisse se figer jusqu’au bout */
+        padding-bottom: clamp(240px, 48vh, 480px);
+      }
+      .pq-sticky-card {
+        flex-shrink: 0;
+        position: sticky;
+        top: max(
+          6px,
+          calc(50dvh - clamp(5.75rem, 17vmin, 8.75rem) + var(--i) * 14px)
+        );
+        border-radius: 20px;
+        padding: 28px;
+        margin-bottom: clamp(200px, 46vh, 420px);
+        z-index: calc(40 + var(--i));
+        /* Vitre opaque + flou : masque fortement la carte sous-jacente */
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.97) 0%,
+            color-mix(in srgb, var(--bg-tint, rgba(255, 255, 255, 1)) 75%, rgba(248, 248, 249, 0.95)) 100%
+          );
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.95) inset,
+          0 12px 40px rgba(0, 0, 0, 0.06);
+        backdrop-filter: blur(26px) saturate(160%);
+        -webkit-backdrop-filter: blur(26px) saturate(160%);
+        transition: box-shadow 0.3s ease;
+      }
+      @supports not (background: color-mix(in srgb, white 50%, black)) {
+        .pq-sticky-card {
+          background: rgba(255, 255, 255, 0.93);
+          border-color: rgba(236, 236, 238, 0.95);
+        }
+      }
+      .pq-sticky-card:hover {
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 1) inset,
+          0 14px 48px rgba(0, 0, 0, 0.09);
+      }
+      .pq-sticky-card .pq-sc-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.06);
+        display: grid;
+        place-items: center;
+        margin-bottom: 14px;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .pq-sticky-card h4 {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 8px;
+      }
+      .pq-sticky-card p {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 1.6;
+      }
+      .pq-ia {
+        text-align: center;
+      }
+      .pq-ia-header {
+        max-width: 760px;
+        margin: 0 auto 60px;
+      }
+      .pq-ia-sub {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        line-height: 1.65;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      /* Carrousel 3D scroll (uniquement les 4 modules IA — pas la grille « Notre différence ») */
+      .pq-ia-carousel-section {
+        position: relative;
+        height: 480vh;
+        margin: 0 -24px 48px;
+      }
+      @media (max-width: 640px) {
+        .pq-ia-carousel-section {
+          height: 420vh;
+          margin-left: -16px;
+          margin-right: -16px;
+        }
+      }
+      .pq-ia-sticky-frame {
+        position: sticky;
+        top: 0;
+        height: 85vh;
+        min-height: 420px;
+        max-height: 900px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        margin: 0 auto;
+        max-width: 920px;
+      }
+      .pq-ia-sticky-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 25%, #fff 92%);
+        pointer-events: none;
+        z-index: 20;
+      }
+      .pq-ia-bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .pq-ia-carousel-label {
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .pq-ia-carousel-label-line {
+        width: 18px;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.12);
+      }
+      .pq-ia-carousel-label-text {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.35);
+      }
+      .pq-ia-stage {
+        position: relative;
+        z-index: 10;
+        perspective: 1100px;
+        perspective-origin: 50% 48%;
+      }
+      .pq-ia-spinner {
+        width: 0;
+        height: 0;
+        transform-style: preserve-3d;
+      }
+      .pq-ia-card-slot {
+        position: absolute;
+        width: 0;
+        height: 0;
+        transform-style: preserve-3d;
+      }
+      .pq-ia-c-card {
+        position: absolute;
+        width: min(340px, 86vw);
+        height: auto;
+        min-height: 200px;
+        left: calc(-0.5 * min(340px, 86vw));
+        top: -100px;
+        border-radius: 20px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 24px 26px 22px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        transition: border-color 0.45s ease;
+        -webkit-font-smoothing: antialiased;
+      }
+      .pq-ia-c-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+      }
+      .pq-ia-c-card.is-front {
+        transform-origin: center center;
+        border-color: rgba(0, 0, 0, 0.14);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.09);
+      }
+      .pq-ia-c-card.is-front::before {
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15), transparent);
+      }
+      .pq-ia-c-num {
+        font-family: Fraunces, serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.12);
+        line-height: 1;
+        margin-bottom: 12px;
+        transition: color 0.35s ease;
+      }
+      .pq-ia-c-card.is-front .pq-ia-c-num {
+        color: rgba(0, 0, 0, 0.2);
+      }
+      .pq-ia-c-card h4 {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+      .pq-ia-c-card p {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 12.5px;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 1.62;
+      }
+      .pq-ia-chip {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -52%);
+        width: min(260px, 72vw);
+        height: min(260px, 72vw);
+        pointer-events: none;
+        z-index: 5;
+      }
+      .pq-ia-chip-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .pq-ia-carousel-bottom {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .pq-ia-dots {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .pq-ia-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.15);
+        transition:
+          background 0.3s,
+          transform 0.3s;
+      }
+      .pq-ia-dot.active {
+        background: rgba(0, 0, 0, 0.45);
+        transform: scale(1.5);
+      }
+      .pq-ia-progress-num {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: rgba(0, 0, 0, 0.35);
+        min-width: 52px;
+        text-align: right;
+      }
+      @media (max-width: 480px) {
+        .pq-ia-c-card {
+          top: -90px;
+          min-height: 180px;
+        }
+        .pq-ia-carousel-label {
+          top: 16px;
+        }
+        .pq-ia-carousel-bottom {
+          bottom: 16px;
+        }
+      }
+      .pq-ia-diff {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+      }
+      @media (max-width: 640px) {
+        .pq-ia-diff {
+          grid-template-columns: 1fr;
+        }
+      }
+      .pq-diff-card {
+        background: rgba(0, 0, 0, 0.04);
+        border-radius: 20px;
+        padding: 28px;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .pq-diff-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+      .pq-diff-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.06);
+        display: grid;
+        place-items: center;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 14px;
+      }
+      .pq-diff-card h4 {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 10px;
+      }
+      .pq-diff-card p {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 1.6;
+      }
+      .pq-rd {
+        text-align: center;
+      }
+      .pq-rd-sub {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        line-height: 1.65;
+        max-width: 560px;
+        margin: 0 auto 60px;
+      }
+      .pq-rd-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        text-align: left;
+      }
+      @media (max-width: 640px) {
+        .pq-rd-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .pq-rd-block {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+        padding: 32px;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .pq-rd-block:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+      .pq-rd-num {
+        font-family: Fraunces, serif;
+        font-size: 40px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.08);
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .pq-rd-block h4 {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 10px;
+      }
+      .pq-rd-block p {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 1.65;
+      }
+      .pq-sec-intro {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        line-height: 1.65;
+        max-width: 520px;
+      }
+      /* Même pile sticky que Expertise terrain : check + texte dans la carte vitrée */
+      .pq-sticky-sec-inner {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .pq-sticky-card--sec .pq-check {
+        margin-top: 2px;
+      }
+      .pq-sticky-card--sec h4 {
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+      .pq-sticky-card--sec p {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .pq-check {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.07);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .pq-check::after {
+        content: "";
+        width: 8px;
+        height: 5px;
+        border-left: 1.5px solid rgba(0, 0, 0, 0.5);
+        border-bottom: 1.5px solid rgba(0, 0, 0, 0.5);
+        transform: rotate(-45deg) translateY(-1px);
+      }
+      .pq-team {
+        text-align: center;
+      }
+      .pq-team-sub {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        line-height: 1.65;
+        max-width: 520px;
+        margin: 0 auto 56px;
+      }
+      .pq-team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        text-align: left;
+        margin-bottom: 48px;
+      }
+      @media (max-width: 768px) {
+        .pq-team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .pq-team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .pq-team-block {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+        padding: 24px;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .pq-team-block:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+      .pq-team-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.06);
+        display: grid;
+        place-items: center;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 14px;
+      }
+      .pq-team-block h4 {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 8px;
+      }
+      .pq-team-block p {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+        line-height: 1.6;
+      }
+      .pq-flags {
+        overflow: hidden;
+        margin-bottom: 64px;
+        position: relative;
+      }
+      .pq-flags::before,
+      .pq-flags::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 80px;
+        z-index: 2;
+      }
+      .pq-flags::before {
+        left: 0;
+        background: linear-gradient(to right, #fff, transparent);
+      }
+      .pq-flags::after {
+        right: 0;
+        background: linear-gradient(to left, #fff, transparent);
+      }
+      .pq-flag-track {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 32px;
+        font-size: 28px;
+        animation: pqFlagScroll 100s linear infinite;
+        width: max-content;
+      }
+      .pq-flag-track > span {
+        flex-shrink: 0;
+      }
+      @keyframes pqFlagScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .pq-section-divider {
+        height: 1px;
+        background: rgba(0, 0, 0, 0.07);
+        margin-bottom: 48px;
+      }
+      .pq-cta-final {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .pq-cta-title {
+        font-family: Fraunces, serif;
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        color: #000;
+        margin-bottom: 24px;
+      }
+      .pq-cta-title em {
+        font-style: normal;
+        color: rgba(0, 0, 0, 0.3);
+      }
+      .pq-cta-checks {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.45);
+      }
+      .pq-cta-checks span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pq-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #000;
+        color: #fff;
+        border-radius: 999px;
+        padding: 16px 32px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .pq-cta-btn:hover {
+        background: rgba(0, 0, 0, 0.85);
+        transform: translateY(-2px);
+      }
+      .pq-reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.5s ease var(--d, 0s),
+          transform 0.5s ease var(--d, 0s);
+      }
+      .pq-reveal-up {
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s ease var(--d, 0s),
+          filter 0.65s ease var(--d, 0s),
+          transform 0.65s ease var(--d, 0s);
+      }
+      .pq-reveal.in,
+      .pq-reveal-up.in {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body class="bg-white text-black font-body">
@@ -635,6 +1575,23 @@
           <path d="M3 4h2l2.5 12h11l2-9H6" />
           <circle cx="9" cy="20" r="1.4" />
           <circle cx="17" cy="20" r="1.4" />
+        </symbol>
+        <symbol id="i-kyc" viewBox="0 0 100 100">
+          <path fill="currentColor" fill-rule="evenodd" d="m43.242 3.9258c17.672 0 26.586 21.469 14.074 33.98-12.512 12.512-33.98 3.5977-33.98-14.074 0.003906-10.992 8.918-19.906 19.906-19.906zm42.617 67.727c2.4609-2.875 6.8242 0.86328 4.3633 3.7344l-16.883 19.688c-1.1641 1.3594-3.25 1.3203-4.3906-0.03125l-8.207-9.5664c-2.457-2.8711 1.9023-6.6094 4.3633-3.7344l6.0508 7.0547zm-8.5781-5.2695c-1.1523-8.7773-8.7148-15.484-17.633-15.484h-32.809c-9.793 0-17.793 8-17.793 17.793v14.914c0 1.5898 1.2891 2.8789 2.8789 2.8789h38.914c3.793 0 3.793-5.7617 0-5.7617l-36.031 0.003906v-12.035c0-6.6133 5.4219-12.031 12.031-12.031h32.809c6.0547 0 11.164 4.5391 11.941 10.465 0.48828 3.7461 6.1797 3.0039 5.6914-0.74219zm-24.035-52.555c-8.8867-8.8867-24.148-2.5625-24.148 10.004 0 12.562 15.262 18.891 24.148 10.004 5.5234-5.5273 5.5234-14.484 0-20.008z" />
+        </symbol>
+        <symbol id="i-kyb" viewBox="0 0 100 100">
+          <path fill="currentColor" d="m7.5977 96.875h84.805c0.86328 0 1.5625-0.69922 1.5625-1.5625v-6.9688c0-0.86328-0.69922-1.5625-1.5625-1.5625h-3.3594v-5.4102c0-0.86328-0.69922-1.5625-1.5625-1.5625h-2.875v-6.1992c0-0.86328-0.69922-1.5625-1.5625-1.5625h-0.67188v-25.906h0.67188c0.86328 0 1.5625-0.69922 1.5625-1.5625v-6.1953h5.4844c1.1914 0 2.2422-0.76172 2.6133-1.8945 0.37109-1.1328-0.023437-2.3672-0.98438-3.0742l-40.09-29.469c-0.97656-0.71875-2.2852-0.71875-3.2617 0l-40.086 29.469c-0.96094 0.70703-1.3555 1.9414-0.98438 3.0742 0.37109 1.1328 1.4219 1.8945 2.6133 1.8945h5.4844v6.1953c0 0.86328 0.69922 1.5625 1.5625 1.5625h0.67188v25.906h-0.67188c-0.86328 0-1.5625 0.69922-1.5625 1.5625v6.1992h-2.875c-0.86328 0-1.5625 0.69922-1.5625 1.5625v5.4102h-3.3594c-0.86328 0-1.5625 0.69922-1.5625 1.5625v6.9688c0 0.86328 0.69922 1.5625 1.5625 1.5625zm63.023-17.066v-4.6367h10.859v4.6367zm8.625-7.7617h-6.3906v-25.906h6.3906zm-8.625-29.031v-4.625h10.859v4.625zm-1.5625 3.125h0.67188v25.906h-0.67188c-0.86328 0-1.5625 0.69922-1.5625 1.5625v6.1992h-8.9375v-6.1992c0-0.86328-0.69922-1.5625-1.5625-1.5625h-0.67188v-25.906h0.67188c0.86328 0 1.5625-0.69922 1.5625-1.5625v-6.1953h8.9375v6.1953c0 0.86328 0.69922 1.5625 1.5625 1.5625zm-24.488-3.125v-4.625h10.859v4.625zm2.2344 3.125h6.3906v25.906h-6.3906zm-2.2344 33.668v-4.6367h10.859v4.6367zm5.4297-73.184 38.953 28.633h-77.906zm-8.5547 31.758v6.1953c0 0.86328 0.69922 1.5625 1.5625 1.5625h0.67188v25.906h-0.67188c-0.86328 0-1.5625 0.69922-1.5625 1.5625v6.1992h-8.9414v-6.1992c0-0.86328-0.69922-1.5625-1.5625-1.5625h-0.67188v-25.906h0.67188c0.86328 0 1.5625-0.69922 1.5625-1.5625v-6.1953zm-22.926 4.6328v-4.625h10.859v4.625zm2.2344 3.125h6.3906v25.906h-6.3906zm-2.2344 29.031h10.859v4.6367h-10.859zm-4.4375 7.7617h2.8477c0.007812 0 0.015624 0.003906 0.027343 0.003906h13.984c0.007813 0 0.015625-0.003906 0.027344-0.003906h12.012c0.007812 0 0.015625 0.003906 0.027343 0.003906h13.984c0.007812 0 0.015624-0.003906 0.027343-0.003906h12.012c0.007812 0 0.015625 0.003906 0.027344 0.003906h13.984c0.007812 0 0.015625-0.003906 0.027343-0.003906h2.8477v3.8477h-71.836zm-4.9219 6.9727h81.68v3.8438h-81.68z" />
+        </symbol>
+        <symbol id="i-doc" viewBox="0 0 95 95">
+          <path fill="currentColor" d="M81.39,23.49L58.87,1.31c-0.28-0.27-0.65-0.43-1.04-0.43H16.19c-1.67,0-3.03,1.36-3.03,3.02v87.2c0,1.67,1.36,3.02,3.03,3.02h62.62c1.66,0,3.02-1.36,3.02-3.02V24.55C81.83,24.15,81.67,23.77,81.39,23.49z M59.34,5.93l17.69,17.43H59.34V5.93z M16.13,91.1V3.9c0-0.02,0.03-0.05,0.06-0.05h40.18v21c0,0.82,0.67,1.48,1.48,1.48h21l-0.05,64.82L16.13,91.1z M24.35,20.22c0-0.82,0.67-1.48,1.48-1.48h14.23c0.82,0,1.48,0.66,1.48,1.48s-0.67,1.48-1.48,1.48H25.84C25.02,21.7,24.35,21.04,24.35,20.22z M70,37.78c0,0.82-0.67,1.48-1.48,1.48H25.84c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h42.68C69.33,36.29,70,36.96,70,37.78z M70,47.33c0,0.82-0.67,1.48-1.48,1.48H25.84c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h42.68C69.33,45.85,70,46.51,70,47.33z M70,56.89c0,0.82-0.67,1.48-1.48,1.48H25.84c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h42.68C69.33,55.41,70,56.07,70,56.89z M70,66.45c0,0.82-0.67,1.48-1.48,1.48H25.84c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h42.68C69.33,64.96,70,65.63,70,66.45z M39.55,76.45c0,0.82-0.67,1.48-1.48,1.48H25.84c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h12.23C38.88,74.97,39.55,75.63,39.55,76.45z M69.33,76.45c0,0.82-0.67,1.48-1.48,1.48H55.63c-0.82,0-1.48-0.66-1.48-1.48s0.67-1.48,1.48-1.48h12.22C68.66,74.97,69.33,75.63,69.33,76.45z" />
+        </symbol>
+        <symbol id="i-solv" viewBox="0 0 450 450">
+          <path fill="currentColor" d="M268.3,394.9c-11.8,0-21.6-0.9-28.6-2.8c-14.3-3.8-26.1-12.3-37.6-20.5c-24.9-17.9-46.4-33.4-88,3.6c-2.1,1.8-5.2,1.7-7.1-0.4c-1.8-2.1-1.7-5.2,0.4-7.1c21.4-19.1,39.9-27.1,58.2-25c16.1,1.8,29.4,11.4,42.3,20.7c10.7,7.7,21.8,15.7,34.3,19c16.4,4.4,51.7,2.8,90-3.9c40.7-7.1,75.1-18.3,92.1-29.9c6.7-4.6,10.5-9.1,10.9-13c0.5-4.2-0.8-5.8-1.9-6.7c-8.6-7.4-41,1.2-60.4,6.3c-9,2.4-16.7,4.4-21.6,5c-5.7,0.6-11.4,0.9-17.2,0.9c-53.6,0-108.9-25.7-119.1-38.3c-3.9-4.9-8.8-12-5.5-18c4.3-7.8,18-6.3,37-4.1c16.5,1.9,37,4.2,43.9-1.8c0.9-0.8,2.2-2.3,2.3-5.3c0.1-5.5-3.7-10.5-11.6-14.8c-17.7-9.8-53.6-14.5-93.7-12.5c-40.1,2-75.7,10.5-93,22L63.5,289c-2.3,1.5-5.4,0.9-6.9-1.4c-1.5-2.3-0.9-5.4,1.4-6.9l31.1-20.8c18.9-12.7,55.6-21.5,98-23.7c42.5-2.1,79.5,3,99,13.8c14.1,7.8,16.9,17.3,16.7,23.8c-0.1,5.2-2,9.4-5.7,12.6c-10.2,8.9-31.2,6.5-51.6,4.2c-9.4-1.1-23.3-2.6-26.9-1c0.2,0.8,1.1,2.9,4.3,6.9c8.9,11,72.7,39.9,127.3,33.7c4.2-0.5,11.6-2.4,20.1-4.7c31.1-8.3,57.8-14.3,69.4-4.2c2.9,2.5,6.2,7.2,5.3,15.4c-0.8,7-5.9,13.8-15.2,20.2c-18,12.3-53.9,24.1-96,31.5C309.5,392.7,286.5,394.9,268.3,394.9z" />
+          <path fill="currentColor" d="M76.5,415.1c-1.7,0-3.4-0.9-4.3-2.5L5.9,297.7c-0.7-1.1-0.8-2.5-0.5-3.8s1.2-2.4,2.3-3l42.4-24.5c2.4-1.4,5.4-0.6,6.8,1.8l66.3,114.9c1.4,2.4,0.6,5.5-1.8,6.8L79,414.4C78.3,414.9,77.4,415.1,76.5,415.1z M17,297.1l61.3,106.2l33.7-19.5L50.8,277.6L17,297.1z" />
+          <path fill="currentColor" d="M244.6,216.2c-49.6,0-89.9-40.3-89.9-89.9s40.3-89.9,89.9-89.9s89.9,40.3,89.9,89.9S294.2,216.2,244.6,216.2z M244.6,46.4c-44.1,0-79.9,35.8-79.9,79.9s35.9,79.9,79.9,79.9s79.9-35.9,79.9-79.9S288.7,46.4,244.6,46.4z" />
+          <path fill="currentColor" d="M244.6,89c-2.8,0-5-2.2-5-5v-15c0-2.8,2.2-5,5-5s5,2.2,5,5V84C249.6,86.8,247.4,89,244.6,89z" />
+          <path fill="currentColor" d="M244.6,188.6c-2.8,0-5-2.2-5-5v-15.1c0-2.8,2.2-5,5-5s5,2.2,5,5v15.1C249.6,186.4,247.4,188.6,244.6,188.6z" />
+          <path fill="currentColor" d="M242.5,173.6c-0.5,0-1,0-1.5,0c-10.8-0.5-23.2-7.8-23.1-26.6c0-2.7,2.3-4.9,5-4.9c0,0,0,0,0.1,0c2.8,0,5,2.3,4.9,5.1c-0.1,13.8,8.4,16.3,13.6,16.6c8.4,0.4,18.3-4.8,18.9-12.3c0-0.1,0-0.1,0-0.2c1.6-12.4-14.1-19.1-18.9-20.9c-6.8-2.5-27.6-10-22.6-29.4c4.5-17.2,18.8-23.2,30.3-21.5c11,1.6,22.5,10.7,21.9,26.9c-0.1,2.8-2.4,4.9-5.2,4.8c-2.8-0.1-4.9-2.4-4.8-5.2c0.4-10.1-6.5-15.6-13.4-16.6c-6.9-1-16,2.1-19.2,14.1c-1.4,5.2-0.5,11.4,16.3,17.5c6.6,2.4,27.9,11.8,25.4,31.5C269.2,165.3,255.3,173.6,242.5,173.6z" />
         </symbol>
         <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 6 6 18" />
@@ -776,48 +1733,48 @@
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="bank" aria-haspopup="dialog">
+                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="kyc" aria-haspopup="dialog">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
-                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-bank" /></svg>
+                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-kyc" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Fraude bancaire</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Détection des virements suspects et des comptes mules avant qu&rsquo;ils ne sortent de votre établissement.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Vérification KYC</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Vérifiez l&rsquo;identité de vos clients en temps réel — documents, liveness, bases watchlist — sans friction pour les utilisateurs légitimes.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
                   </span>
                 </button>
 
-                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="card" aria-haspopup="dialog">
+                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="kyb" aria-haspopup="dialog">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
-                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-card" /></svg>
+                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-kyb" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Fraude au paiement</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Cartes volées, rétrofacturations abusives, schémas de chargeback : un signal mutualisé entre marchands.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Connaissance entreprise (KYB)</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Qualifiez vos partenaires et fournisseurs : structure juridique, bénéficiaires effectifs, réputation — détectez les sociétés écrans avant d&rsquo;engager une relation.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
                   </span>
                 </button>
 
-                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="identity" aria-haspopup="dialog">
+                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="documents" aria-haspopup="dialog">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
-                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-id" /></svg>
+                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-doc" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Usurpation d&rsquo;identité</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Faux justificatifs, deepfakes, identités synthétiques : l&rsquo;empreinte d&rsquo;un fraudeur démasqué partout à la fois.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Analyse documentaire</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Détection de falsifications sur pièces d&rsquo;identité, justificatifs de domicile et bulletins de salaire — deepfakes et montages IA inclus.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
                   </span>
                 </button>
 
-                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="ecom" aria-haspopup="dialog">
+                <button type="button" class="why-card liquid-glass rounded-2xl p-6 text-left" data-card="solvency" aria-haspopup="dialog">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
-                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-cart" /></svg>
+                    <svg class="w-4 h-4" aria-hidden="true"><use href="#i-solv" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Fraude e-commerce</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Comptes complices, scripts d&rsquo;achat, retours frauduleux : protégez vos marges sans freiner vos clients légitimes.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Score de solvabilité</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Évaluez la capacité de remboursement de vos clients en combinant signaux comportementaux, données ouvertes et historique transactionnel.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
@@ -1171,6 +2128,625 @@
       </div>
     </div>
 
+    <!-- POURQUOI CIRKLES — popup plein écran -->
+    <div class="pq-modal" id="pq-modal" role="dialog" aria-modal="true" aria-label="Pourquoi Cirkles">
+      <div class="pq-backdrop" id="pq-backdrop"></div>
+      <div class="pq-progress-bar"><div class="pq-progress-fill" id="pq-progress"></div></div>
+      <button type="button" class="pq-close" id="pq-close" aria-label="Fermer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <a href="demo-booking.html" class="pq-cta-float" id="pq-cta" onclick="closePqModal()">
+        Demandez une démo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+      <div class="pq-scroll" id="pq-scroll">
+        <section class="pq-section pq-hero">
+          <div class="pq-hero-inner">
+            <div class="pq-badge pq-reveal">Notre différence</div>
+            <h1 class="pq-hero-title pq-reveal-up">Pourquoi Cirkles ?<br><em>Parce que la fraude<br>ne se combat pas seul.</em></h1>
+            <p class="pq-hero-sub pq-reveal-up" style="--d:.15s">Demain, votre outil de scoring ne suffira plus. La fraude s'organise en réseau, votre défense aussi. Cirkles s'enrichit en temps réel des signaux de tout l'écosystème pour vous alerter avant même que la menace n'arrive jusqu'à vous. Pas un outil. Pas une base de données. Un réseau vivant.</p>
+            <div class="pq-stats pq-reveal-up" style="--d:.3s">
+              <div class="pq-stat"><div class="pq-stat-num" data-count="25" data-suffix=" ans">0</div><div class="pq-stat-label">d'expertise systèmes financiers</div></div>
+              <div class="pq-stat-div"></div>
+              <div class="pq-stat"><div class="pq-stat-num" data-count="20" data-prefix="+" data-suffix="%">0</div><div class="pq-stat-label">de détection minimum</div></div>
+              <div class="pq-stat-div"></div>
+              <div class="pq-stat"><div class="pq-stat-num" data-text="7j/7">—</div><div class="pq-stat-label">assistance &amp; monitoring</div></div>
+            </div>
+          </div>
+        </section>
+        <section class="pq-section pq-knows" id="pqs2">
+          <div class="pq-knows-left-cell">
+            <div class="pq-knows-left">
+              <div class="pq-section-label pq-reveal">Expertise terrain</div>
+              <h2 class="pq-section-title pq-reveal-up">On a vécu vos<br>systèmes.<br><em>De l'intérieur.</em></h2>
+              <blockquote class="pq-quote pq-reveal-up" style="--d:.1s"><p>"Je n'en pouvais plus des explications à rallonge. Avec Cirkles, on est tenu par la main, les opérateurs tout comme les managers. Rien n'est laissé au hasard."</p><cite>Responsable Risque, établissement financier</cite></blockquote>
+            </div>
+          </div>
+          <div class="pq-knows-right" id="pq-stack">
+            <div class="pq-stack-wrapper">
+              <div class="pq-sticky-card" style="--i: 0; --bg-tint: rgb(250, 251, 252)">
+                <div class="pq-sc-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                  </svg>
+                </div>
+                <h4>Cirkles connaît vos systèmes, pas juste votre métier</h4>
+                <p>Vingt ans à construire et intégrer les infrastructures financières européennes. On ne découvre pas vos contraintes — on les a vécues avant même de vous rencontrer.</p>
+              </div>
+
+              <div class="pq-sticky-card" style="--i: 1; --bg-tint: rgb(246, 247, 248)">
+                <div class="pq-sc-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+                  </svg>
+                </div>
+                <h4>Notre produit évolue avec les fraudes réelles du réseau</h4>
+                <p>
+                  Chaque signal détecté par un membre enrichit le modèle pour tous. Pas de roadmap figée — une IA qui s'adapte en temps réel à ce que vos concurrents voient sur le terrain.
+                </p>
+              </div>
+
+              <div class="pq-sticky-card" style="--i: 2; --bg-tint: rgb(242, 243, 245)">
+                <div class="pq-sc-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <h4>Vous parlez à des architectes, pas à des commerciaux</h4>
+                <p>Nos équipes ont construit des systèmes bancaires. Elles comprennent vos enjeux techniques, vos contraintes IT, et vos vraies douleurs — sans jargon creux.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pq-section pq-ia" id="pqs3">
+          <div class="pq-ia-header">
+            <div class="pq-section-label pq-reveal">Intelligence artificielle</div>
+            <h2 class="pq-section-title pq-reveal-up">Détection collective, explication précise,<br>conseil actionnable.<br><em>Votre premier analyste fraude augmenté.</em></h2>
+            <p class="pq-ia-sub pq-reveal-up" style="--d:.1s">Nos modèles s'entraînent sur les signaux réels de tout l'écosystème. Chaque score est expliqué, chaque signal détaillé, chaque décision orientée par un agent qui connaît votre contexte.</p>
+          </div>
+          <div class="pq-ia-carousel-section" id="pq-ia-carousel" aria-label="Modules intelligence artificielle">
+            <div class="pq-ia-sticky-frame">
+              <div class="pq-ia-bg-grid" aria-hidden="true"></div>
+              <div class="pq-ia-carousel-label">
+                <span class="pq-ia-carousel-label-line"></span>
+                <span class="pq-ia-carousel-label-text">Modules IA</span>
+                <span class="pq-ia-carousel-label-line"></span>
+              </div>
+              <div class="pq-ia-stage">
+                <div class="pq-ia-spinner" id="pq-ia-spinner"></div>
+              </div>
+              <div class="pq-ia-chip" aria-hidden="true">
+                <svg class="pq-ia-chip-svg" viewBox="0 0 290 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="pq-ia-rA" style="transform-origin: 145px 145px">
+                    <circle cx="145" cy="145" r="133" stroke="rgba(0,0,0,0.08)" stroke-width="0.6" />
+                    <circle cx="145" cy="145" r="127" stroke="rgba(0,0,0,0.05)" stroke-width="0.5" stroke-dasharray="5 20" />
+                    <circle cx="145" cy="12" r="2.2" fill="rgba(0,0,0,0.25)" />
+                    <circle cx="278" cy="145" r="2.2" fill="rgba(0,0,0,0.25)" />
+                    <circle cx="145" cy="278" r="2.2" fill="rgba(0,0,0,0.25)" />
+                    <circle cx="12" cy="145" r="2.2" fill="rgba(0,0,0,0.25)" />
+                    <path d="M145 12 A133 133 0 0 1 278 145" stroke="rgba(0,0,0,0.1)" stroke-width="0.8" fill="none" />
+                    <path d="M145 278 A133 133 0 0 1 12 145" stroke="rgba(0,0,0,0.1)" stroke-width="0.8" fill="none" />
+                    <circle cx="239" cy="51" r="1.3" fill="rgba(0,0,0,0.12)" />
+                    <circle cx="239" cy="239" r="1.3" fill="rgba(0,0,0,0.12)" />
+                    <circle cx="51" cy="239" r="1.3" fill="rgba(0,0,0,0.12)" />
+                    <circle cx="51" cy="51" r="1.3" fill="rgba(0,0,0,0.12)" />
+                  </g>
+                  <g id="pq-ia-rB" style="transform-origin: 145px 145px">
+                    <circle cx="145" cy="145" r="106" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="3 14" />
+                    <circle cx="145" cy="145" r="100" stroke="rgba(0,0,0,0.05)" stroke-width="0.5" />
+                    <circle cx="145" cy="39" r="1.6" fill="rgba(0,0,0,0.2)" />
+                    <circle cx="251" cy="145" r="1.6" fill="rgba(0,0,0,0.2)" />
+                    <circle cx="145" cy="251" r="1.6" fill="rgba(0,0,0,0.2)" />
+                    <circle cx="39" cy="145" r="1.6" fill="rgba(0,0,0,0.2)" />
+                  </g>
+                  <rect x="105" y="105" width="80" height="80" rx="11" stroke="rgba(0,0,0,0.12)" stroke-width="0.75" fill="rgba(255,255,255,0.96)" />
+                  <rect x="112" y="112" width="66" height="66" rx="7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" fill="none" />
+                  <line x1="105" y1="121" x2="88" y2="121" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="105" y1="133" x2="82" y2="133" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="105" y1="145" x2="88" y2="145" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="105" y1="157" x2="82" y2="157" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="105" y1="169" x2="88" y2="169" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="185" y1="121" x2="202" y2="121" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="185" y1="133" x2="208" y2="133" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="185" y1="145" x2="202" y2="145" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="185" y1="157" x2="208" y2="157" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="185" y1="169" x2="202" y2="169" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="121" y1="105" x2="121" y2="88" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="133" y1="105" x2="133" y2="82" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="145" y1="105" x2="145" y2="88" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="157" y1="105" x2="157" y2="82" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="169" y1="105" x2="169" y2="88" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="121" y1="185" x2="121" y2="202" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="133" y1="185" x2="133" y2="208" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="145" y1="185" x2="145" y2="202" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="157" y1="185" x2="157" y2="202" stroke="rgba(0,0,0,0.16)" stroke-width="0.5" />
+                  <line x1="169" y1="185" x2="169" y2="202" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                  <line x1="116" y1="127" x2="174" y2="127" stroke="rgba(0,0,0,0.06)" stroke-width="0.4" />
+                  <line x1="116" y1="145" x2="174" y2="145" stroke="rgba(0,0,0,0.04)" stroke-width="0.4" />
+                  <line x1="116" y1="163" x2="174" y2="163" stroke="rgba(0,0,0,0.06)" stroke-width="0.4" />
+                  <line x1="127" y1="116" x2="127" y2="174" stroke="rgba(0,0,0,0.06)" stroke-width="0.4" />
+                  <line x1="145" y1="116" x2="145" y2="174" stroke="rgba(0,0,0,0.04)" stroke-width="0.4" />
+                  <line x1="163" y1="116" x2="163" y2="174" stroke="rgba(0,0,0,0.06)" stroke-width="0.4" />
+                  <rect x="118" y="118" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.1)" stroke-width="0.5" />
+                  <rect x="136" y="118" width="18" height="14" rx="2.5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5" />
+                  <rect x="160" y="118" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.1)" stroke-width="0.5" />
+                  <rect x="118" y="136" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5" />
+                  <rect x="135" y="135" width="20" height="20" rx="3.5" fill="rgba(0,0,0,0.08)" stroke="rgba(0,0,0,0.14)" stroke-width="0.8" />
+                  <rect x="160" y="136" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5" />
+                  <rect x="118" y="160" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.1)" stroke-width="0.5" />
+                  <rect x="136" y="160" width="18" height="12" rx="2.5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5" />
+                  <rect x="160" y="160" width="12" height="12" rx="2.5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.1)" stroke-width="0.5" />
+                  <circle cx="145" cy="145" r="2.8" fill="rgba(0,0,0,0.35)" />
+                </svg>
+              </div>
+              <div class="pq-ia-carousel-bottom">
+                <div class="pq-ia-dots" id="pq-ia-dots"></div>
+                <div class="pq-ia-progress-num" id="pq-ia-progress-num">01 / 04</div>
+              </div>
+            </div>
+          </div>
+          <div class="pq-ia-diff">
+            <div class="pq-diff-card pq-reveal-up">
+              <div class="pq-diff-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+              <h4>Notre différence ?</h4>
+              <p>Cirkles ne score pas dans le vide. Chaque score reflète ce que tout le réseau a appris. Ce qui pèse, pourquoi ça pèse, et quoi faire ensuite. Votre analyste décide vite, avec le contexte complet.</p>
+            </div>
+            <div class="pq-diff-card pq-reveal-up" style="--d:.1s">
+              <div class="pq-diff-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h4>IA responsable — en avance sur la réglementation</h4>
+              <p>L'AI Act européen va imposer la transparence totale d'ici 2026. Beaucoup vont courir. Nous sommes déjà prêts — chaque décision auditable, chaque biais corrigé. Pas par obligation. Par conviction.</p>
+            </div>
+          </div>
+        </section>
+        <section class="pq-section pq-rd" id="pqs4">
+          <div class="pq-section-label pq-reveal">Innovation</div>
+          <h2 class="pq-section-title pq-reveal-up">Une R&amp;D en anticipation<br><em>de la fraude.</em></h2>
+          <p class="pq-rd-sub pq-reveal-up" style="--d:.1s">Nos modèles n'attendent pas qu'un schéma de fraude soit confirmé pour agir. Des dizaines de variables croisées en temps réel détectent les signaux faibles avant même que la fraude ne soit caractérisée.</p>
+          <div class="pq-rd-grid">
+            <div class="pq-rd-block pq-reveal-up" style="--d:.0s"><div class="pq-rd-num">01</div><h4>Veille active — on anticipe, on n'attend pas</h4><p>DORA, AI Act, PSD3, eIDAS 2 — nos équipes intègrent les évolutions réglementaires avant qu'elles ne vous impactent. Et parce que la fraude évolue plus vite que les textes, nous surveillons les nouveaux schémas dès leur émergence.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.1s"><div class="pq-rd-num">02</div><h4>Architecture conçue pour durer</h4><p>Cloud native, APIs REST modernes, modèles IA versionnés et déployables sans interruption. Zéro dette technique. Zéro downtime. Votre équipe IT ne voit rien — vos analystes bénéficient de tout.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.2s"><div class="pq-rd-num">03</div><h4>Le réseau s'enrichit — vous aussi</h4><p>Chaque nouveau membre apporte des signaux. Chaque signal affine les modèles. Vous bénéficiez automatiquement de toutes les améliorations sans aucune action de votre côté.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.3s"><div class="pq-rd-num">04</div><h4>Pensé pour les DSI qui ont déjà tout vu</h4><p>Faible impact IT, intégration API en quelques jours, sécurité by design. On ne vous demande pas de refondre votre stack — on s'y connecte.</p></div>
+          </div>
+        </section>
+        <section class="pq-section pq-knows" id="pqs5">
+          <div class="pq-knows-left-cell">
+            <div class="pq-knows-left">
+              <div class="pq-section-label pq-reveal">Sécurité &amp; conformité</div>
+              <h2 class="pq-section-title pq-reveal-up">Vos données ne bougent pas.<br><em>Votre protection, si.</em></h2>
+              <p class="pq-sec-intro pq-reveal-up" style="--d:.1s">Chez Cirkles, sécurité et conformité ne sont pas des cases à cocher. Ce sont les fondations sur lesquelles tout repose.</p>
+            </div>
+          </div>
+          <div class="pq-knows-right">
+            <div class="pq-stack-wrapper">
+              <div class="pq-sticky-card pq-sticky-card--sec" style="--i: 0; --bg-tint: rgb(250, 251, 252)">
+                <div class="pq-sticky-sec-inner">
+                  <div class="pq-check"></div>
+                  <div>
+                    <h4>100% RGPD — natif, pas rajouté</h4>
+                    <p>Conformité totale aux réglementations européennes. Droit à l'oubli, portabilité, transparence : tout est conçu dès le départ, pas patché après coup.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pq-sticky-card pq-sticky-card--sec" style="--i: 1; --bg-tint: rgb(246, 247, 248)">
+                <div class="pq-sticky-sec-inner">
+                  <div class="pq-check"></div>
+                  <div>
+                    <h4>Vos données restent les vôtres</h4>
+                    <p>Les dossiers que vous soumettez enrichissent les modèles de détection — jamais exposés aux autres membres. Ce qui circule, c'est l'intelligence collective. Pas vos données clients.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pq-sticky-card pq-sticky-card--sec" style="--i: 2; --bg-tint: rgb(242, 243, 245)">
+                <div class="pq-sticky-sec-inner">
+                  <div class="pq-check"></div>
+                  <div>
+                    <h4>Hébergement souverain en Europe</h4>
+                    <p>Infrastructure certifiée en France et Allemagne. Chiffrement AES-256, TLS 1.3. Continuité d'activité garantie. Vos données ne quittent jamais l'Europe.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pq-sticky-card pq-sticky-card--sec" style="--i: 3; --bg-tint: rgb(238, 239, 242)">
+                <div class="pq-sticky-sec-inner">
+                  <div class="pq-check"></div>
+                  <div>
+                    <h4>Transparence totale — vous décidez de tout</h4>
+                    <p>Vous savez exactement comment vos données alimentent les modèles. Aucune utilisation sans votre accord explicite. Audit disponible à tout moment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pq-section pq-team" id="pqs6">
+          <div class="pq-section-label pq-reveal">Équipe &amp; présence</div>
+          <h2 class="pq-section-title pq-reveal-up">Une équipe à taille humaine.<br><em>Une ambition sans frontières.</em></h2>
+          <p class="pq-team-sub pq-reveal-up" style="--d:.1s">Née à Paris, déjà déployée en Europe et aux États-Unis. Assez agiles pour vous répondre aujourd'hui, assez solides pour vous accompagner demain où que vous soyez.</p>
+          <div class="pq-team-grid">
+            <div class="pq-team-block pq-reveal-up" style="--d:.0s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h4>Proximité</h4><p>Un interlocuteur dédié qui connaît votre dossier, votre secteur, vos contraintes. Pas un centre d'appel — une équipe.</p></div>
+            <div class="pq-team-block pq-reveal-up" style="--d:.1s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div><h4>Réactivité</h4><p>Pas de ticket niveau 1, pas de bot. Vous parlez directement aux bonnes personnes, celles qui ont construit le produit.</p></div>
+            <div class="pq-team-block pq-reveal-up" style="--d:.2s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><h4>Agilité</h4><p>On intègre vos retours en semaines, pas en trimestres. Vous n'attendez pas une roadmap annuelle pour voir vos besoins adressés.</p></div>
+            <div class="pq-team-block pq-reveal-up" style="--d:.3s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Présence internationale</h4><p>Déjà présent des deux côtés de l'Atlantique. Cirkles ne compte pas s'arrêter là.</p></div>
+          </div>
+          <div class="pq-flags pq-reveal-up" style="--d:.2s">
+            <div class="pq-flag-track">
+              <span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span>
+            </div>
+          </div>
+          <div class="pq-cta-final pq-reveal-up" style="--d:.3s">
+            <div class="pq-section-divider"></div>
+            <h3 class="pq-cta-title">Rejoignez le réseau.<br><em>La fraude n'attend pas.</em></h3>
+            <div class="pq-cta-checks">
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sans engagement</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Déploiement en jours</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Résultats dès le premier mois</span>
+            </div>
+            <a href="demo-booking.html" class="pq-cta-btn" onclick="closePqModal()">
+              Demandez une démo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var pqIaCarouselSync = function () {};
+        function openPqModal() {
+          var m = document.getElementById("pq-modal");
+          m.classList.add("open");
+          document.body.style.overflow = "hidden";
+          var pqScrollEl = document.getElementById("pq-scroll");
+          pqScrollEl.scrollTop = 0;
+          var progressFill = document.getElementById("pq-progress");
+          if (progressFill) progressFill.style.width = "0%";
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              syncPqKnowsLeftStickyRail();
+              pqIaCarouselSync();
+            });
+          });
+          setTimeout(startCounters, 400);
+          setTimeout(initIaCards, 600);
+        }
+        window.openPqModal = openPqModal;
+        window.closePqModal = function () {
+          document.getElementById("pq-modal").classList.remove("open");
+          document.body.style.overflow = "";
+          ["pqs2", "pqs5"].forEach(function (sid) {
+            var s = document.getElementById(sid);
+            if (!s) return;
+            var lc = s.querySelector(".pq-knows-left-cell");
+            if (lc) lc.style.minHeight = "";
+          });
+        };
+        document.addEventListener("DOMContentLoaded", function () {
+          document.getElementById("pq-backdrop").addEventListener("click", closePqModal);
+          document.getElementById("pq-close").addEventListener("click", closePqModal);
+          document.addEventListener("keydown", function (e) {
+            if (e.key !== "Escape") return;
+            var pq = document.getElementById("pq-modal");
+            if (pq && pq.classList.contains("open")) closePqModal();
+          });
+          initScrollEffects();
+          initPqKnowsStickyRail();
+          syncPqKnowsLeftStickyRail();
+          initPqIaCarousel();
+        });
+        var PQ_STACK_SECTION_IDS = ["pqs2", "pqs5"];
+        function syncPqKnowsLeftStickyRail() {
+          var modal = document.getElementById("pq-modal");
+          if (!modal) return;
+          PQ_STACK_SECTION_IDS.forEach(function (sid) {
+            var sec = document.getElementById(sid);
+            if (!sec) return;
+            var leftCell = sec.querySelector(".pq-knows-left-cell");
+            var rightEl = sec.querySelector(".pq-knows-right");
+            var wrap = sec.querySelector(".pq-stack-wrapper");
+            var innerLeft = sec.querySelector(".pq-knows-left");
+            if (!leftCell || !rightEl || !wrap || !innerLeft) return;
+            if (!modal.classList.contains("open") || window.matchMedia("(max-width: 768px)").matches) {
+              leftCell.style.minHeight = "";
+              return;
+            }
+            var runway = parseFloat(getComputedStyle(wrap).paddingBottom) || 0;
+            var synced = Math.max(innerLeft.offsetHeight, rightEl.offsetHeight - runway);
+            leftCell.style.minHeight = Math.max(0, synced) + "px";
+          });
+        }
+        function initPqKnowsStickyRail() {
+          function schedule() {
+            requestAnimationFrame(syncPqKnowsLeftStickyRail);
+          }
+          if (typeof ResizeObserver !== "undefined") {
+            var ro = new ResizeObserver(schedule);
+            PQ_STACK_SECTION_IDS.forEach(function (sid) {
+              var sec = document.getElementById(sid);
+              if (!sec) return;
+              var wrap = sec.querySelector(".pq-stack-wrapper");
+              var rightEl = sec.querySelector(".pq-knows-right");
+              if (wrap) ro.observe(wrap);
+              if (rightEl) ro.observe(rightEl);
+            });
+          }
+          window.addEventListener("resize", schedule);
+        }
+        function startCounters() {
+          document.querySelectorAll("#pq-modal [data-count]").forEach(function (el) {
+            var target = parseInt(el.dataset.count, 10);
+            var prefix = el.dataset.prefix || "";
+            var suffix = el.dataset.suffix || "";
+            var duration = 1200;
+            var step = 16;
+            var steps = duration / step;
+            var inc = target / steps;
+            var current = 0;
+            var timer = setInterval(function () {
+              current = Math.min(current + inc, target);
+              el.textContent = prefix + Math.round(current) + suffix;
+              if (current >= target) clearInterval(timer);
+            }, step);
+          });
+          document.querySelectorAll("#pq-modal [data-text]").forEach(function (el) {
+            el.textContent = el.dataset.text;
+          });
+        }
+        function initScrollEffects() {
+          var scroll = document.getElementById("pq-scroll");
+          var progress = document.getElementById("pq-progress");
+          function updateScrollProgress() {
+            if (!progress) return;
+            var max = scroll.scrollHeight - scroll.clientHeight;
+            var pct = max > 0 ? (scroll.scrollTop / max) * 100 : 0;
+            progress.style.width = pct + "%";
+          }
+          scroll.addEventListener("scroll", function () {
+            updateScrollProgress();
+            revealElements();
+            pqIaCarouselSync();
+          });
+          updateScrollProgress();
+        }
+        function revealElements() {
+          var scroll = document.getElementById("pq-scroll");
+          var scrollT = scroll.getBoundingClientRect().top;
+          var scrollH = scroll.clientHeight;
+          document.querySelectorAll("#pq-modal .pq-reveal, #pq-modal .pq-reveal-up").forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            var relTop = rect.top - scrollT;
+            if (relTop < scrollH * 0.88) el.classList.add("in");
+          });
+        }
+        function initPqIaCarousel() {
+          var spinner = document.getElementById("pq-ia-spinner");
+          var section = document.getElementById("pq-ia-carousel");
+          var scrollEl = document.getElementById("pq-scroll");
+          var rA = document.getElementById("pq-ia-rA");
+          var rB = document.getElementById("pq-ia-rB");
+          var dotsWrap = document.getElementById("pq-ia-dots");
+          var numEl = document.getElementById("pq-ia-progress-num");
+          if (!spinner || !section || !scrollEl || !rA || !rB || !dotsWrap || !numEl) return;
+          if (spinner.getAttribute("data-built")) return;
+          spinner.setAttribute("data-built", "1");
+
+          var CARDS = [
+            {
+              num: "01",
+              title: "Modèle statistique collectif",
+              body: "Nos modèles s'enrichissent en continu des signaux de tout le réseau. Champion / challenger en permanence — chaque nouveau schéma détecté quelque part devient immédiatement une protection pour tous."
+            },
+            {
+              num: "02",
+              title: "IA générative & nouvelles menaces",
+              body: "Deepfakes, identités synthétiques, documents falsifiés à l'IA — nous utilisons les mêmes technologies pour les contrer, avec des LLM sécurisés et souverains, jamais exposés à l'extérieur."
+            },
+            {
+              num: "03",
+              title: "Agent fraude — votre analyste augmenté",
+              body: "Notre agent LLM explique ce qui pèse dans le score, contextualise chaque signal, et vous conseille sur les directions à prendre. Moins de bruit, des décisions plus rapides et mieux fondées."
+            },
+            {
+              num: "04",
+              title: "IA supervisée — jamais sans filet",
+              body: "Aucun modèle ne tourne sans surveillance humaine. Nos équipes vérifient en continu les performances, traitent les biais, et valident chaque évolution. L'IA fait le travail — l'humain garde le contrôle."
+            }
+          ];
+
+          var N = CARDS.length;
+          var STEP = 360 / N;
+          var slotNodes = [];
+          var cardEls = [];
+          var dots = [];
+          var currentDeg = 0;
+          var targetDeg = 0;
+          var rafId = null;
+          var lastActivity = 0;
+          var IDLE_MS = 200;
+          var ANGLE_EPS = 0.06;
+          var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          function getRadius() {
+            var stage = section.querySelector(".pq-ia-stage");
+            if (!stage) return 300;
+            var w = stage.getBoundingClientRect().width;
+            return Math.min(380, Math.max(200, w * 0.42));
+          }
+
+          function layoutSlots() {
+            var R = getRadius();
+            slotNodes.forEach(function (slot, i) {
+              slot.style.transform = "rotateY(" + i * STEP + "deg) translateZ(" + R + "px)";
+            });
+          }
+
+          CARDS.forEach(function (d, i) {
+            var slot = document.createElement("div");
+            slot.className = "pq-ia-card-slot";
+            slot.style.transform = "rotateY(" + i * STEP + "deg) translateZ(" + getRadius() + "px)";
+            var card = document.createElement("div");
+            card.className = "pq-ia-c-card";
+            card.innerHTML =
+              '<div class="pq-ia-c-num">' +
+              d.num +
+              "</div><h4>" +
+              d.title +
+              "</h4><p>" +
+              d.body +
+              "</p>";
+            slot.appendChild(card);
+            spinner.appendChild(slot);
+            slotNodes.push(slot);
+            cardEls.push(card);
+            var dot = document.createElement("div");
+            dot.className = "pq-ia-dot" + (i === 0 ? " active" : "");
+            dotsWrap.appendChild(dot);
+            dots.push(dot);
+          });
+
+          layoutSlots();
+
+          function onCarouselScroll() {
+            var sRoot = scrollEl.getBoundingClientRect();
+            var sSec = section.getBoundingClientRect();
+            var scrolled = sRoot.top - sSec.top;
+            var scrollable = section.offsetHeight - scrollEl.clientHeight;
+            if (scrollable <= 0) {
+              targetDeg = 0;
+              return;
+            }
+            var progress = Math.max(0, Math.min(1, scrolled / scrollable));
+            targetDeg = -(progress * (N - 1) * STEP);
+          }
+
+          function scheduleCarouselFrame() {
+            if (rafId == null) rafId = requestAnimationFrame(tick);
+          }
+
+          pqIaCarouselSync = function () {
+            onCarouselScroll();
+            lastActivity = typeof performance !== "undefined" ? performance.now() : Date.now();
+            scheduleCarouselFrame();
+          };
+
+          function getFrontIndex(spinDeg) {
+            var frontIdx = 0;
+            var minDist = Infinity;
+            for (var i = 0; i < N; i++) {
+              var world = (i * STEP + spinDeg) % 360;
+              if (world < 0) world += 360;
+              var dist = Math.min(world, 360 - world);
+              if (dist < minDist) {
+                minDist = dist;
+                frontIdx = i;
+              }
+            }
+            return frontIdx;
+          }
+
+          function lerp(a, b, t) {
+            return a + (b - a) * t;
+          }
+
+          /** Ramène un angle en ° dans ]-180, 180] pour la plus petite rotation */
+          function normalizeYaw(deg) {
+            var a = deg % 360;
+            if (a > 180) a -= 360;
+            if (a < -180) a += 360;
+            return a;
+          }
+
+          function tick() {
+            rafId = null;
+            var modal = document.getElementById("pq-modal");
+            if (!modal || !modal.classList.contains("open")) {
+              return;
+            }
+            var smooth = reduceMotion ? 1 : 0.22;
+            if (Math.abs(targetDeg - currentDeg) < 0.15) {
+              currentDeg = targetDeg;
+            } else {
+              currentDeg = lerp(currentDeg, targetDeg, smooth);
+            }
+            spinner.style.transform = "rotateY(" + currentDeg + "deg)";
+            rA.style.transform = "rotate(" + currentDeg * 0.45 + "deg)";
+            rB.style.transform = "rotate(" + currentDeg * -0.7 + "deg)";
+            var frontIdx = getFrontIndex(currentDeg);
+            var now = typeof performance !== "undefined" ? performance.now() : Date.now();
+            cardEls.forEach(function (el, i) {
+              var isFront = i === frontIdx;
+              el.classList.toggle("is-front", isFront);
+              var worldYaw = currentDeg + i * STEP;
+              /* Carte au premier plan : annule la rotation Y monde → texte comme en 2D (net) */
+              if (isFront) {
+                var flatten = -normalizeYaw(worldYaw);
+                el.style.transform =
+                  "translateZ(0.1px) rotateY(" + flatten + "deg)";
+              } else {
+                el.style.transform = "translateZ(0)";
+              }
+              var worldDeg = (i * STEP + currentDeg) % 360;
+              if (worldDeg < 0) worldDeg += 360;
+              var cosVal = Math.cos((worldDeg * Math.PI) / 180);
+              var rawOp = Math.max(0.08, (cosVal * 0.5 + 0.5) * 0.85 + (isFront ? 0.15 : 0));
+              var qOp = Math.round(rawOp * 50) / 50;
+              if (el._pqOp !== qOp) {
+                el.style.opacity = String(qOp);
+                el._pqOp = qOp;
+              }
+            });
+            dots.forEach(function (d, i) {
+              d.classList.toggle("active", i === frontIdx);
+            });
+            numEl.textContent = "0" + (frontIdx + 1) + " / 0" + N;
+
+            var delta = Math.abs(targetDeg - currentDeg);
+            if (delta < ANGLE_EPS) {
+              currentDeg = targetDeg;
+            }
+            delta = Math.abs(targetDeg - currentDeg);
+            var recent = now - lastActivity < IDLE_MS;
+            if (delta > ANGLE_EPS || recent) {
+              scheduleCarouselFrame();
+            }
+          }
+
+          window.addEventListener(
+            "resize",
+            function () {
+              layoutSlots();
+              onCarouselScroll();
+              lastActivity = typeof performance !== "undefined" ? performance.now() : Date.now();
+              scheduleCarouselFrame();
+            },
+            { passive: true }
+          );
+          if (typeof ResizeObserver !== "undefined") {
+            var st = section.querySelector(".pq-ia-stage");
+            if (st) {
+              var ro = new ResizeObserver(function () {
+                layoutSlots();
+                onCarouselScroll();
+                lastActivity = typeof performance !== "undefined" ? performance.now() : Date.now();
+                scheduleCarouselFrame();
+              });
+              ro.observe(st);
+            }
+          }
+          pqIaCarouselSync();
+        }
+        function initIaCards() {
+          revealElements();
+          pqIaCarouselSync();
+        }
+      })();
+    </script>
+
     <script>
       // Modal data
       const WHY_DETAILS = {
@@ -1293,44 +2869,44 @@
             "Vos juristes valident en quelques jours, pas en quelques mois."
           ]
         },
-        bank: {
-          icon: "#i-bank",
-          title: "Fraude bancaire",
-          lede: "Détection des virements suspects et des comptes mules avant qu\u2019ils ne sortent de votre établissement.",
+        kyc: {
+          icon: "#i-kyc",
+          title: "Vérification KYC",
+          lede: "Vérifiez l\u2019identité de vos clients en temps réel — documents, liveness, bases watchlist — sans friction pour les utilisateurs légitimes.",
           body: [
-            "Les fraudeurs orchestrent leurs attaques sur plusieurs établissements en parallèle, exploitant les délais d\u2019échange interbancaires. Cirkles supprime ce levier : un compte signalé comme mule chez un membre devient suspect chez tous, en moins de trente secondes.",
-            "Notre moteur croise plus de 80 indicateurs comportementaux (vélocité, géolocalisation, schémas de bénéficiaires) avec les signaux du réseau pour scorer chaque virement en temps réel.",
-            "Bénéfices observés : -68 % de pertes sur les arnaques au faux conseiller, -54 % sur les fraudes au virement, -41 % sur l\u2019ouverture de comptes mules."
+            "Parcours d\u2019onboarding unifié : capture de documents, contrôle liveness anti deepfake et croisement automatique avec les principales listes de sanctions et PEP.",
+            "Chaque identité validée ou rejetée enrichit le réseau : une alerte émise chez un membre est prise en compte chez les autres avant la prochaine action sensible.",
+            "File d\u2019attente prioritisation IA, SLA paramétrable et export des preuves pour vos audits conformité."
           ]
         },
-        card: {
-          icon: "#i-card",
-          title: "Fraude au paiement",
-          lede: "Cartes volées, rétrofacturations abusives, schémas de chargeback : un signal mutualisé entre marchands.",
+        kyb: {
+          icon: "#i-kyb",
+          title: "Connaissance entreprise (KYB)",
+          lede: "Qualifiez vos partenaires et fournisseurs : structure juridique, bénéficiaires effectifs, réputation — détectez les sociétés écrans avant d\u2019engager une relation.",
           body: [
-            "Une carte compromise ne sert jamais qu\u2019une seule fois : les fraudeurs la testent chez plusieurs marchands en quelques minutes. Le réseau Cirkles transforme cette logique en piège \u2014 la première transaction frauduleuse signale la carte à tous les autres membres avant la deuxième tentative.",
-            "Côté chargeback, le réseau identifie les profils de fraude au remboursement (\u00ab friendly fraud \u00bb) qui passent d\u2019un marchand à l\u2019autre, et fournit les éléments de preuve nécessaires pour gagner les litiges.",
-            "Intégration native avec les principaux PSP exposant une API de risk scoring."
+            "Remontée des bénéficiaires effectifs, liens capitalistiques et réseaux détenus : une vue consolidée sur la filière avant signature ou paiement.",
+            "Scores de réputation et signaux partagés par le réseau pour signaler les entités à risque ou les schémas de surfacturation récurrents.",
+            "Intégrations registres et données ouvertes pour tenir vos dossiers à jour sans saisie manuelle massive."
           ]
         },
-        identity: {
-          icon: "#i-id",
-          title: "Usurpation d\u2019identité",
-          lede: "Faux justificatifs, deepfakes, identités synthétiques : l\u2019empreinte d\u2019un fraudeur démasqué partout à la fois.",
+        documents: {
+          icon: "#i-doc",
+          title: "Analyse documentaire",
+          lede: "Détection de falsifications sur pièces d\u2019identité, justificatifs de domicile et bulletins de salaire — deepfakes et montages IA inclus.",
           body: [
-            "L\u2019identité synthétique est aujourd\u2019hui la fraude qui progresse le plus vite : un fraudeur combine des éléments réels et fictifs pour créer un dossier crédible, qu\u2019il déploie ensuite chez plusieurs créanciers.",
-            "Cirkles maintient un graphe de signaux anonymisés \u2014 hash de pièces d\u2019identité, schémas biométriques, empreintes d\u2019appareils \u2014 enrichi par chaque KYC effectué par un membre. Une identité signalée chez un assureur déclenche une alerte chez la banque qui l\u2019onboarde le lendemain.",
-            "Compatible avec les principaux fournisseurs de KYC du marché et les solutions de détection de deepfakes."
+            "Analyse multimodale : anomalies de police, incohérences métadonnées, motifs de duplication et indices de génération IA sur les pièces déposées.",
+            "Règles métier par type de document (CNI, passeport, RIB, fiches de paie) avec niveau de confiance explicite pour vos équipes de conformité.",
+            "Le réseau mutualise les empreintes de documents frauduleux : un fichier compromis détecté ailleurs bloque les soumissions équivalentes chez vous."
           ]
         },
-        ecom: {
-          icon: "#i-cart",
-          title: "Fraude e-commerce",
-          lede: "Comptes complices, scripts d\u2019achat, retours frauduleux : protégez vos marges sans freiner vos clients légitimes.",
+        solvency: {
+          icon: "#i-solv",
+          title: "Score de solvabilité",
+          lede: "Évaluez la capacité de remboursement de vos clients en combinant signaux comportementaux, données ouvertes et historique transactionnel.",
           body: [
-            "Les fraudeurs e-commerce industrialisent : bots d\u2019achat sur les drops, comptes complices revendant des objets jamais reçus, retours frauduleux orchestrés en série. Aucun marchand isolé n\u2019a la visibilité suffisante pour détecter ces schémas.",
-            "Le réseau Cirkles fournit cette visibilité : un acheteur dont 80 % des commandes finissent en \u00ab non reçu \u00bb sur un autre site est immédiatement scoré à risque chez vous.",
-            "Sans friction additionnelle pour vos clients légitimes \u2014 nous ne ralentissons que les comptes signalés. Lift mesuré sur les conversions : +3 à 5 %, en plus des pertes évitées."
+            "Modèle de scoring continu alimenté par le réseau : schémas de défaut observés chez d\u2019autres créanciers sans jamais exposer de données personnelles.",
+            "Combinaison de tendances de flux, stabilité des revenus déclarés et indicateurs de stress financier issus de sources ouvertes et autorisées.",
+            "Interprétabilité : chaque facteur du score est documenté pour vos équipes risque et pour répondre aux exigences de traitement équitable."
           ]
         }
       };
@@ -1361,15 +2937,22 @@
 
       window.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("[data-card]").forEach((card) => {
-          card.addEventListener("click", () =>
-            openWhyModal(card.dataset.card)
-          );
+          card.addEventListener("click", () => {
+            if (card.dataset.card === "principe") {
+              openPqModal();
+            } else {
+              openWhyModal(card.dataset.card);
+            }
+          });
         });
         document
           .querySelectorAll("#why-modal [data-close]")
           .forEach((el) => el.addEventListener("click", closeWhyModal));
         document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") closeWhyModal();
+          if (e.key !== "Escape") return;
+          const pqEl = document.getElementById("pq-modal");
+          if (pqEl && pqEl.classList.contains("open")) return;
+          closeWhyModal();
         });
       });
     </script>

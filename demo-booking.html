@@ -751,6 +751,8 @@
 
     // ── State ────────────────────────────────────────────────────────────
     let eventTypeUri = null;
+    /** kind API Calendly pour POST /invitees (ex. microsoft_teams_conference) */
+    let eventLocationKind = null;
     let currentYear = new Date().getFullYear();
     let currentMonth = new Date().getMonth();
     let selectedDate = null;
@@ -800,15 +802,37 @@
       });
     }
 
-    // ── API (proxy Vercel) ────────────────────────────────────────────────
-    async function calendlyGet(path, params = {}) {
-      const qs = new URLSearchParams({ path, ...params }).toString();
+    /** Doc : https://developer.calendly.com/how-to-find-the-organization-or-user-uri — PAT : current_organization */
+    function formatCalendlyApiError(data) {
+      var base = (
+        (data.title || "") + " " + (data.message || data.error || "Erreur Calendly API")
+      ).trim();
+      if (data.details && data.details.length) {
+        var parts = [];
+        data.details.forEach(function (d) {
+          var m =
+            typeof d.message === "string"
+              ? d.message
+              : typeof d.reason === "string"
+                ? d.reason
+                : "";
+          var p = typeof d.parameter === "string" ? " [" + d.parameter + "]" : "";
+          if (m || p) parts.push((m || "détail") + p);
+        });
+        if (parts.length) base += " — " + parts.join("; ");
+      }
+      return base;
+    }
+
+    // ── API (proxy local / Vercel) ────────────────────────────────────────
+    async function calendlyGet(path, params) {
+      if (!params) params = {};
+      const qs = new URLSearchParams(Object.assign({ path: path }, params)).toString();
       const r = await fetch("/api/calendly?" + qs);
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok)
-        throw new Error(
-          ((data.title || "") + " " + (data.message || data.error || "HTTP " + r.status)).trim()
-        );
+      const data = await r.json().catch(function () {
+        return {};
+      });
+      if (!r.ok) throw new Error(formatCalendlyApiError(data) + " [" + r.status + "]");
       return data;
     }
 
@@ -816,43 +840,153 @@
       const r = await fetch("/api/calendly?path=" + encodeURIComponent(path), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       });
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error((data.title || "") + " " + (data.message || data.error || "Erreur " + r.status).trim());
+      const data = await r.json().catch(function () {
+        return {};
+      });
+      if (!r.ok) throw new Error(formatCalendlyApiError(data) + " [" + r.status + "]");
       return data;
+    }
+
+    /** GET paginé (pagination.next_page) — doc Calendly v2. */
+    async function calendlyGetAllCollection(apiPath, baseParams) {
+      const all = [];
+      let path = apiPath;
+      let pageParams = Object.assign({}, baseParams);
+      let safety = 0;
+      while (safety++ < 40) {
+        const data = await calendlyGet(path, pageParams);
+        (data.collection || []).forEach(function (item) {
+          all.push(item);
+        });
+        const nextLink = data.pagination && data.pagination.next_page;
+        if (!nextLink) break;
+        let u;
+        try {
+          u = new URL(nextLink);
+        } catch (_) {
+          break;
+        }
+        path = u.pathname;
+        pageParams = {};
+        u.searchParams.forEach(function (val, key) {
+          pageParams[key] = val;
+        });
+      }
+      return all;
+    }
+
+    /**
+     * Lieu pour POST /invitees : body.location.kind doit reprendre event_type.locations[].kind
+     * (voir doc « Schedule Events with AI Agents », objet location — pas location_configuration).
+     * Priorité Microsoft Teams si plusieurs lieux configurés.
+     */
+    function resolveLocationKindFromEventType(et) {
+      if (!et) return null;
+      var locs = et.locations;
+      if (!locs || !locs.length) return null;
+      var preferTeams = locs.filter(function (l) {
+        var k = String((l && l.kind) || "").toLowerCase();
+        return (
+          k.indexOf("teams") !== -1 ||
+          k.indexOf("microsoft_teams") !== -1
+        );
+      });
+      var pick = preferTeams.length ? preferTeams[0] : locs[0];
+      return (pick && pick.kind) || (locs[0] && locs[0].kind) || null;
     }
 
     // ── Chargement dispos ────────────────────────────────────────────────
     async function initEventType() {
-      const me = await calendlyGet("/users/me");
-      const userUri = me.resource && me.resource.uri;
-      if (!userUri) throw new Error("Profil Calendly introuvable.");
+      const meData = await calendlyGet("/users/me");
+      const r = meData.resource;
+      if (!r || !r.uri) throw new Error("Profil Calendly introuvable.");
 
-      const events = await calendlyGet("/event_types", {
-        user: userUri,
-        count: "100",
+      const byUri = {};
+      function addTypes(list) {
+        (list || []).forEach(function (e) {
+          if (e && e.uri) byUri[e.uri] = e;
+        });
+      }
+
+      addTypes(await calendlyGetAllCollection("/event_types", { user: r.uri, count: "100" }));
+
+      const orgUri = r.current_organization;
+      if (orgUri) {
+        addTypes(
+          await calendlyGetAllCollection("/event_types", {
+            organization: orgUri,
+            count: "100",
+          })
+        );
+      }
+
+      const col = Object.keys(byUri).map(function (k) {
+        return byUri[k];
       });
-
-      const col = events.collection || [];
-      if (!col.length) throw new Error("Aucun type d’événement Calendly.");
+      if (!col.length) {
+        throw new Error(
+          "Aucun type d’événement. Vérifie le compte Calendly et les scopes du token."
+        );
+      }
 
       const match = col.find(function (e) {
         return (
           e.slug === EVENT_TYPE_SLUG ||
-          (e.scheduling_url && e.scheduling_url.includes(EVENT_TYPE_SLUG))
+          (e.scheduling_url && String(e.scheduling_url).indexOf(EVENT_TYPE_SLUG) !== -1)
         );
       });
-      eventTypeUri = match ? match.uri : col[0].uri;
+      var selectedEt = match || col[0];
+      eventTypeUri = selectedEt.uri;
       if (!eventTypeUri) throw new Error("Type d’événement introuvable.");
+
+      eventLocationKind = resolveLocationKindFromEventType(selectedEt);
+      try {
+        var uuid = String(eventTypeUri)
+          .split("/")
+          .filter(function (x) {
+            return x;
+          })
+          .pop();
+        if (uuid) {
+          var detail = await calendlyGet("/event_types/" + uuid);
+          if (detail.resource) {
+            eventLocationKind = resolveLocationKindFromEventType(detail.resource);
+          }
+        }
+      } catch (detailErr) {
+        console.warn("Détail event_type ignoré:", detailErr);
+      }
     }
+
+    /**
+     * Doc : start_time et end_time doivent être dans le futur ; plage ≤ 7 jours
+     * (voir List available times — developer.calendly.com).
+     * Calendly compare côté serveur : « maintenant » + latence doit être <
+     * start_time envoyé → marge obligatoire (sinon erreur même avec Date.now()).
+     */
+    const MAX_AVAIL_MS = 7 * 24 * 60 * 60 * 1000 - 120000;
+    /** Seuil minimal pour start_time (ms depuis epoch), strictement après l’instant API. */
+    const CAL_MIN_FUTURE_MS = function () {
+      return Date.now() + 60000;
+    };
 
     async function fetchAvailabilityWindow(startInclusive, endInclusive) {
       if (!eventTypeUri) return;
-      const data = await calendlyGet("/event_type_available_times", {
+      var floorMs = CAL_MIN_FUTURE_MS();
+      var startMs = startInclusive.getTime();
+      var endMs = endInclusive.getTime();
+      if (endMs <= floorMs) return;
+      if (startMs < floorMs) startMs = floorMs;
+      if (startMs >= endMs) return;
+      var spanCap = startMs + MAX_AVAIL_MS;
+      if (endMs > spanCap) endMs = spanCap;
+      if (startMs >= endMs) return;
+      var data = await calendlyGet("/event_type_available_times", {
         event_type: eventTypeUri,
-        start_time: startInclusive.toISOString(),
-        end_time: endInclusive.toISOString(),
+        start_time: new Date(startMs).toISOString(),
+        end_time: new Date(endMs).toISOString(),
       });
       mergeAvailabilityIntoBuckets(data.collection || []);
     }
@@ -867,10 +1001,13 @@
 
       let cur = startOfMonthLocal(year, month);
       const hardEnd = endOfMonthLocal(year, month);
+      var todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      if (cur < todayStart) cur = todayStart;
 
       while (cur <= hardEnd) {
         const chunkEnd = new Date(cur);
-        chunkEnd.setDate(chunkEnd.getDate() + (MAX_RANGE_DAYS - 1));
+        chunkEnd.setDate(chunkEnd.getDate() + (MAX_RANGE_DAYS - 2));
         chunkEnd.setHours(23, 59, 59, 999);
         if (chunkEnd > hardEnd) {
           chunkEnd.setTime(hardEnd.getTime());
@@ -896,10 +1033,12 @@
       const p = parseDayKey(dayKey);
       const lo = new Date(p.getFullYear(), p.getMonth(), p.getDate(), 0, 0, 0, 0);
       const hi = new Date(p.getFullYear(), p.getMonth(), p.getDate(), 23, 59, 59, 999);
+      var reqStartMs = Math.max(lo.getTime(), CAL_MIN_FUTURE_MS());
+      if (reqStartMs >= hi.getTime()) return [];
 
       const data = await calendlyGet("/event_type_available_times", {
         event_type: eventTypeUri,
-        start_time: lo.toISOString(),
+        start_time: new Date(reqStartMs).toISOString(),
         end_time: hi.toISOString(),
       });
 
@@ -1179,6 +1318,15 @@
       const displayName = prenom + " " + nom + " — " + entreprise;
 
       try {
+        const utmContent = (message ? message : entreprise ? "Entreprise : " + entreprise : "Réservation site Cirkles").slice(
+          0,
+          120
+        );
+        /**
+         * Doc officielle (Schedule Events with AI Agents) : champ root « location: { kind } »,
+         * pas « location_configuration » — celui-ci provoque invalid_location_choice / mauvais mapping.
+         */
+        var locKind = eventLocationKind;
         const inviteeBody = {
           event_type: eventTypeUri,
           start_time: selectedSlot,
@@ -1187,10 +1335,17 @@
             name: displayName.length > 200 ? displayName.slice(0, 200) : displayName,
             timezone: tz(),
           },
+          tracking: {
+            utm_campaign: "cirkles_demo",
+            utm_source: "cirkles_ai_site",
+            utm_medium: "embedded_scheduler",
+            utm_term: "demo_booking",
+            utm_content: utmContent,
+            salesforce_uuid: "00000000-0000-4000-8000-000000000001",
+          },
         };
-
-        if (message) {
-          inviteeBody.tracking = { utm_content: message.slice(0, 120) };
+        if (locKind) {
+          inviteeBody.location = { kind: locKind };
         }
 
         await calendlyPost("/invitees", inviteeBody);
@@ -1230,7 +1385,7 @@
         console.error("Boot error:", e);
         setCalLoading(false);
         document.getElementById("calLoading").textContent =
-          "Erreur de chargement. Vérifiez Calendly, le token et le slug (« " + EVENT_TYPE_SLUG + " »).";
+          "Erreur : " + (e.message || String(e)) + " — vérif aussi le slug « " + EVENT_TYPE_SLUG + " » dans demo-booking.html.";
         document.getElementById("calLoading").style.display = "block";
       }
     })();

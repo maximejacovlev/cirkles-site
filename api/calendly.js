@@ -7,7 +7,8 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const token = process.env.CALENDLY_TOKEN;
+  const token =
+    typeof process.env.CALENDLY_TOKEN === "string" ? process.env.CALENDLY_TOKEN.trim() : "";
   if (!token) {
     return res.status(500).json({ error: "Token manquant" });
   }
@@ -18,16 +19,27 @@ module.exports = async function handler(req, res) {
   }
 
   const pathStr = Array.isArray(path) ? path[0] : path;
-  const qs = new URLSearchParams(queryParams).toString();
+  const usp = new URLSearchParams();
+  Object.keys(queryParams).forEach((key) => {
+    let v = queryParams[key];
+    if (v === undefined || v === null) return;
+    let s = Array.isArray(v) ? v[0] : v;
+    if (typeof s !== "string") s = String(s);
+    usp.append(key, s);
+  });
+  const qs = usp.toString();
   const url = "https://api.calendly.com" + pathStr + (qs ? "?" + qs : "");
 
   try {
+    const headers = {
+      Authorization: "Bearer " + token,
+      Accept: "application/json",
+    };
+    if (req.method === "POST") headers["Content-Type"] = "application/json";
+
     const options = {
       method: req.method,
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
+      headers,
     };
 
     if (req.method === "POST" && req.body) {

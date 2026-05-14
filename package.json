@@ -3,9 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "serve . -p 3000",
-    "serve": "serve . -p 3000",
+    "dev": "node server.js",
+    "static": "serve . -p 3000",
     "dev:vercel": "vercel dev --listen 3000"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "serve": "^14.2.5",
