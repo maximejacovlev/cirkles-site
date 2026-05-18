@@ -360,6 +360,84 @@
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
       }
 
+      .feature-preview-shell {
+        padding: 1px;
+      }
+      .feature-preview {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        width: 100%;
+        overflow: hidden;
+        background:
+          repeating-linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.016) 0 8px,
+            transparent 8px 18px
+          ),
+          linear-gradient(180deg, #fafbfc 0%, #f0f1f3 100%);
+      }
+      .feature-preview__frame {
+        position: absolute;
+        inset: 7%;
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow:
+          inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+          0 8px 28px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .feature-preview__frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.2px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.14) 0%,
+          rgba(0, 0, 0, 0.05) 22%,
+          rgba(0, 0, 0, 0) 48%,
+          rgba(0, 0, 0, 0) 52%,
+          rgba(0, 0, 0, 0.05) 78%,
+          rgba(0, 0, 0, 0.12) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .feature-preview video,
+      .feature-preview__frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        border: 0;
+        border-radius: inherit;
+      }
+      .feature-preview video {
+        object-fit: cover;
+        filter: grayscale(100%) brightness(1.1) contrast(1.03);
+      }
+      .feature-preview__veil {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: inherit;
+        pointer-events: none;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.42) 0%,
+          rgba(255, 255, 255, 0.12) 38%,
+          rgba(248, 249, 251, 0.2) 100%
+        );
+      }
+
       /* BlurText animation */
       .blur-word {
         display: inline-block;
@@ -409,6 +487,32 @@
       .fade-bottom {
         bottom: 0;
         background: linear-gradient(to top, #fff, transparent);
+      }
+
+      .section-video-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .section-video-bg > video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .section-video-bg__veil {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      /* Fond #reseau — reflets neutres (blanc/gris, sans dominante violette) */
+      #reseau video {
+        filter: grayscale(100%) brightness(1.12) contrast(1.02);
       }
 
       /* Reduce horizontal overflow on small viewports */
@@ -2125,7 +2229,7 @@
                 loop
                 playsinline
                 preload="auto"
-                class="absolute inset-0 w-full h-full object-cover select-none"
+                class="section-bg-video absolute inset-0 w-full h-full object-cover select-none"
                 aria-hidden="true"
               ></video>
               <div class="absolute inset-0" style="background: rgba(255,255,255,0.6);"></div>
@@ -2229,22 +2333,16 @@
                   </button>
                 </div>
                 <div class="flex-1 w-full">
-                  <div class="liquid-glass rounded-2xl overflow-hidden">
-                    <div class="gif-placeholder">
-                      <div class="frame">
-                        <div class="bar"><i></i><i></i><i></i></div>
-                        <div class="body">
-                          <div class="col">
-                            <div class="ln head"></div>
-                            <div class="ln"></div>
-                            <div class="ln short"></div>
-                            <div class="ln"></div>
-                            <div class="ln short"></div>
-                          </div>
-                          <div class="card"></div>
-                        </div>
+                  <div class="feature-preview-shell liquid-glass rounded-2xl overflow-hidden">
+                    <div class="feature-preview" aria-label="Aperçu détection en temps réel — réseau de fraude">
+                      <div class="feature-preview__frame">
+                        <iframe
+                          src="fraud_network_final.html?embed=1"
+                          title="Réseau de détection de fraude"
+                          loading="lazy"
+                          tabindex="-1"
+                        ></iframe>
                       </div>
-                      <span class="label">[ aperçu — détection en temps réel ]</span>
                     </div>
                   </div>
                 </div>
@@ -2263,22 +2361,20 @@
                   </button>
                 </div>
                 <div class="flex-1 w-full">
-                  <div class="liquid-glass rounded-2xl overflow-hidden">
-                    <div class="gif-placeholder">
-                      <div class="frame">
-                        <div class="bar"><i></i><i></i><i></i></div>
-                        <div class="body">
-                          <div class="card"></div>
-                          <div class="col">
-                            <div class="ln head"></div>
-                            <div class="ln"></div>
-                            <div class="ln short"></div>
-                            <div class="ln"></div>
-                            <div class="ln short"></div>
-                          </div>
-                        </div>
+                  <div class="feature-preview-shell liquid-glass rounded-2xl overflow-hidden">
+                    <div class="feature-preview" aria-label="Aperçu tableau de bord réseau">
+                      <div class="feature-preview__frame">
+                        <video
+                          src="videos/dashboard-1.mp4"
+                          class="feature-preview-video"
+                          autoplay
+                          muted
+                          loop
+                          playsinline
+                          preload="auto"
+                        ></video>
+                        <div class="feature-preview__veil" aria-hidden="true"></div>
                       </div>
-                      <span class="label">[ aperçu — tableau de bord réseau ]</span>
                     </div>
                   </div>
                 </div>
@@ -2287,7 +2383,24 @@
           </section>
 
           <!-- =================== FEATURES GRID =================== -->
-          <section id="reseau" class="relative px-6 lg:px-16 py-28 scroll-mt-24">
+          <section id="reseau" class="relative overflow-hidden scroll-mt-24">
+            <div class="absolute inset-0 z-0">
+              <video
+                src="videos/sect3_bg.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="absolute inset-0 w-full h-full object-cover select-none"
+                aria-hidden="true"
+              ></video>
+              <div class="absolute inset-0" style="background: rgba(255,255,255,0.65);"></div>
+            </div>
+            <div class="fade-top"></div>
+            <div class="fade-bottom"></div>
+
+            <div class="relative z-10 px-6 lg:px-16 py-28">
             <div class="max-w-6xl mx-auto">
               <div class="flex flex-col items-center text-center mb-16">
                 <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Pourquoi Cirkles</div>
@@ -2344,6 +2457,7 @@
                   </span>
                 </button>
               </div>
+            </div>
             </div>
           </section>
 
@@ -2524,9 +2638,36 @@
         els.forEach((el) => io.observe(el));
       }
 
+      function initSectionBgVideos() {
+        document
+          .querySelectorAll("video.section-bg-video, video.feature-preview-video")
+          .forEach((video) => {
+            video.muted = true;
+            const observeTarget =
+              video.closest("section") || video.closest(".feature-preview") || video;
+            const tryPlay = () => {
+              const p = video.play();
+              if (p && typeof p.catch === "function") p.catch(() => {});
+            };
+            tryPlay();
+            video.addEventListener("loadeddata", tryPlay, { once: true });
+            const io = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((e) => {
+                  if (e.isIntersecting) tryPlay();
+                  else video.pause();
+                });
+              },
+              { threshold: 0.05, rootMargin: "100px 0px" }
+            );
+            io.observe(observeTarget);
+          });
+      }
+
       window.addEventListener("DOMContentLoaded", () => {
         initBlurText();
         initFadeUp();
+        initSectionBgVideos();
       });
     </script>
     <!-- =================== MODAL =================== -->
