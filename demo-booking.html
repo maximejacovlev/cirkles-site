@@ -1384,8 +1384,15 @@
       } catch (e) {
         console.error("Boot error:", e);
         setCalLoading(false);
-        document.getElementById("calLoading").textContent =
-          "Erreur : " + (e.message || String(e)) + " — vérif aussi le slug « " + EVENT_TYPE_SLUG + " » dans demo-booking.html.";
+        var msg = e.message || String(e);
+        var hint = "";
+        if (/Token manquant/i.test(msg)) {
+          hint =
+            " Sur Vercel : Project → Settings → Environment Variables → ajoute CALENDLY_TOKEN (redéploie ou « Redeploy » après).";
+        } else {
+          hint = " — vérif aussi le slug « " + EVENT_TYPE_SLUG + " » (const EVENT_TYPE_SLUG) face à ton type d’événement Calendly.";
+        }
+        document.getElementById("calLoading").textContent = "Erreur : " + msg + hint;
         document.getElementById("calLoading").style.display = "block";
       }
     })();
