@@ -1,5 +1,5 @@
 /**
- * Serveur local : fichiers statiques + proxy /api/calendly (comme api/calendly.js).
+ * Serveur local : fichiers statiques + /api/calendly + POST /api/contact (e-mail).
  * Usage : cp .env.example .env puis npm run dev
  */
 const path = require("path");
@@ -7,6 +7,7 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const express = require("express");
+const { sendContactEmail } = require("./lib/contactMail.js");
 
 const PORT_START = Number(process.env.PORT) || 3000;
 const PORT_ATTEMPTS = 20;
@@ -76,6 +77,34 @@ app.all("/api/calendly", async function (req, res) {
   }
 });
 
+function contactCors(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+app.options("/api/contact", function (req, res) {
+  contactCors(res);
+  res.status(200).end();
+});
+
+app.post("/api/contact", async function (req, res) {
+  contactCors(res);
+  try {
+    const result = await sendContactEmail(req.body || {});
+    if (result.skipped) return res.status(200).json({ ok: true });
+    if (result.error) {
+      return res.status(result.status || 400).json({ error: result.error });
+    }
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("contact mail:", err);
+    return res.status(500).json({
+      error: err.message || "Erreur lors de l’envoi. Réessayez plus tard.",
+    });
+  }
+});
+
 app.use(express.static(ROOT));
 
 function listenFrom(port, attempt) {
@@ -88,7 +117,7 @@ function listenFrom(port, attempt) {
     console.log(
       "Cirkles local → http://localhost:" +
         port +
-        "  |  landing: /index.html  démo: /demo-booking.html"
+        "  |  landing: /index.html  démo: /demo-booking.html  contact: /contact.html"
     );
   });
 

@@ -177,27 +177,6 @@
         pointer-events: none;
         mix-blend-mode: overlay;
       }
-      .partner-logos img {
-        width: auto;
-        object-fit: contain;
-        display: block;
-        opacity: 0.9;
-      }
-      .partner-logos .logo-cirkles {
-        height: 48px;
-      }
-      .partner-logos .logo-synapse {
-        height: 66px;
-      }
-      .partner-logos .logo-basikon {
-        height: 50px;
-      }
-      .partner-logos .logo-quicksign {
-        height: 56px;
-      }
-      .partner-logos .logo-trustfull {
-        height: 44px;
-      }
       @keyframes drift {
         0% {
           transform: translate3d(0, 0, 0) scale(1);
@@ -1033,79 +1012,6 @@
         font-size: 11px;
         color: rgba(0, 0, 0, 0.35);
         line-height: 1.5;
-      }
-
-      /* Video modal */
-      .video-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 110;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-      }
-      .video-modal.open {
-        display: flex;
-      }
-      .video-modal .v-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        opacity: 0;
-        transition: opacity 0.35s ease;
-      }
-      .video-modal.open .v-backdrop {
-        opacity: 1;
-      }
-      .video-modal .v-card {
-        position: relative;
-        width: 100%;
-        max-width: 1100px;
-        aspect-ratio: 16 / 9;
-        border-radius: 28px;
-        overflow: hidden;
-        background: #ffffff;
-        box-shadow:
-          0 30px 80px rgba(0, 0, 0, 0.6),
-          inset 0 1px 1px rgba(255, 255, 255, 0.12);
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-        transition:
-          opacity 0.4s ease,
-          transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      .video-modal.open .v-card {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      .video-modal video {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-        background: #fff;
-      }
-      .video-modal .video-placeholder {
-        width: 100%;
-        height: 100%;
-        display: block;
-        background: #000;
-      }
-      .video-modal .v-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 40px;
-        height: 40px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        color: #000;
-        cursor: pointer;
-        z-index: 2;
       }
 
       /* POURQUOI CIRKLES — popup plein écran */
@@ -2057,9 +1963,6 @@
           <path d="M7 17 17 7" />
           <path d="M7 7h10v10" />
         </symbol>
-        <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M8 5v14l11-7z" />
-        </symbol>
         <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
         </symbol>
@@ -2141,6 +2044,7 @@
               <a href="#accueil" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Accueil</a>
               <a href="#solution" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Solution</a>
               <a href="#reseau" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Réseau</a>
+              <a href="contact.html" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Contact</a>
               <a href="demo-booking.html" class="ml-1 inline-flex items-center gap-1 bg-black text-white rounded-full px-3.5 py-1.5 text-sm font-medium hover:bg-black/85 transition">
                 Demandez une Démo
                 <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
@@ -2155,7 +2059,7 @@
         </nav>
 
         <!-- =================== HERO =================== -->
-        <section id="accueil" class="relative overflow-visible scroll-mt-24" style="height: 780px;">
+        <section id="accueil" class="relative overflow-visible scroll-mt-24 min-h-[560px] sm:min-h-[600px]">
           <!-- Hero background image -->
           <div class="absolute inset-0 z-0 overflow-hidden">
             <img
@@ -2170,7 +2074,7 @@
           <!-- Bottom gradient fade 300px -->
           <div class="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none" style="height:300px; background: linear-gradient(to bottom, transparent, #fff);"></div>
 
-          <div class="relative z-10 h-full flex flex-col items-center px-6 lg:px-16" style="padding-top: 95px;">
+          <div class="relative z-10 h-full flex flex-col items-center px-6 lg:px-16 pb-20" style="padding-top: 95px;">
             <!-- Badge -->
             <div class="liquid-glass rounded-full px-1 py-1 inline-flex items-center gap-2 fade-up" data-delay="0">
               <span class="bg-black text-white rounded-full px-3 py-1 text-xs font-semibold font-body">Nouveau</span>
@@ -2190,31 +2094,14 @@
               Chaque dossier frauduleux détecté dans l’écosystème renforce la protection de tous ses membres. Plus le réseau grandit, plus la fraude recule.
             </p>
 
-            <!-- CTA buttons -->
-            <div class="mt-7 flex items-center gap-3 fade-up" data-delay="1100">
+            <!-- CTA -->
+            <div class="mt-7 flex items-center justify-center gap-3 fade-up" data-delay="1100">
               <a href="demo-booking.html" class="liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium">
                 Demandez une Démo
                 <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
               </a>
-              <a href="#" data-video-open class="inline-flex items-center gap-2 text-sm text-black/65 font-body font-medium px-3 py-2.5">
-                <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-play" /></svg>
-                Voir le film
-              </a>
             </div>
 
-            <!-- Partners bar -->
-            <div class="mt-auto pb-4 pt-8 w-full flex flex-col items-center gap-6">
-              <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/60 hover:text-black transition font-body">
-                Ils nous font confiance
-              </div>
-              <div class="partner-logos flex flex-wrap items-center justify-center gap-x-12 md:gap-x-16 gap-y-4">
-                <img src="images/cirkles-partner.png" alt="Cirkles" class="logo-cirkles" draggable="false" />
-                <img src="images/synapse-black.png" alt="Synapse Risk &amp; Compliance" class="logo-synapse" draggable="false" />
-                <img src="images/basikon-black.png" alt="Basikon" class="logo-basikon" draggable="false" />
-                <img src="images/quicksign-black.png" alt="QuickSign" class="logo-quicksign" draggable="false" />
-                <img src="images/trustfull.png" alt="Trustfull" class="logo-trustfull" draggable="false" />
-              </div>
-            </div>
           </div>
         </section>
 
@@ -2559,13 +2446,10 @@
                 <p class="mt-6 max-w-xl text-black/55 font-body font-light text-sm md:text-base fade-up" data-delay="200">
                   Réservez une démonstration personnalisée. Découvrez comment l’intelligence collective peut protéger votre organisation. Sans engagement.
                 </p>
-                <div class="mt-9 flex flex-col sm:flex-row items-center gap-3 fade-up" data-delay="400">
+                <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 fade-up" data-delay="400">
                   <a href="demo-booking.html" class="liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm text-black font-body font-medium">
                     Demandez une Démo
                     <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                  </a>
-                  <a href="#" data-video-open class="bg-black text-white rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm font-body font-medium hover:bg-black/85 transition">
-                    Voir le film
                   </a>
                 </div>
 
@@ -2577,7 +2461,7 @@
                   <div class="flex items-center gap-6">
                     <button type="button" class="footer-link-popup text-black/35 text-xs font-body hover:text-black/60 transition cursor-pointer" data-card="page-confidentialite" aria-haspopup="dialog">Confidentialité</button>
                     <button type="button" class="footer-link-popup text-black/35 text-xs font-body hover:text-black/60 transition cursor-pointer" data-card="page-conditions" aria-haspopup="dialog">Conditions</button>
-                    <button type="button" class="footer-link-popup text-black/35 text-xs font-body hover:text-black/60 transition cursor-pointer" data-card="page-contact" aria-haspopup="dialog">Contact</button>
+                    <a href="contact.html" class="text-black/35 text-xs font-body hover:text-black/60 transition">Contact</a>
                   </div>
                 </div>
               </div>
@@ -3632,6 +3516,7 @@
           title: "Nous contacter",
           lede: "Une question, un projet, une démo&nbsp;? Notre équipe répond sous 24 heures ouvrées.",
           body: [
+            "Formulaire \u2014 <strong>contact.html</strong> pour nous écrire directement depuis le site.",
             "Commercial &amp; partenariats \u2014 contact@cirkles.ai. Pour les demandes de démo, nous vous proposons un créneau de 45 minutes avec un expert sectoriel (banque, assurance, e-commerce) sous 48 heures.",
             "Support client \u2014 support@cirkles.ai pour les membres existants. Astreinte 24/7 incluse dans tous les contrats Enterprise, support business hours pour les autres formules.",
             "Sécurité &amp; conformité \u2014 security@cirkles.ai pour signaler une vulnérabilité (programme de bug bounty actif), dpo@cirkles.ai pour toute demande relative aux données personnelles. Adresse postale : Cirkles SAS, 12 rue de la Paix, 75002 Paris."
@@ -3801,56 +3686,6 @@
           closeWhyModal();
         });
       });
-    </script>
-    <!-- =================== VIDEO MODAL =================== -->
-    <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Vidéo de présentation">
-      <div class="v-backdrop" data-video-close></div>
-      <div class="v-card">
-        <button type="button" class="v-close liquid-glass-strong" data-video-close aria-label="Fermer la vidéo">
-          <svg class="w-4 h-4" aria-hidden="true"><use href="#i-x" /></svg>
-        </button>
-        <div id="film-player" class="video-placeholder" aria-label="Emplacement vidéo"></div>
-      </div>
-    </div>
-
-    <script>
-      (function () {
-        const root = document.getElementById("video-modal");
-        const player = document.getElementById("film-player");
-        const hasVideoPlayer = player instanceof HTMLVideoElement;
-        function open() {
-          root.classList.add("open");
-          document.body.style.overflow = "hidden";
-          // Try autoplay only when an actual <video> element exists.
-          if (hasVideoPlayer) {
-            try {
-              player.currentTime = 0;
-              player.play().catch(() => {});
-            } catch (e) {}
-          }
-        }
-        function close() {
-          root.classList.remove("open");
-          document.body.style.overflow = "";
-          if (hasVideoPlayer) {
-            try {
-              player.pause();
-            } catch (e) {}
-          }
-        }
-        document.querySelectorAll("[data-video-open]").forEach((el) =>
-          el.addEventListener("click", (e) => {
-            e.preventDefault();
-            open();
-          })
-        );
-        document
-          .querySelectorAll("#video-modal [data-video-close]")
-          .forEach((el) => el.addEventListener("click", close));
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && root.classList.contains("open")) close();
-        });
-      })();
     </script>
     <script src="js/landing-scroll.js"></script>
   </body>
