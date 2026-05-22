@@ -2,7 +2,8 @@
   "version": 2,
   "redirects": [
     { "source": "/kyc.html", "destination": "/fraude-id.html", "permanent": true },
-    { "source": "/kyb.html", "destination": "/schema.html", "permanent": true }
+    { "source": "/kyb.html", "destination": "/schema.html", "permanent": true },
+    { "source": "/solvabilite.html", "destination": "/score.html", "permanent": true }
   ],
   "functions": {
     "api/**/*.js": {

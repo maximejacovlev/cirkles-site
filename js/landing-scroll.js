@@ -4,7 +4,7 @@
  */
 (function () {
   const STORAGE_KEY = "cirkles-landing-scroll";
-  const PRODUCT_PAGES = ["fraude-id.html", "schema.html", "solvabilite.html", "analyse-documentaire.html"];
+  const PRODUCT_PAGES = ["fraude-id.html", "schema.html", "score.html", "analyse-documentaire.html"];
 
   function isLandingPage() {
     const last = window.location.pathname.split("/").filter(Boolean).pop() || "";
