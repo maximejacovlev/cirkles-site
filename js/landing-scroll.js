@@ -1,6 +1,6 @@
 /**
  * Mémorise la position de scroll de la landing quand l'utilisateur ouvre
- * une page produit (KYC, KYB, score de fraude, analyse documentaire), et la restaure au retour.
+ * une page produit (fraude identité, schéma complexe, score de fraude, analyse documentaire), et la restaure au retour.
  */
 (function () {
   const STORAGE_KEY = "cirkles-landing-scroll";
