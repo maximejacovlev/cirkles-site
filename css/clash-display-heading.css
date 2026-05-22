@@ -1,0 +1,19 @@
+/* Clash Display — titres (Fontshare, Semibold) */
+@font-face {
+  font-family: "Clash Display";
+  src: url("../fonts/clash-display/ClashDisplay-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-heading,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Clash Display", system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}

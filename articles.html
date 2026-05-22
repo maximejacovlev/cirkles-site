@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Articles — Cirkles.ai</title>
+  <meta name="description" content="Articles et analyses sur la fraude, l'intelligence collective et la conformité — Cirkles.ai" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/report-popup.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #fff;
+      color: #000;
+      font-family: "Inter Tight", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(55% 40% at 15% 8%, rgba(0,0,0,.03) 0%, transparent 55%),
+        radial-gradient(45% 35% at 85% 92%, rgba(0,0,0,.025) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .liquid-glass {
+      background: rgba(0,0,0,.04);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.06) 22%, transparent 45%, transparent 55%, rgba(0,0,0,.06) 78%, rgba(0,0,0,.14) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .liquid-glass-strong {
+      background: rgba(0,0,0,.06);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      box-shadow: 4px 4px 4px rgba(0,0,0,.04), inset 0 1px 1px rgba(0,0,0,.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass-strong::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.08) 22%, transparent 45%, transparent 55%, rgba(0,0,0,.08) 78%, rgba(0,0,0,.18) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 12px 16px;
+    }
+    @media (min-width: 1024px) {
+      .site-nav { padding: 12px 64px; }
+    }
+    .site-nav-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-nav-links {
+      display: none;
+      align-items: center;
+      gap: 0;
+      padding: 4px 6px;
+      border-radius: 9999px;
+    }
+    @media (min-width: 768px) {
+      .site-nav-links { display: flex; }
+    }
+    .site-nav-links a {
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0,0,0,.75);
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: color .2s, background .2s;
+    }
+    .site-nav-links a:hover { color: #000; }
+    .site-nav-links a.is-active {
+      color: #000;
+      background: rgba(0,0,0,.05);
+    }
+    .site-nav-links a.nav-cta,
+    .site-nav-links button.nav-cta {
+      margin-left: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #000;
+      border: none;
+      cursor: pointer;
+      color: #fff !important;
+      -webkit-text-fill-color: #fff;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .2s;
+      position: relative;
+      z-index: 2;
+    }
+    .site-nav-links a.nav-cta:hover,
+    .site-nav-links button.nav-cta:hover {
+      background: rgba(0,0,0,.85);
+      color: #fff !important;
+    }
+    .site-nav-links a.nav-cta svg {
+      width: 14px;
+      height: 14px;
+      color: #fff;
+      stroke: #fff;
+    }
+    .nav-cta-mobile {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #000;
+      border: none;
+      cursor: pointer;
+      color: #fff !important;
+      -webkit-text-fill-color: #fff;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+    }
+    .nav-cta-mobile svg {
+      color: #fff;
+      stroke: #fff;
+    }
+    @media (min-width: 768px) {
+      .nav-cta-mobile { display: none; }
+    }
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 100px 20px 64px;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+    @media (min-width: 1024px) {
+      main { padding: 108px 64px 80px; }
+    }
+    .page-hero { max-width: 40rem; margin-bottom: 48px; }
+    .page-label {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(0,0,0,.65);
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: "Clash Display", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: #000;
+    }
+    .page-lede {
+      margin-top: 16px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(0,0,0,.55);
+      font-weight: 400;
+      max-width: 36rem;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    @media (min-width: 1024px) {
+      .articles-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .25s ease, box-shadow .25s ease;
+      height: 100%;
+    }
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.08);
+    }
+    .article-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .article-card-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.45);
+      background: rgba(0,0,0,.05);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .article-card-date,
+    .article-card-read {
+      font-size: 11px;
+      color: rgba(0,0,0,.4);
+      font-weight: 500;
+    }
+    .article-card-title {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #000;
+      flex: 1;
+    }
+    .article-card-excerpt {
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(0,0,0,.55);
+      font-weight: 400;
+    }
+    .article-card-more {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,.6);
+    }
+    .article-card-more svg { width: 12px; height: 12px; }
+    .site-footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 11px;
+      color: rgba(0,0,0,.35);
+    }
+    .site-footer a { color: rgba(0,0,0,.5); text-decoration: none; }
+    .site-footer a:hover { color: #000; }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <nav class="site-nav" aria-label="Navigation principale">
+    <div class="site-nav-inner">
+      <a href="index.html" aria-label="Cirkles.ai accueil">
+        <img src="images/cirkles-logo-white.png" alt="Cirkles.ai" width="120" height="36" style="height:36px;width:auto;filter:invert(1)" draggable="false" />
+      </a>
+      <div class="site-nav-links liquid-glass rounded-full">
+        <a href="index.html">Accueil</a>
+        <a href="articles.html" class="is-active">Articles</a>
+        <a href="contact.html">Contact</a>
+        <button type="button" data-report-open class="nav-cta">
+          Obtenir le rapport
+        </button>
+      </div>
+      <button type="button" data-report-open class="nav-cta-mobile">
+        Rapport
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-hero">
+      <span class="page-label liquid-glass rounded-full">Ressources</span>
+      <h1 class="page-title">Articles</h1>
+      <p class="page-lede">
+        Analyses, retours d'expérience et décryptages sur la fraude, l'intelligence collective et les bonnes pratiques pour les équipes risque.
+      </p>
+    </header>
+
+    <div class="articles-grid" id="articles-grid" role="list"></div>
+
+    <footer class="site-footer">
+      <span>© Cirkles.ai</span>
+      <div style="display:flex;gap:16px">
+        <a href="index.html">Accueil</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/articles-data.js"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById("articles-grid");
+      const articles = window.CIRKLES_ARTICLES || [];
+      articles.forEach(function (a) {
+        const card = document.createElement("a");
+        card.href = "article.html?slug=" + encodeURIComponent(a.slug);
+        card.className = "article-card liquid-glass";
+        card.setAttribute("role", "listitem");
+        card.innerHTML =
+          '<div class="article-card-meta">' +
+          '<span class="article-card-tag">' + a.category + "</span>" +
+          '<span class="article-card-date">' + a.date + "</span>" +
+          '<span class="article-card-read">' + a.readMin + " min</span>" +
+          "</div>" +
+          "<h2 class=\"article-card-title\">" + a.title + "</h2>" +
+          '<p class="article-card-excerpt">' + a.excerpt + "</p>" +
+          '<span class="article-card-more">Lire l\'article <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>';
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+  <script src="js/report-popup.js"></script>
+</body>
+</html>

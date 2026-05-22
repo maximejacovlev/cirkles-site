@@ -6,14 +6,15 @@
   <title>Analyse documentaire — Cirkles.ai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/clash-display-heading.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            heading: ["'Fraunces'", "serif"],
+            heading: ["'Clash Display'", "sans-serif"],
             body: ["'Inter Tight'", "sans-serif"],
           },
         },
@@ -39,7 +40,7 @@
       margin: 0; padding: 0;
       overflow-x: clip;
     }
-    .font-heading { font-family: 'Fraunces', serif; font-feature-settings: "ss01" on; }
+    .font-heading { font-family: 'Clash Display', sans-serif; font-weight: 600; }
 
     /* Même croix que « Pourquoi Cirkles » (#pq-close) — retour landing */
     .kyc-pq-close {
@@ -185,7 +186,7 @@
       display:grid; place-items:center; margin-bottom:14px; color:rgba(0,0,0,.6);
     }
     .kyc-sticky-card .sc-num {
-      font-family:'Fraunces',serif; font-size:28px; font-weight:400;
+      font-family:'Clash Display',sans-serif; font-size:28px; font-weight: 600;
       color:rgba(0,0,0,.12); line-height:1; margin-bottom:12px;
     }
     .kyc-sticky-card h4 { font-family:'Inter Tight',sans-serif; font-size:14px; font-weight:600; color:#000; margin-bottom:8px; }
@@ -236,7 +237,7 @@
       padding:40px;
     }
     .flip-front .fp-eyebrow { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4); }
-    .flip-front .fp-title { font-family:'Fraunces',serif; font-size:clamp(28px,4vw,40px); font-weight:400; text-align:center; line-height:1; letter-spacing:-.02em; }
+    .flip-front .fp-title { font-family:'Clash Display',sans-serif; font-size:clamp(28px,4vw,40px); font-weight: 600; text-align:center; line-height:1; letter-spacing:-.02em; }
     .flip-front .fp-hint { font-size:12px; color:rgba(255,255,255,.35); display:flex; align-items:center; gap:6px; }
     .flip-front .fp-hint svg { opacity:.5; }
     .flip-back {
@@ -252,7 +253,7 @@
       border-radius:99px; padding:4px 12px; font-size:11px; font-weight:600; letter-spacing:.04em; margin-bottom:16px;
     }
     .flip-back .fb-tag::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
-    .flip-back .fb-title { font-family:'Fraunces',serif; font-size:22px; font-weight:400; color:#000; margin-bottom:14px; line-height:1.1; }
+    .flip-back .fb-title { font-family:'Clash Display',sans-serif; font-size:22px; font-weight: 600; color:#000; margin-bottom:14px; line-height:1.1; }
     .flip-back .fb-body { font-size:13px; color:rgba(0,0,0,.6); line-height:1.65; }
     .flip-back .fb-body + .fb-body { margin-top:12px; }
     .flip-back-close {
@@ -300,7 +301,7 @@
     /* ─────────────────────────────────────
        STATS BAR
     ───────────────────────────────────── */
-    .stat-num { font-family:'Fraunces',serif; font-size:clamp(32px,4vw,52px); font-weight:400; color:#000; line-height:1; letter-spacing:-.02em; }
+    .stat-num { font-family:'Clash Display',sans-serif; font-size:clamp(32px,4vw,52px); font-weight:400; color:#000; line-height:1; letter-spacing:-.02em; }
     .stat-label { font-size:11px; color:rgba(0,0,0,.4); margin-top:6px; font-weight:500; }
     .stat-div { width:1px; height:44px; background:rgba(0,0,0,.1); }
 
@@ -313,7 +314,7 @@
     }
     .int-block:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.08); }
     .int-block .ib-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(0,0,0,.35); margin-bottom:10px; }
-    .int-block h4 { font-family:'Fraunces',serif; font-size:22px; font-weight:400; color:#000; margin-bottom:8px; }
+    .int-block h4 { font-family:'Clash Display',sans-serif; font-size:22px; font-weight: 600; color:#000; margin-bottom:8px; }
     .int-block p { font-size:13px; color:rgba(0,0,0,.5); line-height:1.6; }
 
     /* ─────────────────────────────────────
@@ -348,14 +349,14 @@
       margin-top:48px; padding:32px 36px; border-radius:20px;
       background:rgba(0,0,0,.03); border-left:3px solid rgba(0,0,0,.12);
     }
-    .doc-quote p { font-family:'Fraunces',serif; font-size:clamp(17px,2.2vw,22px); font-weight:400;
+    .doc-quote p { font-family:'Clash Display',sans-serif; font-size:clamp(17px,2.2vw,22px); font-weight:400;
       font-style:italic; color:rgba(0,0,0,.75); line-height:1.5; margin:0 0 16px; }
     .doc-quote cite { font-size:12px; font-style:normal; color:rgba(0,0,0,.45); display:block; }
     .doc-steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px; }
     .doc-step-card {
       background:rgba(0,0,0,.025); border-radius:20px; padding:24px 28px; border:1px solid rgba(0,0,0,.06);
     }
-    .doc-step-card .step-num { font-family:'Fraunces',serif; font-size:28px; color:rgba(0,0,0,.12); line-height:1; margin-bottom:12px; }
+    .doc-step-card .step-num { font-family:'Clash Display',sans-serif; font-size:28px; color:rgba(0,0,0,.12); line-height:1; margin-bottom:12px; }
     .doc-step-card h4 { font-size:14px; font-weight:600; color:#000; margin:0 0 10px; line-height:1.35; }
     .doc-step-card p { font-size:13px; color:rgba(0,0,0,.55); line-height:1.6; margin:0; }
     .doc-eco-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:32px; }
@@ -392,7 +393,7 @@
       }
     }
     .section-title {
-      font-family:'Fraunces',serif; font-size:clamp(32px,4vw,52px); font-weight:400;
+      font-family:'Clash Display',sans-serif; font-size:clamp(32px,4vw,52px); font-weight: 600;
       line-height:.95; letter-spacing:-.02em; color:#000; margin-bottom:28px;
     }
     .section-title em { font-style:normal; color:rgba(0,0,0,.3); }
@@ -676,7 +677,7 @@
     <div class="section-label reveal-up" style="margin-bottom:20px;">Écosystème</div>
     <h2 class="section-title reveal-up" style="--d:.05s; font-size:clamp(28px,3.5vw,48px); max-width:720px;">L'analyse documentaire ne travaille pas seule.</h2>
     <p class="reveal-up" style="--d:.1s; font-size:15px; color:rgba(0,0,0,.5); line-height:1.65; max-width:560px;">
-      Chez Cirkles, chaque module renforce les autres. L'analyse documentaire est connectée au KYC, au KYB et au scoring de solvabilité et leurs signaux se croisent. Un faux justificatif de domicile remonte dans le score KYC. Une liasse suspecte affecte le score KYB. Le schéma se révèle dans l'ensemble, pas dans chaque pièce prise isolément.
+      Chez Cirkles, chaque module renforce les autres. L'analyse documentaire est connectée à la fraude à l'identité, au schéma complexe et au score de fraude — leurs signaux se croisent. Un faux justificatif de domicile remonte dans le score d'identité. Une liasse suspecte affecte le score entreprise. Le schéma se révèle dans l'ensemble, pas dans chaque pièce prise isolément.
     </p>
     <div class="doc-eco-grid">
       <div class="int-block reveal-up" style="--d:.0s;"><h4>Analyse documentaire &amp; IBAN</h4><p>Authenticité, cohérence, schémas comportementaux</p></div>

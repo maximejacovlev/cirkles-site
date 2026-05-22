@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Article — Cirkles.ai</title>
+  <meta name="description" content="Article Cirkles.ai — fraude et intelligence collective" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/report-popup.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #fff;
+      color: #000;
+      font-family: "Inter Tight", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(55% 40% at 20% 0%, rgba(0,0,0,.03) 0%, transparent 55%),
+        radial-gradient(45% 35% at 80% 100%, rgba(0,0,0,.025) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .liquid-glass {
+      background: rgba(0,0,0,.04);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.06) 22%, transparent 45%, transparent 55%, rgba(0,0,0,.06) 78%, rgba(0,0,0,.14) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 12px 16px;
+    }
+    @media (min-width: 1024px) {
+      .site-nav { padding: 12px 64px; }
+    }
+    .site-nav-inner {
+      max-width: 48rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0,0,0,.55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: #000; }
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 96px 20px 64px;
+    }
+    @media (min-width: 1024px) {
+      main { padding: 104px 24px 80px; }
+    }
+    .article-shell {
+      padding: 36px 28px 40px;
+      border-radius: 20px;
+    }
+    .article-shell > * {
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width: 640px) {
+      .article-shell { padding: 44px 40px 48px; }
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .article-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.45);
+      background: rgba(0,0,0,.05);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .article-meta span {
+      font-size: 12px;
+      color: rgba(0,0,0,.4);
+      font-weight: 500;
+    }
+    .article-title {
+      font-family: "Clash Display", sans-serif;
+      font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #000;
+    }
+    .article-body {
+      margin-top: 28px;
+    }
+    .article-body p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(0,0,0,.65);
+      margin-bottom: 18px;
+    }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-footer-cta {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(0,0,0,.08);
+    }
+    .article-footer-cta p {
+      font-size: 14px;
+      color: rgba(0,0,0,.5);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+    .btn-demo,
+    button.btn-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      color: #fff !important;
+      -webkit-text-fill-color: #fff;
+      border-radius: 9999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .2s;
+      position: relative;
+      z-index: 2;
+    }
+    button.btn-demo {
+      border: none;
+      cursor: pointer;
+    }
+    .btn-demo:hover {
+      background: rgba(0,0,0,.85);
+      color: #fff !important;
+    }
+    .btn-demo svg {
+      width: 14px;
+      height: 14px;
+      color: #fff;
+      stroke: #fff;
+    }
+    .not-found {
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .not-found h1 {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .not-found p {
+      font-size: 14px;
+      color: rgba(0,0,0,.5);
+      margin-bottom: 20px;
+    }
+    .not-found a {
+      color: #000;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="articles.html" class="nav-back">← Tous les articles</a>
+      <a href="index.html" class="nav-back">Accueil</a>
+    </div>
+  </nav>
+
+  <main id="article-main"></main>
+
+  <script src="js/articles-data.js"></script>
+  <script>
+    (function () {
+      const main = document.getElementById("article-main");
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+      const articles = window.CIRKLES_ARTICLES || [];
+      const article = articles.find(function (a) { return a.slug === slug; });
+
+      if (!article) {
+        document.title = "Article introuvable — Cirkles.ai";
+        main.innerHTML =
+          '<div class="not-found liquid-glass article-shell">' +
+          "<h1>Article introuvable</h1>" +
+          "<p>Cet article n'existe pas ou a été déplacé.</p>" +
+          '<a href="articles.html">Retour aux articles</a></div>';
+        return;
+      }
+
+      document.title = article.title + " — Cirkles.ai";
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute("content", article.excerpt);
+
+      const bodyHtml = article.body.map(function (p) {
+        return "<p>" + p + "</p>";
+      }).join("");
+
+      main.innerHTML =
+        '<article class="article-shell liquid-glass">' +
+        '<div class="article-meta">' +
+        '<span class="article-tag">' + article.category + "</span>" +
+        "<span>" + article.date + "</span>" +
+        "<span>" + article.readMin + " min de lecture</span>" +
+        "</div>" +
+        '<h1 class="article-title">' + article.title + "</h1>" +
+        '<div class="article-body">' + bodyHtml + "</div>" +
+        '<div class="article-footer-cta">' +
+        "<p>Recevez une synthèse sur la fraude et l'intelligence collective appliquée à votre secteur.</p>" +
+        '<button type="button" data-report-open class="btn-demo">Obtenir le rapport</button>' +
+        "</div></article>";
+    })();
+  </script>
+  <script src="js/report-popup.js"></script>
+</body>
+</html>

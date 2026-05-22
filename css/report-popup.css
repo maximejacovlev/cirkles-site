@@ -1,0 +1,142 @@
+/* Popup — demande de rapport (e-mail) */
+.report-popup-root {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.report-popup-root.open {
+  display: flex;
+}
+.report-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.report-popup-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 28px 28px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 24px 64px rgba(0, 0, 0, 0.12);
+}
+.report-popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s;
+}
+.report-popup-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.report-popup-title {
+  font-family: "Clash Display", system-ui, sans-serif;
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #000;
+  padding-right: 32px;
+}
+.report-popup-lede {
+  margin-top: 10px;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.55);
+}
+.report-popup-form {
+  margin-top: 22px;
+}
+.report-popup-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
+}
+.report-popup-form input[type="email"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  font-family: "Inter Tight", sans-serif;
+  font-size: 15px;
+  color: #000;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.report-popup-form input[type="email"]:focus {
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+.report-popup-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.report-popup-submit {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.report-popup-submit:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.85);
+}
+.report-popup-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.report-popup-msg {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  display: none;
+}
+.report-popup-msg.show {
+  display: block;
+}
+.report-popup-msg.err {
+  color: #b42318;
+}
+.report-popup-msg.ok {
+  color: #027a48;
+}
+button[data-report-open] {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}

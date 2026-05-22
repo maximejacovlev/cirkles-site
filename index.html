@@ -7,16 +7,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/clash-display-heading.css" />
+    <link rel="stylesheet" href="css/report-popup.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              heading: ["'Fraunces'", "serif"],
+              heading: ["'Clash Display'", "sans-serif"],
               body: ["'Inter Tight'", "sans-serif"],
             },
             colors: {
@@ -56,8 +56,8 @@
         padding: 0;
       }
       .font-heading {
-        font-family: "Fraunces", serif;
-        font-feature-settings: "ss01" on;
+        font-family: "Clash Display", sans-serif;
+        font-weight: 600;
       }
       .font-body {
         font-family: "Barlow", sans-serif;
@@ -233,7 +233,7 @@
         display: grid;
         place-items: center;
         color: #0b1230;
-        font-family: "Fraunces", serif;
+        font-family: "Clash Display", sans-serif;
         font-size: 26px;
         line-height: 1;
         box-shadow:
@@ -389,8 +389,7 @@
         pointer-events: none;
         z-index: 2;
       }
-      .feature-preview video,
-      .feature-preview__frame iframe {
+      .feature-preview video {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -398,8 +397,6 @@
         display: block;
         border: 0;
         border-radius: inherit;
-      }
-      .feature-preview video {
         object-fit: cover;
         filter: grayscale(100%) brightness(1.1) contrast(1.03);
       }
@@ -433,6 +430,237 @@
         opacity: 1;
         filter: blur(0);
         transform: translateY(0);
+      }
+      .hero-title .blur-line {
+        display: block;
+        white-space: nowrap;
+      }
+
+      /* ── Section équipe (carrousel) ── */
+      .team-section {
+        background: #fff;
+      }
+      .team-carousel {
+        position: relative;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 0 3.25rem;
+      }
+      .team-carousel-viewport {
+        overflow: hidden;
+        border-radius: 1.25rem;
+      }
+      .team-carousel-track {
+        display: flex;
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+      .team-carousel-slide {
+        flex: 0 0 100%;
+        min-width: 100%;
+        padding: 0 2px;
+        box-sizing: border-box;
+      }
+      .team-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 2rem 1.75rem 2.25rem;
+        border-radius: 1.25rem;
+        background: rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          0 12px 40px rgba(0, 0, 0, 0.04);
+      }
+      @media (min-width: 640px) {
+        .team-card {
+          flex-direction: row;
+          align-items: center;
+          text-align: left;
+          gap: 2rem;
+          padding: 2.25rem 2.5rem;
+        }
+      }
+      .team-card-portrait {
+        flex-shrink: 0;
+        width: 9.5rem;
+        height: 9.5rem;
+        border-radius: 50%;
+        padding: 4px;
+        background: rgba(0, 0, 0, 0.04);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow:
+          inset 0 1px 1px rgba(255, 255, 255, 0.85),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+          0 8px 28px rgba(0, 0, 0, 0.06);
+        position: relative;
+        isolation: isolate;
+      }
+      .team-card-portrait::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        padding: 1.4px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.16) 0%,
+          rgba(0, 0, 0, 0.06) 22%,
+          rgba(0, 0, 0, 0) 42%,
+          rgba(0, 0, 0, 0) 58%,
+          rgba(0, 0, 0, 0.06) 78%,
+          rgba(0, 0, 0, 0.14) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .team-card-portrait-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(
+          165deg,
+          #f8f9fb 0%,
+          #eef1f7 45%,
+          #e4e9f2 100%
+        );
+      }
+      .team-card-portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        filter: grayscale(100%) contrast(1.03) brightness(1.12);
+      }
+      .team-card-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .team-card-role {
+        font-family: "Clash Display", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: #000;
+        line-height: 1.1;
+      }
+      .team-card-quote {
+        margin-top: 0.75rem;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 1.6;
+      }
+      .team-card-linkedin {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.125rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        background: rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        color: rgba(0, 0, 0, 0.65);
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .team-card-linkedin:hover {
+        background: rgba(0, 0, 0, 0.1);
+        color: #000;
+        transform: translateY(-1px);
+      }
+      .team-card-linkedin svg {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+      .team-carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: #000;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease,
+          transform 0.2s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      }
+      .team-carousel-btn:hover {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.14);
+      }
+      .team-carousel-btn:active {
+        transform: translateY(-50%) scale(0.96);
+      }
+      .team-carousel-btn--prev {
+        left: 0;
+      }
+      .team-carousel-btn--next {
+        right: 0;
+      }
+      .team-carousel-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .team-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+      }
+      .team-carousel-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease;
+      }
+      .team-carousel-dot.active {
+        background: #000;
+        transform: scale(1.15);
+      }
+      @media (max-width: 480px) {
+        .team-carousel {
+          padding: 0 2.5rem;
+        }
+        .team-carousel-btn {
+          width: 2.25rem;
+          height: 2.25rem;
+        }
+        .team-card-portrait {
+          width: 8rem;
+          height: 8rem;
+          padding: 3px;
+        }
       }
       .fade-up {
         opacity: 0;
@@ -594,6 +822,22 @@
         color: #000;
         cursor: pointer;
       }
+      #why-modal .why-modal-cta-btn {
+        background: #000 !important;
+        color: #fff !important;
+        -webkit-text-fill-color: #fff;
+        box-shadow: none;
+        position: relative;
+        z-index: 1;
+      }
+      #why-modal .why-modal-cta-btn:hover {
+        background: rgba(0, 0, 0, 0.85) !important;
+        color: #fff !important;
+      }
+      #why-modal .why-modal-cta-btn svg {
+        color: #fff;
+        stroke: #fff;
+      }
 
       /* Article modal (capacités) */
       .article-modal-root {
@@ -703,9 +947,9 @@
         margin-top: 32px;
       }
       .article-section h4 {
-        font-family: "Fraunces", serif;
+        font-family: "Clash Display", sans-serif;
         font-size: 22px;
-        font-weight: 500;
+        font-weight: 600;
         color: #000;
         line-height: 1.2;
         margin: 0 0 12px;
@@ -793,7 +1037,7 @@
         text-align: center;
       }
       .article-stat-encart .stat-big {
-        font-family: "Fraunces", serif;
+        font-family: "Clash Display", sans-serif;
         font-size: clamp(48px, 10vw, 72px);
         font-weight: 500;
         color: #000;
@@ -874,7 +1118,7 @@
       }
       .article-quote::before {
         content: "\201C";
-        font-family: "Fraunces", serif;
+        font-family: "Clash Display", sans-serif;
         font-size: 56px;
         line-height: 1;
         color: rgba(0, 0, 0, 0.08);
@@ -883,7 +1127,7 @@
         left: 20px;
       }
       .article-quote p {
-        font-family: "Fraunces", serif;
+        font-family: "Clash Display", sans-serif;
         font-size: 17px;
         line-height: 1.5;
         color: rgba(0, 0, 0, 0.65);
@@ -1149,9 +1393,9 @@
         background: rgba(0, 0, 0, 0.25);
       }
       .pq-section-title {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: clamp(32px, 4vw, 52px);
-        font-weight: 400;
+        font-weight: 600;
         line-height: 0.95;
         letter-spacing: -0.02em;
         color: #000;
@@ -1196,9 +1440,9 @@
         max-width: 760px;
       }
       .pq-hero-title {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: clamp(36px, 5.5vw, 72px);
-        font-weight: 400;
+        font-weight: 600;
         line-height: 0.9;
         letter-spacing: -0.025em;
         color: #000;
@@ -1228,7 +1472,7 @@
         text-align: center;
       }
       .pq-stat-num {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: clamp(28px, 3.5vw, 44px);
         font-weight: 400;
         color: #000;
@@ -1300,7 +1544,7 @@
         border-left: none;
       }
       .pq-quote p {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: 18px;
         font-weight: 400;
         line-height: 1.4;
@@ -1534,7 +1778,7 @@
         background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15), transparent);
       }
       .pq-ia-c-num {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: 28px;
         font-weight: 400;
         color: rgba(0, 0, 0, 0.12);
@@ -1706,7 +1950,7 @@
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
       }
       .pq-rd-num {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: 40px;
         font-weight: 400;
         color: rgba(0, 0, 0, 0.08);
@@ -1882,9 +2126,9 @@
         margin: 0 auto;
       }
       .pq-cta-title {
-        font-family: Fraunces, serif;
+        font-family: Clash Display, sans-serif;
         font-size: clamp(28px, 4vw, 48px);
-        font-weight: 400;
+        font-weight: 600;
         line-height: 0.95;
         letter-spacing: -0.02em;
         color: #000;
@@ -2015,6 +2259,15 @@
           <path d="M18 6 6 18" />
           <path d="m6 6 12 12" />
         </symbol>
+        <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6" />
+        </symbol>
+        <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6" />
+        </symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </symbol>
       </defs>
     </svg>
 
@@ -2029,8 +2282,7 @@
 
             <div class="liquid-glass rounded-full px-1.5 py-1 hidden md:flex items-center">
               <a href="#accueil" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Accueil</a>
-              <a href="#solution" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Solution</a>
-              <a href="#reseau" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Réseau</a>
+              <a href="articles.html" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Articles</a>
               <a href="contact.html" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Contact</a>
               <a href="demo-booking.html" class="ml-1 inline-flex items-center gap-1 bg-black text-white rounded-full px-3.5 py-1.5 text-sm font-medium hover:bg-black/85 transition">
                 Demandez une Démo
@@ -2071,9 +2323,9 @@
             <!-- Heading -->
             <h1
               data-blur-text
-              data-text="L’intelligence collective contre la fraude."
-              class="mt-8 text-6xl md:text-7xl lg:text-[5.5rem] font-heading text-black leading-[0.95] max-w-3xl text-center"
-              style="letter-spacing: -0.02em; font-weight: 400;"
+              data-text="L’intelligence collective|contre la fraude."
+              class="hero-title mt-8 font-heading text-black leading-[0.95] max-w-none text-center px-2"
+              style="letter-spacing: -0.02em; font-weight: 600; font-size: clamp(1.5rem, 4.2vw + 0.65rem, 4.25rem);"
             ></h1>
 
             <!-- Subtext -->
@@ -2135,23 +2387,23 @@
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="kyc.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Vérification KYC — page dédiée">
+                <a href="kyc.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Fraude à l'identité — page dédiée">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
                     <svg class="w-4 h-4" aria-hidden="true"><use href="#i-kyc" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Vérification KYC</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Vérifiez l&rsquo;identité de vos clients en temps réel — documents, liveness, bases watchlist — sans friction pour les utilisateurs légitimes.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Fraude à l&rsquo;identité</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Détectez usurpations, documents falsifiés et deepfakes en temps réel — sans friction pour les utilisateurs légitimes.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
                   </span>
                 </a>
 
-                <a href="kyb.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Connaissance entreprise (KYB) — page dédiée">
+                <a href="kyb.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Schéma complexe — page dédiée">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
                     <svg class="w-4 h-4" aria-hidden="true"><use href="#i-kyb" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Connaissance entreprise (KYB)</h4>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Schéma complexe</h4>
                   <p class="mt-2 text-black/55 font-body font-light text-sm">Qualifiez vos partenaires et fournisseurs : structure juridique, bénéficiaires effectifs, réputation — détectez les sociétés écrans avant d&rsquo;engager une relation.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
@@ -2171,12 +2423,12 @@
                   </span>
                 </a>
 
-                <a href="solvabilite.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Score de solvabilité — page dédiée">
+                <a href="solvabilite.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Score de fraude — page dédiée">
                   <div class="liquid-glass-strong rounded-full w-10 h-10 grid place-items-center text-black">
                     <svg class="w-4 h-4" aria-hidden="true"><use href="#i-solv" /></svg>
                   </div>
-                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Score de solvabilité</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Évaluez la capacité de remboursement de vos clients en combinant signaux comportementaux, données ouvertes et historique transactionnel.</p>
+                  <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Score de fraude</h4>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Évaluez le risque de fraude de vos clients en combinant signaux comportementaux, données ouvertes et historique transactionnel.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
@@ -2210,12 +2462,17 @@
                   <div class="feature-preview-shell liquid-glass rounded-2xl overflow-hidden">
                     <div class="feature-preview" aria-label="Aperçu détection en temps réel — réseau de fraude">
                       <div class="feature-preview__frame">
-                        <iframe
-                          src="fraud_network_final.html?embed=1"
-                          title="Réseau de détection de fraude"
-                          loading="lazy"
-                          tabindex="-1"
-                        ></iframe>
+                        <video
+                          src="videos/reseau.mp4"
+                          class="feature-preview-video"
+                          autoplay
+                          muted
+                          loop
+                          playsinline
+                          preload="auto"
+                          aria-label="Réseau de détection de fraude"
+                        ></video>
+                        <div class="feature-preview__veil" aria-hidden="true"></div>
                       </div>
                     </div>
                   </div>
@@ -2239,7 +2496,7 @@
                     <div class="feature-preview" aria-label="Aperçu tableau de bord réseau">
                       <div class="feature-preview__frame">
                         <video
-                          src="videos/dashboard-1.mp4"
+                          src="videos/dashboard-2.mp4"
                           class="feature-preview-video"
                           autoplay
                           muted
@@ -2335,6 +2592,34 @@
             </div>
           </section>
 
+          <!-- =================== ÉQUIPE =================== -->
+          <section id="equipe" class="team-section relative z-10 py-20 md:py-28 scroll-mt-24" aria-labelledby="equipe-title">
+            <div class="px-6 lg:px-16">
+              <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col items-center text-center mb-12 md:mb-14">
+                  <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Équipe</div>
+                  <h2 id="equipe-title" class="mt-6 text-4xl md:text-5xl font-heading text-black tracking-tight leading-[0.9]">Les visages derrière le réseau</h2>
+                  <p class="mt-4 max-w-lg text-sm md:text-base text-black/55 font-body font-light leading-relaxed">
+                    Ingénieurs, produit et croissance — un collectif qui construit l&rsquo;intelligence partagée contre la fraude.
+                  </p>
+                </div>
+
+                <div class="team-carousel" id="team-carousel" aria-roledescription="carousel" aria-label="Membres de l'équipe Cirkles">
+                  <button type="button" class="team-carousel-btn team-carousel-btn--prev" id="team-carousel-prev" aria-label="Membre précédent">
+                    <svg class="w-5 h-5" aria-hidden="true"><use href="#i-chevron-left" /></svg>
+                  </button>
+                  <div class="team-carousel-viewport">
+                    <div class="team-carousel-track" id="team-carousel-track"></div>
+                  </div>
+                  <button type="button" class="team-carousel-btn team-carousel-btn--next" id="team-carousel-next" aria-label="Membre suivant">
+                    <svg class="w-5 h-5" aria-hidden="true"><use href="#i-chevron-right" /></svg>
+                  </button>
+                  <div class="team-carousel-dots" id="team-carousel-dots" role="tablist" aria-label="Navigation équipe"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <!-- =================== CTA + FOOTER =================== -->
           <section id="demo" class="relative overflow-hidden scroll-mt-24">
             <div class="video-placeholder">
@@ -2381,13 +2666,24 @@
         els.forEach((el) => {
           const text = el.getAttribute("data-text") || el.textContent || "";
           el.innerHTML = "";
-          const words = text.split(" ");
-          words.forEach((w, i) => {
-            const span = document.createElement("span");
-            span.className = "blur-word";
-            span.style.transitionDelay = i * 110 + "ms";
-            span.textContent = w + (i < words.length - 1 ? "\u00A0" : "");
-            el.appendChild(span);
+          const lines = text.split("|");
+          let wordIndex = 0;
+          lines.forEach((line) => {
+            const lineEl =
+              lines.length > 1 ? document.createElement("span") : el;
+            if (lines.length > 1) {
+              lineEl.className = "blur-line block";
+              el.appendChild(lineEl);
+            }
+            const words = line.trim().split(/\s+/).filter(Boolean);
+            words.forEach((w, i) => {
+              const span = document.createElement("span");
+              span.className = "blur-word";
+              span.style.transitionDelay = wordIndex * 110 + "ms";
+              span.textContent = w + (i < words.length - 1 ? "\u00A0" : "");
+              lineEl.appendChild(span);
+              wordIndex += 1;
+            });
           });
         });
 
@@ -2451,8 +2747,121 @@
           });
       }
 
+      function initTeamCarousel() {
+        const TEAM = [
+          {
+            role: "CEO",
+            quote:
+              "Protéger un réseau, c'est construire une confiance qui se renforce à chaque dossier traité.",
+            image: "images/team/ceo.png",
+            linkedin: "https://www.linkedin.com/in/franck-jacovlev-4630a57/",
+          },
+          {
+            role: "CTO",
+            quote:
+              "La fraude évolue plus vite que les règles. Notre stack doit évoluer plus vite que la fraude.",
+            image: "images/team/cto.png",
+            linkedin: "https://www.linkedin.com/in/salim-n-728955121/",
+          },
+          {
+            role: "Data Scientist",
+            quote:
+              "Le meilleur signal, c'est celui que personne n'avait encore vu seul.",
+            image: "images/team/engineer-1.png",
+            linkedin: "https://www.linkedin.com/in/romain-seiller-891420257/",
+          },
+          {
+            role: "AI Engineer",
+            quote:
+              "On code pour que l'intelligence collective reste concrète, mesurable et actionnable.",
+            image: "images/team/engineer-2.png",
+            linkedin: "https://www.linkedin.com/in/nael-ghoundale-412312261/",
+          },
+          {
+            role: "Head of Growth",
+            quote:
+              "Chaque partenaire qui rejoint le réseau rend la fraude un peu plus difficile pour tous.",
+            image: "images/team/head-of-growth.png",
+            linkedin: null,
+          },
+        ];
+
+        const track = document.getElementById("team-carousel-track");
+        const dotsWrap = document.getElementById("team-carousel-dots");
+        const prevBtn = document.getElementById("team-carousel-prev");
+        const nextBtn = document.getElementById("team-carousel-next");
+        const root = document.getElementById("team-carousel");
+        if (!track || !dotsWrap || !prevBtn || !nextBtn || !root) return;
+
+        let index = 0;
+        const dots = [];
+
+        TEAM.forEach((member, i) => {
+          const slide = document.createElement("div");
+          slide.className = "team-carousel-slide";
+          slide.setAttribute("role", "group");
+          slide.setAttribute("aria-roledescription", "slide");
+          slide.setAttribute("aria-label", `${i + 1} sur ${TEAM.length} : ${member.role}`);
+          slide.innerHTML = `
+            <article class="team-card liquid-glass">
+              <div class="team-card-portrait">
+                <div class="team-card-portrait-inner">
+                  <img src="${member.image}" alt="Portrait — ${member.role}" width="152" height="152" loading="lazy" decoding="async" />
+                </div>
+              </div>
+              <div class="team-card-body">
+                <h3 class="team-card-role">${member.role}</h3>
+                <p class="team-card-quote">&ldquo;${member.quote}&rdquo;</p>
+                ${
+                  member.linkedin
+                    ? `<a href="${member.linkedin}" class="team-card-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn — ${member.role}">
+                  <svg aria-hidden="true"><use href="#i-linkedin" /></svg>
+                </a>`
+                    : ""
+                }
+              </div>
+            </article>`;
+          track.appendChild(slide);
+
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "team-carousel-dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("role", "tab");
+          dot.setAttribute("aria-label", member.role);
+          dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          dot.addEventListener("click", () => goTo(i));
+          dotsWrap.appendChild(dot);
+          dots.push(dot);
+        });
+
+        function goTo(i) {
+          index = ((i % TEAM.length) + TEAM.length) % TEAM.length;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((d, j) => {
+            d.classList.toggle("active", j === index);
+            d.setAttribute("aria-selected", j === index ? "true" : "false");
+          });
+        }
+
+        prevBtn.addEventListener("click", () => goTo(index - 1));
+        nextBtn.addEventListener("click", () => goTo(index + 1));
+
+        root.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            goTo(index - 1);
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            goTo(index + 1);
+          }
+        });
+
+        goTo(0);
+      }
+
       window.addEventListener("DOMContentLoaded", () => {
         initBlurText();
+        initTeamCarousel();
         initFadeUp();
         initSectionBgVideos();
       });
@@ -2471,10 +2880,9 @@
         <p id="why-modal-lede" class="mt-4 text-black/70 font-body font-light text-base leading-relaxed"></p>
         <div id="why-modal-body" class="mt-5 space-y-4 text-black/55 font-body font-light text-sm leading-relaxed"></div>
         <div class="mt-8 flex items-center gap-3">
-          <a href="demo-booking.html" class="liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium">
-            Demandez une Démo
-            <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-          </a>
+          <button type="button" data-report-open class="why-modal-cta-btn liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm font-body font-medium">
+            Obtenir le rapport
+          </button>
           <button type="button" data-close class="text-black/50 hover:text-black text-sm font-body font-medium px-3 py-2.5">Fermer</button>
         </div>
       </div>
@@ -3560,6 +3968,7 @@
         });
       });
     </script>
+    <script src="js/report-popup.js"></script>
     <script src="js/landing-scroll.js"></script>
   </body>
 </html>
