@@ -9,6 +9,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/clash-display-heading.css" />
+    <link rel="stylesheet" href="css/site-nav.css" />
+    <link rel="stylesheet" href="css/hero-reels.css" />
     <link rel="stylesheet" href="css/report-popup.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -96,38 +98,12 @@
         pointer-events: none;
       }
 
-      /* Liquid glass — strong */
+      /* Liquid glass — strong (fond uni, sans backdrop-filter) */
       .liquid-glass-strong {
-        background: rgba(0, 0, 0, 0.06);
-        background-blend-mode: luminosity;
-        backdrop-filter: blur(50px);
-        -webkit-backdrop-filter: blur(50px);
-        border: none;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.04),
-          inset 0 1px 1px rgba(0, 0, 0, 0.08);
+        background: #f0f0f0;
+        border: 1px solid rgba(0, 0, 0, 0.09);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         position: relative;
-        overflow: hidden;
-      }
-      .liquid-glass-strong::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        padding: 1.4px;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.22) 0%,
-          rgba(0, 0, 0, 0.09) 20%,
-          rgba(0, 0, 0, 0) 40%,
-          rgba(0, 0, 0, 0) 60%,
-          rgba(0, 0, 0, 0.09) 80%,
-          rgba(0, 0, 0, 0.22) 100%
-        );
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
       }
 
       /* Placeholder "video" backgrounds — subtle animated gradients in lieu of real footage */
@@ -344,7 +320,7 @@
       }
       .feature-preview {
         position: relative;
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 16 / 11;
         width: 100%;
         overflow: hidden;
         background:
@@ -587,6 +563,45 @@
         width: 1.125rem;
         height: 1.125rem;
       }
+      .team-card--advisory {
+        justify-content: center;
+        text-align: center;
+        padding: 2.5rem 2rem 2.75rem;
+      }
+      @media (min-width: 640px) {
+        .team-card--advisory {
+          padding: 2.75rem 3rem;
+        }
+      }
+      .team-card--advisory .team-card-body {
+        max-width: 40rem;
+        margin: 0 auto;
+      }
+      .team-card--advisory .team-card-role {
+        font-size: clamp(1.35rem, 3vw, 1.75rem);
+      }
+      .team-card--advisory .team-card-quote {
+        font-style: normal;
+        font-size: 1rem;
+        margin-top: 1rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .team-card-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        font-family: "Inter Tight", sans-serif;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.55);
+        background: #f0f0f0;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
       .team-carousel-btn {
         position: absolute;
         top: 50%;
@@ -715,6 +730,152 @@
         inset: 0;
         z-index: 1;
         background: rgba(255, 255, 255, 0.45);
+      }
+
+      .section-bg-gray {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: #d4d4d4;
+      }
+
+      /* Landing — sections plus compactes, contenu centré */
+      .landing-section {
+        padding-top: clamp(3rem, 5vw, 4.25rem);
+        padding-bottom: clamp(3rem, 5vw, 4.25rem);
+      }
+      .landing-section-inner {
+        max-width: 72rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+      .landing-section-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: clamp(2rem, 3vw, 2.5rem);
+      }
+      .landing-hero-band {
+        min-height: auto;
+        padding: clamp(3.5rem, 7vw, 5rem) 1.5rem;
+      }
+
+      /* Cas d'usage — carte socle fondateur (pleine largeur) */
+      .founder-platform-card {
+        width: 100%;
+        margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+        padding: clamp(1.25rem, 3vw, 2rem);
+        border-radius: 1.25rem;
+        text-align: left;
+        cursor: default;
+      }
+      .founder-platform-card:hover {
+        transform: none;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06);
+      }
+      .founder-platform-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 1rem;
+      }
+      .founder-platform-icon {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        color: #000;
+      }
+      .founder-platform-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+      .founder-platform-eyebrow {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.42);
+        margin-bottom: 6px;
+      }
+      .founder-platform-title {
+        font-family: "Clash Display", sans-serif;
+        font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: #000;
+      }
+      .founder-platform-lede {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: rgba(0, 0, 0, 0.55);
+        max-width: 52rem;
+        margin-bottom: clamp(1rem, 2.5vw, 1.35rem);
+      }
+      .founder-platform-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      @media (min-width: 640px) {
+        .founder-platform-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+      }
+      .founder-platform-cell {
+        width: 100%;
+        padding: 16px 18px;
+        border-radius: 14px;
+        min-height: 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        border: none;
+        font: inherit;
+        color: inherit;
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(
+            rgba(255, 255, 255, 0.78),
+            rgba(255, 255, 255, 0.78)
+          ),
+          url("images/cirkles-cover-fr.png") center / cover no-repeat;
+      }
+      .founder-platform-cell.liquid-glass::before {
+        display: none;
+      }
+      .founder-platform-cell .read-more {
+        margin-top: auto;
+        padding-top: 10px;
+      }
+      .founder-platform-cell-label {
+        font-family: "Inter Tight", sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.38);
+        margin-bottom: 10px;
+      }
+      .founder-platform-cell-value {
+        font-family: "Clash Display", sans-serif;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.25;
+        color: #000;
       }
 
       /* Fond #reseau — reflets neutres (blanc/gris, sans dominante violette) */
@@ -1365,13 +1526,19 @@
       }
       .pq-section {
         position: relative;
-        padding: 120px 64px;
+        padding: 28px 64px 20px;
         max-width: 1100px;
         margin: 0 auto;
       }
+      .pq-section + .pq-section {
+        padding-top: 12px;
+      }
       @media (max-width: 768px) {
         .pq-section {
-          padding: 80px 24px;
+          padding: 24px 24px 16px;
+        }
+        .pq-section + .pq-section {
+          padding-top: 8px;
         }
       }
       .pq-section-label {
@@ -1384,7 +1551,7 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: rgba(0, 0, 0, 0.4);
-        margin-bottom: 20px;
+        margin-bottom: 12px;
       }
       .pq-section-label::before {
         content: "";
@@ -1399,7 +1566,7 @@
         line-height: 0.95;
         letter-spacing: -0.02em;
         color: #000;
-        margin-bottom: 32px;
+        margin-bottom: 20px;
       }
       .pq-section-title em {
         font-style: normal;
@@ -1416,17 +1583,17 @@
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: rgba(0, 0, 0, 0.5);
-        margin-bottom: 24px;
+        margin-bottom: 16px;
       }
       .pq-hero {
-        min-height: 100vh;
+        min-height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding-top: 80px;
-        padding-bottom: 60px;
+        padding-top: 48px;
+        padding-bottom: 24px;
         position: relative;
       }
       .pq-hero::before {
@@ -1446,7 +1613,7 @@
         line-height: 0.9;
         letter-spacing: -0.025em;
         color: #000;
-        margin-bottom: 28px;
+        margin-bottom: 18px;
       }
       .pq-hero-title em {
         font-style: normal;
@@ -1459,13 +1626,16 @@
         line-height: 1.65;
         color: rgba(0, 0, 0, 0.55);
         max-width: 560px;
-        margin: 0 auto 48px;
+        margin: 0 auto 24px;
+      }
+      .pq-hero-cta {
+        margin: 0 auto 28px !important;
       }
       .pq-stats {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 32px;
+        gap: 24px;
         flex-wrap: wrap;
       }
       .pq-stat {
@@ -1494,7 +1664,7 @@
       .pq-knows {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 80px;
+        gap: 48px;
         align-items: start;
       }
       /*
@@ -1517,7 +1687,7 @@
       @media (max-width: 768px) {
         .pq-knows {
           grid-template-columns: 1fr;
-          gap: 48px;
+          gap: 32px;
         }
         .pq-knows-left-cell {
           min-height: 0 !important;
@@ -1528,19 +1698,22 @@
         }
         .pq-sticky-card {
           top: clamp(56px, 22dvh, 120px);
-          margin-bottom: clamp(140px, 40vh, 300px);
+          margin-bottom: clamp(100px, 28vh, 200px);
         }
         /* Colonne seule : pas d’extension flex (évite trous), mais garde runway sticky */
         .pq-stack-wrapper {
           flex: none;
-          padding-bottom: clamp(160px, 38vh, 360px);
+          padding-bottom: clamp(64px, 14vh, 120px);
+        }
+        .pq-stack-wrapper > .pq-sticky-card:last-child {
+          margin-bottom: clamp(32px, 8vh, 56px);
         }
       }
       .pq-quote {
         background: rgba(0, 0, 0, 0.03);
         border-radius: 20px;
-        padding: 24px 28px;
-        margin: 24px 0 32px;
+        padding: 18px 22px;
+        margin: 16px 0 20px;
         border-left: none;
       }
       .pq-quote p {
@@ -1581,7 +1754,7 @@
         display: flex;
         flex-direction: column;
         /* Défilement après la dernière carte pour que le sticky puisse se figer jusqu’au bout */
-        padding-bottom: clamp(240px, 48vh, 480px);
+        padding-bottom: clamp(48px, 10vh, 96px);
       }
       .pq-sticky-card {
         flex-shrink: 0;
@@ -1591,8 +1764,8 @@
           calc(50dvh - clamp(5.75rem, 17vmin, 8.75rem) + var(--i) * 14px)
         );
         border-radius: 20px;
-        padding: 28px;
-        margin-bottom: clamp(200px, 46vh, 420px);
+        padding: 22px;
+        margin-bottom: clamp(72px, 16vh, 140px);
         z-index: calc(40 + var(--i));
         /* Vitre opaque + flou : masque fortement la carte sous-jacente */
         background:
@@ -1608,6 +1781,9 @@
         backdrop-filter: blur(26px) saturate(160%);
         -webkit-backdrop-filter: blur(26px) saturate(160%);
         transition: box-shadow 0.3s ease;
+      }
+      .pq-stack-wrapper > .pq-sticky-card:last-child {
+        margin-bottom: clamp(40px, 8vh, 72px);
       }
       @supports not (background: color-mix(in srgb, white 50%, black)) {
         .pq-sticky-card {
@@ -1648,7 +1824,7 @@
       }
       .pq-ia-header {
         max-width: 760px;
-        margin: 0 auto 60px;
+        margin: 0 auto 32px;
       }
       .pq-ia-sub {
         font-family: "Inter Tight", sans-serif;
@@ -1661,12 +1837,15 @@
       /* Carrousel 3D scroll (uniquement les 4 modules IA — pas la grille « Notre différence ») */
       .pq-ia-carousel-section {
         position: relative;
-        height: 480vh;
-        margin: 0 -24px 48px;
+        height: 340vh;
+        margin: 0 -24px 12px;
+      }
+      .pq-ia.pq-section {
+        padding-top: 8px;
       }
       @media (max-width: 640px) {
         .pq-ia-carousel-section {
-          height: 420vh;
+          height: 300vh;
           margin-left: -16px;
           margin-right: -16px;
         }
@@ -1674,9 +1853,9 @@
       .pq-ia-sticky-frame {
         position: sticky;
         top: 0;
-        height: 85vh;
-        min-height: 420px;
-        max-height: 900px;
+        height: 72vh;
+        min-height: 360px;
+        max-height: 720px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -1883,7 +2062,7 @@
       .pq-diff-card {
         background: rgba(0, 0, 0, 0.04);
         border-radius: 20px;
-        padding: 28px;
+        padding: 22px;
         transition:
           transform 0.3s ease,
           box-shadow 0.3s ease;
@@ -1924,7 +2103,7 @@
         color: rgba(0, 0, 0, 0.5);
         line-height: 1.65;
         max-width: 560px;
-        margin: 0 auto 60px;
+        margin: 0 auto 36px;
       }
       .pq-rd-grid {
         display: grid;
@@ -1940,7 +2119,7 @@
       .pq-rd-block {
         background: rgba(0, 0, 0, 0.03);
         border-radius: 20px;
-        padding: 32px;
+        padding: 24px;
         transition:
           transform 0.3s ease,
           box-shadow 0.3s ease;
@@ -1976,6 +2155,10 @@
         color: rgba(0, 0, 0, 0.5);
         line-height: 1.65;
         max-width: 520px;
+        margin-bottom: 16px;
+      }
+      .pq-knows-cta {
+        margin-top: 1rem !important;
       }
       /* Même pile sticky que Expertise terrain : check + texte dans la carte vitrée */
       .pq-sticky-sec-inner {
@@ -2021,23 +2204,22 @@
         color: rgba(0, 0, 0, 0.5);
         line-height: 1.65;
         max-width: 520px;
-        margin: 0 auto 56px;
+        margin: 0 auto 32px;
       }
       .pq-team-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
-        text-align: left;
-        margin-bottom: 48px;
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto 28px;
+        justify-content: center;
+        text-align: center;
       }
       @media (max-width: 768px) {
         .pq-team-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 480px) {
-        .pq-team-grid {
           grid-template-columns: 1fr;
+          max-width: 400px;
         }
       }
       .pq-team-block {
@@ -2060,7 +2242,7 @@
         display: grid;
         place-items: center;
         color: rgba(0, 0, 0, 0.6);
-        margin-bottom: 14px;
+        margin: 0 auto 14px;
       }
       .pq-team-block h4 {
         font-family: "Inter Tight", sans-serif;
@@ -2077,7 +2259,7 @@
       }
       .pq-flags {
         overflow: hidden;
-        margin-bottom: 64px;
+        margin-bottom: 36px;
         position: relative;
       }
       .pq-flags::before,
@@ -2119,7 +2301,7 @@
       .pq-section-divider {
         height: 1px;
         background: rgba(0, 0, 0, 0.07);
-        margin-bottom: 48px;
+        margin-bottom: 28px;
       }
       .pq-cta-final {
         max-width: 560px;
@@ -2132,7 +2314,7 @@
         line-height: 0.95;
         letter-spacing: -0.02em;
         color: #000;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
       }
       .pq-cta-title em {
         font-style: normal;
@@ -2144,7 +2326,7 @@
         justify-content: center;
         gap: 20px;
         flex-wrap: wrap;
-        margin-bottom: 32px;
+        margin-bottom: 22px;
         font-family: "Inter Tight", sans-serif;
         font-size: 12px;
         font-weight: 500;
@@ -2210,6 +2392,14 @@
         <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
         </symbol>
+        <symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="2.5" />
+          <circle cx="5.5" cy="8" r="1.75" />
+          <circle cx="18.5" cy="8" r="1.75" />
+          <circle cx="7" cy="17" r="1.75" />
+          <circle cx="17" cy="17" r="1.75" />
+          <path d="M9.8 10.5 7.2 9M14.2 10.5l2.6-1.5M10 14l-1.5 2M14 14l1.5 2" />
+        </symbol>
         <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="13.5" cy="6.5" r="1.2" />
           <circle cx="17.5" cy="10.5" r="1.2" />
@@ -2273,32 +2463,8 @@
 
     <div class="bg-white relative">
       <div class="relative z-10">
-        <!-- =================== NAVBAR =================== -->
-        <nav class="fixed top-0 left-0 right-0 z-50 px-4 lg:px-16 py-3">
-          <div class="flex items-center justify-between">
-            <a href="#accueil" class="flex items-center gap-3" aria-label="Cirkles.ai accueil">
-              <img src="images/cirkles-logo-white.png" alt="Cirkles.ai" class="h-8 md:h-9 w-auto select-none" draggable="false" style="filter: invert(1);" />
-            </a>
-
-            <div class="liquid-glass rounded-full px-1.5 py-1 hidden md:flex items-center">
-              <a href="#accueil" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Accueil</a>
-              <a href="articles.html" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Articles</a>
-              <a href="contact.html" class="px-3 py-2 text-sm font-medium text-black/75 font-body">Contact</a>
-              <a href="demo-booking.html" class="ml-1 inline-flex items-center gap-1 bg-black text-white rounded-full px-3.5 py-1.5 text-sm font-medium hover:bg-black/85 transition">
-                Demandez une Démo
-                <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-              </a>
-            </div>
-
-            <a href="demo-booking.html" class="md:hidden inline-flex items-center gap-1 bg-black text-white rounded-full px-3.5 py-1.5 text-sm font-medium">
-              Demandez une Démo
-              <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-            </a>
-          </div>
-        </nav>
-
         <!-- =================== HERO =================== -->
-        <section id="accueil" class="relative overflow-visible scroll-mt-24 min-h-[560px] sm:min-h-[600px]">
+        <section id="accueil" class="relative overflow-visible scroll-mt-24 min-h-[460px] sm:min-h-[500px]">
           <!-- Hero background image -->
           <div class="absolute inset-0 z-0 overflow-hidden">
             <img
@@ -2311,9 +2477,9 @@
           </div>
           
           <!-- Bottom gradient fade 300px -->
-          <div class="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none" style="height:300px; background: linear-gradient(to bottom, transparent, #fff);"></div>
+          <div class="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none" style="height:180px; background: linear-gradient(to bottom, transparent, #fff);"></div>
 
-          <div class="relative z-10 h-full flex flex-col items-center px-6 lg:px-16 pb-20" style="padding-top: 95px;">
+          <div class="relative z-10 h-full flex flex-col items-center justify-center px-6 lg:px-16 pb-12" style="padding-top: 88px;">
             <!-- Badge -->
             <div class="liquid-glass rounded-full px-1 py-1 inline-flex items-center gap-2 fade-up" data-delay="0">
               <span class="bg-black text-white rounded-full px-3 py-1 text-xs font-semibold font-body">Nouveau</span>
@@ -2324,12 +2490,34 @@
             <h1
               data-blur-text
               data-text="L’intelligence collective|contre la fraude."
-              class="hero-title mt-8 font-heading text-black leading-[0.95] max-w-none text-center px-2"
+              class="hero-title mt-6 font-heading text-black leading-[0.95] max-w-none text-center px-2"
               style="letter-spacing: -0.02em; font-weight: 600; font-size: clamp(1.5rem, 4.2vw + 0.65rem, 4.25rem);"
             ></h1>
 
+            <div
+              id="hero-reels"
+              class="hero-reels fade-up"
+              data-delay="400"
+              data-reels='[["Financement","Location","Équipement"],["IBAN","Scoring","Data"],["B2B/B2C","Fraude","ID"]]'
+              role="group"
+              aria-label="Domaines couverts"
+            >
+              <div class="hero-reels-row">
+                <div class="hero-reel" data-reel="0" aria-hidden="true">
+                  <div class="hero-reel-track"></div>
+                </div>
+                <div class="hero-reel" data-reel="1" aria-hidden="true">
+                  <div class="hero-reel-track"></div>
+                </div>
+                <div class="hero-reel" data-reel="2" aria-hidden="true">
+                  <div class="hero-reel-track"></div>
+                </div>
+              </div>
+              <p id="hero-reels-live" class="sr-only" aria-live="polite"></p>
+            </div>
+
             <!-- Subtext -->
-            <p class="mt-6 max-w-xl text-center text-sm md:text-base text-black/60 font-body font-light leading-tight fade-up" data-delay="800">
+            <p class="mt-5 max-w-xl text-center text-sm md:text-base text-black/60 font-body font-light leading-tight fade-up" data-delay="800">
               Chaque dossier frauduleux détecté dans l’écosystème renforce la protection de tous ses membres. Plus le réseau grandit, plus la fraude recule.
             </p>
 
@@ -2347,28 +2535,16 @@
         <div class="bg-white">
           <!-- =================== START SECTION =================== -->
           <section id="solution" class="relative overflow-hidden scroll-mt-24">
-            <div class="absolute inset-0 z-0">
-              <video
-                src="videos/start_bg.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="auto"
-                class="section-bg-video absolute inset-0 w-full h-full object-cover select-none"
-                aria-hidden="true"
-              ></video>
-              <div class="absolute inset-0" style="background: rgba(255,255,255,0.6);"></div>
-            </div>
+            <div class="section-bg-gray" aria-hidden="true"></div>
             <div class="fade-top"></div>
             <div class="fade-bottom"></div>
 
-            <div class="relative z-10 px-6 lg:px-16 flex flex-col items-center justify-center text-center" style="min-height: 600px; padding: 160px 24px;">
+            <div class="relative z-10 px-6 lg:px-16 flex flex-col items-center justify-center text-center landing-hero-band max-w-4xl mx-auto w-full">
               <h2 data-blur-text data-text="Un seul réseau. Une protection partagée." class="text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9] max-w-3xl"></h2>
               <p class="mt-5 max-w-xl text-black/55 font-body font-light text-sm md:text-base fade-up" data-delay="300">
                 Vos équipes détectent. Notre IA corrèle. Le réseau alerte. Chaque signal devient une défense pour l’ensemble de l’écosystème.
               </p>
-              <button type="button" class="why-card mt-8 liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm text-black font-body font-medium fade-up" data-delay="500" data-card="principe" aria-haspopup="dialog">
+              <button type="button" class="why-card mt-6 liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm text-black font-body font-medium fade-up" data-delay="500" data-card="principe" aria-haspopup="dialog">
                 Pourquoi Cirkles
                 <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
               </button>
@@ -2376,15 +2552,64 @@
           </section>
 
           <!-- =================== USE CASES =================== -->
-          <section id="cas-usage" class="relative px-6 lg:px-16 py-28 scroll-mt-24">
-            <div class="max-w-6xl mx-auto">
-              <div class="flex flex-col items-center text-center mb-16">
+          <section id="cas-usage" class="relative px-6 lg:px-16 landing-section scroll-mt-24">
+            <div class="landing-section-inner">
+              <div class="landing-section-head">
                 <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Cas d&rsquo;usage</div>
-                <h2 data-blur-text data-text="Là où l'intelligence collective fait la différence." class="mt-6 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9] max-w-3xl"></h2>
+                <h2 data-blur-text data-text="Là où l'intelligence collective fait la différence." class="mt-4 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9] max-w-3xl"></h2>
                 <p class="mt-5 max-w-xl text-black/55 font-body font-light text-sm md:text-base fade-up" data-delay="200">
                   Quatre fronts sur lesquels nos membres reculent la fraude, ensemble.
                 </p>
               </div>
+
+              <article class="founder-platform-card liquid-glass fade-up" data-delay="280" aria-labelledby="founder-platform-title">
+                <div class="founder-platform-head">
+                  <div class="founder-platform-icon liquid-glass-strong" aria-hidden="true">
+                    <svg><use href="#i-engine" /></svg>
+                  </div>
+                  <div>
+                    <p class="founder-platform-eyebrow">Socle fondateur</p>
+                    <h3 id="founder-platform-title" class="founder-platform-title">Data Science &amp; AI Engine</h3>
+                  </div>
+                </div>
+                <p class="founder-platform-lede">
+                  Le moteur analytique central de Cirkles. Scoring comportemental, détection d&rsquo;anomalies, modèles d&rsquo;apprentissage sur données transactionnelles et réseau — alimentant en continu les quatre intelligences spécialisées.
+                </p>
+                <div class="founder-platform-grid">
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-modeles" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Modèles</p>
+                    <p class="founder-platform-cell-value">Scoring SIRET-only + enrichi</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-signal" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Signal</p>
+                    <p class="founder-platform-cell-value">Comportemental &amp; réseau</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-donnees" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Données partenaires</p>
+                    <p class="founder-platform-cell-value">Mutualisées &amp; historisées</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-apprentissage" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Apprentissage</p>
+                    <p class="founder-platform-cell-value">Continu &amp; adaptatif</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="fraude-id.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Fraude à l'identité — page dédiée">
@@ -2439,21 +2664,92 @@
           </section>
 
           <!-- =================== FEATURES CHESS =================== -->
-          <section id="ressources" class="relative px-6 lg:px-16 py-28 scroll-mt-24">
-            <div class="max-w-6xl mx-auto">
-              <div class="flex flex-col items-center text-center mb-20">
+          <section id="ressources" class="relative px-6 lg:px-16 landing-section scroll-mt-24">
+            <div class="landing-section-inner">
+              <div class="landing-section-head">
                 <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Capacités</div>
-                <h2 data-blur-text data-text="Une technologie de pointe. Une intégration simple." class="mt-6 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9]"></h2>
+                <h2 data-blur-text data-text="Une technologie de pointe. Une intégration simple." class="mt-4 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9]"></h2>
               </div>
 
               <!-- Row 1 -->
-              <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-24">
+              <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-14 max-w-5xl mx-auto">
                 <div class="flex-1">
                   <h3 class="text-3xl md:text-4xl lg:text-5xl font-heading text-black leading-[0.95] tracking-tight">Détecter plus vite.<br />Protéger mieux.</h3>
+                  <div
+                    class="hero-reels hero-reels--left hero-reels--wide mt-4"
+                    data-reels='[["Graph neural network","Anomaly detection"],["Behavioral scoring","SIRET-only inference","Network propagation"],["Feature engineering","Graph neural network","Behavioral scoring"]]'
+                    role="group"
+                    aria-label="Technologies de détection"
+                  >
+                    <div class="hero-reels-row">
+                      <div class="hero-reel" data-reel="0" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                      <div class="hero-reel" data-reel="1" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                      <div class="hero-reel" data-reel="2" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                    </div>
+                    <p class="hero-reels-live sr-only" aria-live="polite"></p>
+                  </div>
                   <p class="mt-5 max-w-md text-black/55 font-body font-light text-sm md:text-base">
                     Notre IA analyse en temps réel les schémas de fraude observés sur l’ensemble du réseau, et alerte chaque membre avant que le préjudice ne se reproduise.
                   </p>
                   <button type="button" class="why-card mt-7 liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium" data-card="detection" aria-haspopup="dialog">
+                    En savoir plus
+                    <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                  </button>
+                </div>
+                <div class="flex-1 w-full">
+                  <div class="feature-preview-shell liquid-glass rounded-2xl overflow-hidden">
+                    <div class="feature-preview" aria-label="Aperçu tableau de bord réseau">
+                      <div class="feature-preview__frame">
+                        <video
+                          src="videos/dashboard-2.mp4"
+                          class="feature-preview-video"
+                          autoplay
+                          muted
+                          loop
+                          playsinline
+                          preload="auto"
+                          aria-label="Tableau de bord réseau"
+                        ></video>
+                        <div class="feature-preview__veil" aria-hidden="true"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2 (reversed) -->
+              <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 max-w-5xl mx-auto">
+                <div class="flex-1">
+                  <h3 class="text-3xl md:text-4xl lg:text-5xl font-heading text-black leading-[0.95] tracking-tight">Le réseau apprend.<br />Sans effort.</h3>
+                  <div
+                    class="hero-reels hero-reels--left hero-reels--wide mt-4"
+                    data-reels='[["Collective intelligence","Network effect","Trust network"],["Shared signals","Connected members","Cross alerts"],["Pooled data","Continuous learning","Network propagation"]]'
+                    role="group"
+                    aria-label="Network capabilities"
+                  >
+                    <div class="hero-reels-row">
+                      <div class="hero-reel" data-reel="0" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                      <div class="hero-reel" data-reel="1" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                      <div class="hero-reel" data-reel="2" aria-hidden="true">
+                        <div class="hero-reel-track"></div>
+                      </div>
+                    </div>
+                    <p class="hero-reels-live sr-only" aria-live="polite"></p>
+                  </div>
+                  <p class="mt-5 max-w-md text-black/55 font-body font-light text-sm md:text-base">
+                    Chaque dossier signalé enrichit le modèle. La détection s’affine en continu, sans paramétrage manuel. Plus le réseau grandit, plus il est précis.
+                  </p>
+                  <button type="button" class="why-card mt-7 liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium" data-card="apprentissage" aria-haspopup="dialog">
                     En savoir plus
                     <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
                   </button>
@@ -2471,38 +2767,6 @@
                           playsinline
                           preload="auto"
                           aria-label="Réseau de détection de fraude"
-                        ></video>
-                        <div class="feature-preview__veil" aria-hidden="true"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Row 2 (reversed) -->
-              <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16">
-                <div class="flex-1">
-                  <h3 class="text-3xl md:text-4xl lg:text-5xl font-heading text-black leading-[0.95] tracking-tight">Le réseau apprend.<br />Sans effort.</h3>
-                  <p class="mt-5 max-w-md text-black/55 font-body font-light text-sm md:text-base">
-                    Chaque dossier signalé enrichit le modèle. La détection s’affine en continu, sans paramétrage manuel. Plus le réseau grandit, plus il est précis.
-                  </p>
-                  <button type="button" class="why-card mt-7 liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium" data-card="apprentissage" aria-haspopup="dialog">
-                    En savoir plus
-                    <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                  </button>
-                </div>
-                <div class="flex-1 w-full">
-                  <div class="feature-preview-shell liquid-glass rounded-2xl overflow-hidden">
-                    <div class="feature-preview" aria-label="Aperçu tableau de bord réseau">
-                      <div class="feature-preview__frame">
-                        <video
-                          src="videos/dashboard-2.mp4"
-                          class="feature-preview-video"
-                          autoplay
-                          muted
-                          loop
-                          playsinline
-                          preload="auto"
                         ></video>
                         <div class="feature-preview__veil" aria-hidden="true"></div>
                       </div>
@@ -2531,11 +2795,11 @@
             <div class="fade-top"></div>
             <div class="fade-bottom"></div>
 
-            <div class="relative z-10 px-6 lg:px-16 py-28">
-            <div class="max-w-6xl mx-auto">
-              <div class="flex flex-col items-center text-center mb-16">
+            <div class="relative z-10 px-6 lg:px-16 landing-section">
+            <div class="landing-section-inner">
+              <div class="landing-section-head">
                 <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Pourquoi Cirkles</div>
-                <h2 data-blur-text data-text="La force du collectif change tout." class="mt-6 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9]"></h2>
+                <h2 data-blur-text data-text="La force du collectif change tout." class="mt-4 text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9]"></h2>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -2569,7 +2833,7 @@
                     <svg class="w-4 h-4" aria-hidden="true"><use href="#i-shield" /></svg>
                   </div>
                   <h4 class="mt-5 text-2xl font-heading text-black leading-tight">Confidentialité différentielle</h4>
-                  <p class="mt-2 text-black/55 font-body font-light text-sm">Ce qui circule dans le réseau, ce sont des empreintes anonymisées — jamais des données clients. Vos dossiers restent chez vous. L&rsquo;intelligence collective, elle, est partagée.</p>
+                  <p class="mt-2 text-black/55 font-body font-light text-sm">Ce qui circule dans le réseau, ce sont des empreintes anonymisées — jamais des données clients. Vos dossiers restent chez vous.</p>
                   <span class="read-more mt-4 inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
                     En savoir plus
                     <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
@@ -2593,12 +2857,12 @@
           </section>
 
           <!-- =================== ÉQUIPE =================== -->
-          <section id="equipe" class="team-section relative z-10 py-20 md:py-28 scroll-mt-24" aria-labelledby="equipe-title">
+          <section id="equipe" class="team-section relative z-10 landing-section scroll-mt-24" aria-labelledby="equipe-title">
             <div class="px-6 lg:px-16">
-              <div class="max-w-6xl mx-auto">
-                <div class="flex flex-col items-center text-center mb-12 md:mb-14">
+              <div class="landing-section-inner">
+                <div class="landing-section-head">
                   <div class="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-black/65 font-body">Équipe</div>
-                  <h2 id="equipe-title" class="mt-6 text-4xl md:text-5xl font-heading text-black tracking-tight leading-[0.9]">Les visages derrière le réseau</h2>
+                  <h2 id="equipe-title" class="mt-4 text-4xl md:text-5xl font-heading text-black tracking-tight leading-[0.9]">Les visages derrière le réseau</h2>
                   <p class="mt-4 max-w-lg text-sm md:text-base text-black/55 font-body font-light leading-relaxed">
                     Ingénieurs, produit et croissance — un collectif qui construit l&rsquo;intelligence partagée contre la fraude.
                   </p>
@@ -2628,9 +2892,9 @@
             <div class="fade-top"></div>
             <div class="fade-bottom"></div>
 
-            <div class="relative z-10 px-6 lg:px-16 pt-32 pb-12">
-              <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
-                <h2 data-blur-text data-text="Rejoignez le réseau. Reculez la fraude." class="text-5xl md:text-6xl lg:text-7xl font-heading text-black leading-[0.85] max-w-3xl tracking-tight"></h2>
+            <div class="relative z-10 px-6 lg:px-16 pt-20 pb-10">
+              <div class="max-w-3xl mx-auto flex flex-col items-center text-center">
+                <h2 data-blur-text data-text="Rejoignez le réseau. Éradiquez la fraude." class="text-5xl md:text-6xl lg:text-7xl font-heading text-black leading-[0.85] max-w-3xl tracking-tight"></h2>
                 <p class="mt-6 max-w-xl text-black/55 font-body font-light text-sm md:text-base fade-up" data-delay="200">
                   Réservez une démonstration personnalisée. Découvrez comment l’intelligence collective peut protéger votre organisation. Sans engagement.
                 </p>
@@ -2641,7 +2905,7 @@
                   </a>
                 </div>
 
-                <div class="mt-32 pt-8 border-t border-black/10 w-full flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="mt-16 pt-6 border-t border-black/10 w-full flex flex-col sm:flex-row items-center justify-between gap-3">
                   <div class="flex items-center gap-3">
                     <img src="images/cirkles-logo-white.png" alt="Cirkles.ai" class="h-6 w-auto select-none" draggable="false" style="filter: invert(1); opacity: 0.45;" />
                     <span class="text-black/35 text-xs font-body">© 2026 Cirkles.ai. Tous droits réservés.</span>
@@ -2764,6 +3028,13 @@
             linkedin: "https://www.linkedin.com/in/salim-n-728955121/",
           },
           {
+            role: "CSO",
+            quote:
+              "La stratégie de sécurité et l&rsquo;intelligence collective doivent avancer au même rythme que la fraude.",
+            image: "images/team/cso.png",
+            linkedin: "https://www.linkedin.com/in/jo%C3%ABl-nadjar-257656138/",
+          },
+          {
             role: "Data Scientist",
             quote:
               "Le meilleur signal, c'est celui que personne n'avait encore vu seul.",
@@ -2784,6 +3055,13 @@
             image: "images/team/head-of-growth.png",
             linkedin: null,
           },
+          {
+            type: "advisory",
+            role: "Advisory board",
+            quote:
+              "Plus de 100&nbsp;ans d&rsquo;expérience cumulée dans les systèmes de financement, la conformité réglementaire et la gestion des risques — au service de la stratégie du réseau.",
+            linkedin: null,
+          },
         ];
 
         const track = document.getElementById("team-carousel-track");
@@ -2802,7 +3080,17 @@
           slide.setAttribute("role", "group");
           slide.setAttribute("aria-roledescription", "slide");
           slide.setAttribute("aria-label", `${i + 1} sur ${TEAM.length} : ${member.role}`);
-          slide.innerHTML = `
+          if (member.type === "advisory") {
+            slide.innerHTML = `
+            <article class="team-card team-card--advisory liquid-glass">
+              <div class="team-card-body">
+                <p class="team-card-badge">Conseil stratégique</p>
+                <h3 class="team-card-role">${member.role}</h3>
+                <p class="team-card-quote">${member.quote}</p>
+              </div>
+            </article>`;
+          } else {
+            slide.innerHTML = `
             <article class="team-card liquid-glass">
               <div class="team-card-portrait">
                 <div class="team-card-portrait-inner">
@@ -2821,6 +3109,7 @@
                 }
               </div>
             </article>`;
+          }
           track.appendChild(slide);
 
           const dot = document.createElement("button");
@@ -2902,37 +3191,16 @@
             Notre IA analyse en temps réel les schémas de fraude observés sur l&rsquo;ensemble du réseau, et alerte chaque membre avant que le préjudice ne se reproduise.
           </p>
 
-          <div class="article-photo hero" aria-hidden="true">
-            <div class="photo-inner">
-              <div class="photo-icon">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              </div>
-              <span class="photo-label">[ Photo — tableau de bord alertes temps réel ]</span>
-            </div>
-          </div>
-
           <div class="article-section">
             <h4>La fraude ne prévient pas. Le réseau, si.</h4>
             <p>Chaque établissement détecte des signaux en silo. Un fraudeur identifié chez vous peut être inconnu de vos systèmes — mais déjà signalé par trois autres membres du réseau Cirkles. L&rsquo;alerte arrive avant la prochaine tentative, pas après le préjudice.</p>
             <p>Notre moteur corrèle en continu des dizaines de paramètres comportementaux, documentaires et contextuels pour isoler les configurations qui précèdent statistiquement la fraude — sans attendre qu&rsquo;un individu soit fiché quelque part.</p>
           </div>
 
-          <div class="article-split">
-            <div>
-              <div class="article-section" style="margin-top:0">
-                <h4>Alerte avant impact</h4>
-                <p>Dès qu&rsquo;un schéma est confirmé dans l&rsquo;écosystème, tous les membres connectés reçoivent un signal. Vos équipes risque disposent du contexte nécessaire pour bloquer, contrôler ou valider — avec des preuves, pas seulement un score opaque.</p>
-                <p>Latence inférieure à 30 secondes sur la majorité des analyses. Le temps de réaction devient un avantage compétitif.</p>
-              </div>
-            </div>
-            <div class="article-photo inline" aria-hidden="true">
-              <div class="photo-inner">
-                <div class="photo-icon">
-                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <span class="photo-label">[ Photo — équipe conformité / centre de contrôle ]</span>
-              </div>
-            </div>
+          <div class="article-section">
+            <h4>Alerte avant impact</h4>
+            <p>Dès qu&rsquo;un schéma est confirmé dans l&rsquo;écosystème, tous les membres connectés reçoivent un signal. Vos équipes risque disposent du contexte nécessaire pour bloquer, contrôler ou valider — avec des preuves, pas seulement un score opaque.</p>
+            <p>Latence inférieure à 30 secondes sur la majorité des analyses. Le temps de réaction devient un avantage compétitif.</p>
           </div>
 
           <div class="article-section">
@@ -2941,34 +3209,6 @@
             <strong style="font-weight:600;color:rgba(0,0,0,.75)">Comportementale</strong> — timing, séquence du dossier, micro-signaux digitaux.<br />
             <strong style="font-weight:600;color:rgba(0,0,0,.75)">Réseau</strong> — schémas déjà cartographiés par d&rsquo;autres membres.</p>
             <p>Pris isolément, ces signaux peuvent sembler anodins. Ensemble, ils dessinent un profil que vos contrôles actuels ne voient pas.</p>
-          </div>
-
-          <div class="article-photo-grid">
-            <div class="article-photo" aria-hidden="true">
-              <div class="photo-inner">
-                <div class="photo-icon">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                </div>
-                <span class="photo-label">[ Photo — analyse documentaire ]</span>
-              </div>
-            </div>
-            <div class="article-photo" aria-hidden="true">
-              <div class="photo-inner">
-                <div class="photo-icon">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <span class="photo-label">[ Photo — corrélation réseau ]</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="article-photo wide" aria-hidden="true">
-            <div class="photo-inner">
-              <div class="photo-icon">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <span class="photo-label">[ Photo — courbe d&rsquo;alertes / réduction des pertes ]</span>
-            </div>
           </div>
 
           <div class="article-highlight">
@@ -3002,21 +3242,6 @@
           <h3 id="apprentissage-article-title" class="text-3xl md:text-4xl font-heading text-black leading-[0.95] tracking-tight">Un modèle qui s&rsquo;améliore seul.<br />En permanence.</h3>
           <p class="article-kicker font-body">Article technique — Cirkles.ai</p>
 
-          <div class="article-photo network-viz hero" aria-hidden="true">
-            <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <line x1="80" y1="100" x2="160" y2="60" stroke="#000" stroke-width="0.8" stroke-opacity="0.15"/>
-              <line x1="160" y1="60" x2="240" y2="100" stroke="#000" stroke-width="0.8" stroke-opacity="0.15"/>
-              <line x1="240" y1="100" x2="320" y2="70" stroke="#000" stroke-width="0.8" stroke-opacity="0.15"/>
-              <line x1="160" y1="60" x2="200" y2="140" stroke="#000" stroke-width="0.8" stroke-opacity="0.12"/>
-              <circle cx="80" cy="100" r="5" fill="#fff" stroke="#000" stroke-width="1.2" opacity="0.9"/>
-              <circle cx="160" cy="60" r="5" fill="#fff" stroke="#000" stroke-width="1.2" opacity="0.7"/>
-              <circle cx="240" cy="100" r="5" fill="#fff" stroke="#000" stroke-width="1.2" opacity="0.5"/>
-              <circle cx="320" cy="70" r="5" fill="#fff" stroke="#000" stroke-width="1.2" opacity="0.35"/>
-              <circle cx="200" cy="140" r="4" fill="#fff" stroke="#000" stroke-width="1" opacity="0.25"/>
-            </svg>
-            <span class="photo-label" style="position:absolute;bottom:12px;left:0;right:0;text-align:center;">[ Visuel — réseau de nœuds interconnectés, ouverture ]</span>
-          </div>
-
           <div class="article-section">
             <h4>Le problème que tout le monde a accepté comme une fatalité</h4>
             <p>Les systèmes de détection de fraude vieillissent mal. Pas parce que la technologie est mauvaise. Parce que le modèle de maintenance est structurellement défaillant. Un système classique s&rsquo;entraîne une fois, se déploie, et commence immédiatement à se dégrader — pendant que les schémas frauduleux, eux, évoluent en continu.</p>
@@ -3025,8 +3250,8 @@
           </div>
 
           <div class="article-stat-encart">
-            <div class="stat-big">180+</div>
-            <p class="stat-desc">organisations dont chaque dossier enrichit les modèles en temps réel</p>
+            <div class="stat-big">+1M</div>
+            <p class="stat-desc">de dossiers enrichissent les modèles en temps réel</p>
           </div>
 
           <div class="article-section">
@@ -3037,7 +3262,7 @@
             <p>Un schéma de fraude qui apparaît chez un membre en janvier est cartographié, anonymisé, intégré aux modèles. En février, quand un profil similaire se présente chez un autre membre — dans un autre secteur, dans un autre pays — le modèle le reconnaît. Pas parce qu&rsquo;il a été programmé pour le faire. Parce qu&rsquo;il a appris.</p>
           </div>
 
-          <div class="article-process" aria-hidden="true">
+          <div class="article-process">
             <div class="article-process-step">
               <div class="step-label">01</div>
               <p>Dossier soumis<br />par le membre A</p>
@@ -3053,7 +3278,6 @@
               <p>Réseau protégé —<br />tous les membres<br />bénéficient</p>
             </div>
           </div>
-          <p class="photo-label" style="text-align:center;margin-top:8px;font-size:11px;color:rgba(0,0,0,.35);">[ Visuel process — dossier, engrenage, bouclier ]</p>
 
           <div class="article-section">
             <h4>Pourquoi la taille du réseau n&rsquo;est pas un avantage parmi d&rsquo;autres — c&rsquo;est l&rsquo;avantage</h4>
@@ -3064,8 +3288,8 @@
           </div>
 
           <blockquote class="article-quote">
-            <p>En six semaines, nous avons identifié un réseau de fausses fiches de paie qui sévissait depuis plus d&rsquo;un an. Aucun de nous ne pouvait le voir seul — ensemble, le schéma était évident.</p>
-            <cite>— CISO, Assurances Polaris</cite>
+            <p>&laquo;&nbsp;CIRKLES n&rsquo;est pas seulement un outil de scoring. Il devient progressivement une couche d&rsquo;intelligence collaborative à l&rsquo;échelle de l&rsquo;écosystème du financement.&nbsp;&raquo;</p>
+            <cite>— Directeur Général Adjoint, Groupe Financement Automobile</cite>
           </blockquote>
 
           <div class="article-section">
@@ -3102,9 +3326,10 @@
 
           <div class="article-section">
             <h4>La confidentialité dans un système d&rsquo;apprentissage partagé</h4>
-            <p>La question se pose naturellement&nbsp;: si les données de mes dossiers enrichissent les modèles partagés, qu&rsquo;est-ce qui circule exactement&nbsp;?</p>
-            <p>La réponse est architecturale. Ce qui enrichit les modèles, ce ne sont pas des données clients. Ce sont des représentations vectorielles anonymisées — des empreintes mathématiques qui capturent la structure d&rsquo;un schéma sans en révéler le contenu. Vos dossiers restent chez vous.</p>
-            <p>Architecture de confidentialité différentielle. Hébergement souverain en Europe. RGPD natif. AI Act compliant.</p>
+            <p>Ce qui circule dans le réseau, ce sont des empreintes anonymisées — jamais des données clients. Vos dossiers restent chez vous.</p>
+            <p>La question se pose naturellement&nbsp;: si mes dossiers enrichissent les modèles, qu&rsquo;est-ce qui est partagé&nbsp;? La réponse est architecturale&nbsp;: des représentations vectorielles anonymisées, jamais des données identifiables.</p>
+            <p>Ce qui rejoint le réseau, c&rsquo;est l&rsquo;information que &laquo;&nbsp;ce type de configuration est associé à ce type de résultat&nbsp;&raquo; — sans exposer l&rsquo;identité, le document, ni les données personnelles qui ont permis de l&rsquo;établir.</p>
+            <p>Hébergement souverain en France, RGPD natif, chiffrement de bout en bout. Vos juristes valident en jours, pas en mois.</p>
           </div>
 
           <div class="article-tech-encart">
@@ -3140,34 +3365,9 @@
             </ul>
           </div>
 
-          <div class="article-photo network-viz dense wide" aria-hidden="true">
-            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <line x1="40" y1="90" x2="100" y2="40" stroke="#000" stroke-width="0.7" stroke-opacity="0.3"/>
-              <line x1="100" y1="40" x2="180" y2="70" stroke="#000" stroke-width="0.7" stroke-opacity="0.3"/>
-              <line x1="180" y1="70" x2="260" y2="50" stroke="#000" stroke-width="0.7" stroke-opacity="0.3"/>
-              <line x1="260" y1="50" x2="340" y2="90" stroke="#000" stroke-width="0.7" stroke-opacity="0.3"/>
-              <line x1="100" y1="40" x2="140" y2="130" stroke="#000" stroke-width="0.7" stroke-opacity="0.28"/>
-              <line x1="180" y1="70" x2="200" y2="140" stroke="#000" stroke-width="0.7" stroke-opacity="0.28"/>
-              <line x1="140" y1="130" x2="200" y2="140" stroke="#000" stroke-width="0.7" stroke-opacity="0.25"/>
-              <line x1="200" y1="140" x2="280" y2="120" stroke="#000" stroke-width="0.7" stroke-opacity="0.25"/>
-              <line x1="260" y1="50" x2="280" y2="120" stroke="#000" stroke-width="0.7" stroke-opacity="0.22"/>
-              <circle cx="40" cy="90" r="5" fill="#fff" stroke="#000" stroke-width="1.2"/>
-              <circle cx="100" cy="40" r="5" fill="#fff" stroke="#000" stroke-width="1.2"/>
-              <circle cx="180" cy="70" r="5" fill="#fff" stroke="#000" stroke-width="1.2"/>
-              <circle cx="260" cy="50" r="5" fill="#fff" stroke="#000" stroke-width="1.2"/>
-              <circle cx="340" cy="90" r="5" fill="#fff" stroke="#000" stroke-width="1.2"/>
-              <circle cx="140" cy="130" r="4" fill="#fff" stroke="#000" stroke-width="1"/>
-              <circle cx="200" cy="140" r="4" fill="#fff" stroke="#000" stroke-width="1"/>
-              <circle cx="280" cy="120" r="4" fill="#fff" stroke="#000" stroke-width="1"/>
-              <circle cx="220" cy="30" r="3" fill="#fff" stroke="#000" stroke-width="0.9" opacity="0.7"/>
-              <circle cx="300" cy="150" r="3" fill="#fff" stroke="#000" stroke-width="0.9" opacity="0.6"/>
-            </svg>
-            <span class="photo-label" style="position:absolute;bottom:12px;left:0;right:0;text-align:center;">[ Visuel — réseau densifié, clôture ]</span>
-          </div>
-
           <div class="article-outro">
             <p class="outro-brand">Cirkles.ai — Intelligence collective contre la fraude</p>
-            <p class="outro-meta">Réseau de 180+ membres · Hébergement souverain Europe · AI Act compliant</p>
+            <p class="outro-meta">Millions de dossiers · Hébergement souverain Europe · AI Act compliant</p>
           </div>
         </div>
         <div class="article-modal-footer">
@@ -3197,12 +3397,16 @@
             <div class="pq-badge pq-reveal">Notre différence</div>
             <h1 class="pq-hero-title pq-reveal-up">Pourquoi Cirkles ?<br><em>Parce que la fraude<br>ne se combat pas seul.</em></h1>
             <p class="pq-hero-sub pq-reveal-up" style="--d:.15s">Demain, votre outil de scoring ne suffira plus. La fraude s'organise en réseau, votre défense aussi. Cirkles s'enrichit en temps réel des signaux de tout l'écosystème pour vous alerter avant même que la menace n'arrive jusqu'à vous. Pas un outil. Pas une base de données. Un réseau vivant.</p>
+            <a href="demo-booking.html" class="pq-cta-btn pq-hero-cta pq-reveal-up" style="--d:.22s;display:inline-flex" onclick="closePqModal()">
+              Demandez une démo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
             <div class="pq-stats pq-reveal-up" style="--d:.3s">
-              <div class="pq-stat"><div class="pq-stat-num" data-count="25" data-suffix=" ans">0</div><div class="pq-stat-label">d'expertise systèmes financiers</div></div>
+              <div class="pq-stat"><div class="pq-stat-num" data-count="25" data-suffix=" ans">0</div><div class="pq-stat-label">d'expertise</div></div>
               <div class="pq-stat-div"></div>
-              <div class="pq-stat"><div class="pq-stat-num" data-count="20" data-prefix="+" data-suffix="%">0</div><div class="pq-stat-label">de détection minimum</div></div>
+              <div class="pq-stat"><div class="pq-stat-num" data-count="80" data-prefix="+" data-suffix="%">0</div><div class="pq-stat-label">de détection</div></div>
               <div class="pq-stat-div"></div>
-              <div class="pq-stat"><div class="pq-stat-num" data-text="7j/7">—</div><div class="pq-stat-label">assistance &amp; monitoring</div></div>
+              <div class="pq-stat"><div class="pq-stat-num" data-text="5j/7">—</div><div class="pq-stat-label">assistance</div></div>
             </div>
           </div>
         </section>
@@ -3210,8 +3414,13 @@
           <div class="pq-knows-left-cell">
             <div class="pq-knows-left">
               <div class="pq-section-label pq-reveal">Expertise terrain</div>
-              <h2 class="pq-section-title pq-reveal-up">On a vécu vos<br>systèmes.<br><em>De l'intérieur.</em></h2>
-              <blockquote class="pq-quote pq-reveal-up" style="--d:.1s"><p>"Je n'en pouvais plus des explications à rallonge. Avec Cirkles, on est tenu par la main, les opérateurs tout comme les managers. Rien n'est laissé au hasard."</p><cite>Responsable Risque, établissement financier</cite></blockquote>
+              <h2 class="pq-section-title pq-reveal-up">On sait&hellip;</h2>
+              <p class="pq-sec-intro pq-reveal-up" style="--d:.08s">Nous avons passé vingt ans à l'intérieur des systèmes bancaires. Pas à les vendre, à les construire. C'est ce regard-là qui nous permet de concevoir une protection que vos équipes adoptent en jours, pas en mois.</p>
+              <blockquote class="pq-quote pq-reveal-up" style="--d:.1s"><p>&ldquo;Je n'en pouvais plus des explications à rallonge. Avec Cirkles, on est tenu par la main, les opérateurs tout comme les managers. Rien n'est laissé au hasard.&rdquo;</p></blockquote>
+              <a href="demo-booking.html" class="pq-cta-btn pq-reveal-up" style="--d:.14s;margin-top:1rem;display:inline-flex" onclick="closePqModal()">
+                Demandez une démo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              </a>
             </div>
           </div>
           <div class="pq-knows-right" id="pq-stack">
@@ -3225,7 +3434,7 @@
                   </svg>
                 </div>
                 <h4>Cirkles connaît vos systèmes, pas juste votre métier</h4>
-                <p>Vingt ans à construire et intégrer les infrastructures financières européennes. On ne découvre pas vos contraintes — on les a vécues avant même de vous rencontrer.</p>
+                <p>Vingt ans à construire et intégrer les infrastructures financières européennes. On ne découvre pas vos contraintes, on les a vécues avant même de vous rencontrer.</p>
               </div>
 
               <div class="pq-sticky-card" style="--i: 1; --bg-tint: rgb(246, 247, 248)">
@@ -3236,7 +3445,7 @@
                 </div>
                 <h4>Notre produit évolue avec les fraudes réelles du réseau</h4>
                 <p>
-                  Chaque signal détecté par un membre enrichit le modèle pour tous. Pas de roadmap figée — une IA qui s'adapte en temps réel à ce que vos concurrents voient sur le terrain.
+                  Chaque signal détecté par un membre enrichit le modèle pour tous. Pas de roadmap figée, une IA qui s'adapte en temps réel à ce que vos concurrents voient sur le terrain.
                 </p>
               </div>
 
@@ -3250,7 +3459,17 @@
                   </svg>
                 </div>
                 <h4>Vous parlez à des architectes, pas à des commerciaux</h4>
-                <p>Nos équipes ont construit des systèmes bancaires. Elles comprennent vos enjeux techniques, vos contraintes IT, et vos vraies douleurs — sans jargon creux.</p>
+                <p>Nos équipes ont construit des systèmes bancaires. Elles comprennent vos enjeux techniques, vos contraintes IT, et vos vraies douleurs. Tout ça sans jargon creux.</p>
+              </div>
+
+              <div class="pq-sticky-card pq-sticky-card--result" style="--i: 3; --bg-tint: rgb(238, 239, 242)">
+                <div class="pq-sc-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </div>
+                <h4><strong>Résultat ?</strong> Nous ne vendons pas un outil. Nous devenons votre avantage collectif.</h4>
               </div>
             </div>
           </div>
@@ -3258,8 +3477,8 @@
         <section class="pq-section pq-ia" id="pqs3">
           <div class="pq-ia-header">
             <div class="pq-section-label pq-reveal">Intelligence artificielle</div>
-            <h2 class="pq-section-title pq-reveal-up">Détection collective, explication précise,<br>conseil actionnable.<br><em>Votre premier analyste fraude augmenté.</em></h2>
-            <p class="pq-ia-sub pq-reveal-up" style="--d:.1s">Nos modèles s'entraînent sur les signaux réels de tout l'écosystème. Chaque score est expliqué, chaque signal détaillé, chaque décision orientée par un agent qui connaît votre contexte.</p>
+            <h2 class="pq-section-title pq-reveal-up">Détection collective, explication précise,<br>conseil actionnable.<br><em>Propulsé par une IA qui apprend de chaque fraude du réseau.</em></h2>
+            <p class="pq-ia-sub pq-reveal-up" style="--d:.1s">Nos modèles s'entraînent sur les signaux réels de tout l'écosystème, pas seulement vos dossiers. Chaque score est expliqué, chaque signal détaillé, chaque décision orientée par un agent IA qui connaît votre contexte. Pas de boîte noire. Une IA collective, transparente et actionnable.</p>
           </div>
           <div class="pq-ia-carousel-section" id="pq-ia-carousel" aria-label="Modules intelligence artificielle">
             <div class="pq-ia-sticky-frame">
@@ -3346,23 +3565,23 @@
             <div class="pq-diff-card pq-reveal-up">
               <div class="pq-diff-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
               <h4>Notre différence ?</h4>
-              <p>Cirkles ne score pas dans le vide. Chaque score reflète ce que tout le réseau a appris. Ce qui pèse, pourquoi ça pèse, et quoi faire ensuite. Votre analyste décide vite, avec le contexte complet.</p>
+              <p>Cirkles ne score pas dans le vide. Chaque score reflète ce que tout le réseau a appris, pas seulement vos dossiers. Ce qui pèse, pourquoi ça pèse, et quoi faire ensuite. Votre équipe peut décider vite, avec le contexte complet.</p>
             </div>
             <div class="pq-diff-card pq-reveal-up" style="--d:.1s">
               <div class="pq-diff-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <h4>IA responsable — en avance sur la réglementation</h4>
-              <p>L'AI Act européen va imposer la transparence totale d'ici 2026. Beaucoup vont courir. Nous sommes déjà prêts — chaque décision auditable, chaque biais corrigé. Pas par obligation. Par conviction.</p>
+              <h4>IA responsable, en avance sur la réglementation</h4>
+              <p>L'AI Act européen va imposer la transparence totale sur les modèles d'IA d'ici 2026. Beaucoup vont courir. Nous sommes déjà prêts. Chaque décision est auditable, chaque signal traçable, chaque biais corrigé en continu. Pas par obligation. Par conviction.</p>
             </div>
           </div>
         </section>
         <section class="pq-section pq-rd" id="pqs4">
           <div class="pq-section-label pq-reveal">Innovation</div>
           <h2 class="pq-section-title pq-reveal-up">Une R&amp;D en anticipation<br><em>de la fraude.</em></h2>
-          <p class="pq-rd-sub pq-reveal-up" style="--d:.1s">Nos modèles n'attendent pas qu'un schéma de fraude soit confirmé pour agir. Des dizaines de variables croisées en temps réel détectent les signaux faibles avant même que la fraude ne soit caractérisée.</p>
+          <p class="pq-rd-sub pq-reveal-up" style="--d:.1s">Chez Cirkles, la R&amp;D n'est pas un département&nbsp;: c'est le moteur. Nos modèles n'attendent pas qu'un schéma de fraude soit confirmé pour agir. Des dizaines de variables croisées en temps réel suffisent à détecter les signaux faibles, avant même que la fraude ne soit caractérisée. Vous êtes alerté avant que vos concurrents aient compris ce qui leur est arrivé.</p>
           <div class="pq-rd-grid">
-            <div class="pq-rd-block pq-reveal-up" style="--d:.0s"><div class="pq-rd-num">01</div><h4>Veille active — on anticipe, on n'attend pas</h4><p>DORA, AI Act, PSD3, eIDAS 2 — nos équipes intègrent les évolutions réglementaires avant qu'elles ne vous impactent. Et parce que la fraude évolue plus vite que les textes, nous surveillons les nouveaux schémas dès leur émergence.</p></div>
-            <div class="pq-rd-block pq-reveal-up" style="--d:.1s"><div class="pq-rd-num">02</div><h4>Architecture conçue pour durer</h4><p>Cloud native, APIs REST modernes, modèles IA versionnés et déployables sans interruption. Zéro dette technique. Zéro downtime. Votre équipe IT ne voit rien — vos analystes bénéficient de tout.</p></div>
-            <div class="pq-rd-block pq-reveal-up" style="--d:.2s"><div class="pq-rd-num">03</div><h4>Le réseau s'enrichit — vous aussi</h4><p>Chaque nouveau membre apporte des signaux. Chaque signal affine les modèles. Vous bénéficiez automatiquement de toutes les améliorations sans aucune action de votre côté.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.0s"><div class="pq-rd-num">01</div><h4>Veille active — on anticipe, on n'attend pas</h4><p>Nos équipes intègrent les évolutions réglementaires avant qu'elles ne vous impactent. Et parce que la fraude évolue plus vite que les textes, nous surveillons aussi les nouveaux schémas d'attaque dès qu'ils émergent dans le réseau.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.1s"><div class="pq-rd-num">02</div><h4>Architecture conçue pour durer</h4><p>Nos modèles IA sont versionnés et déployables sans interruption. Zéro dette technique. Zéro downtime lors des mises à jour. Votre équipe IT ne voit rien, elle bénéficie de tout.</p></div>
+            <div class="pq-rd-block pq-reveal-up" style="--d:.2s"><div class="pq-rd-num">03</div><h4>Le réseau s'enrichit. Vous en profitez</h4><p>Chaque nouveau membre apporte des signaux. Chaque signal affine les modèles. Vous bénéficiez automatiquement de toutes les améliorations sans aucune action de votre côté.</p></div>
             <div class="pq-rd-block pq-reveal-up" style="--d:.3s"><div class="pq-rd-num">04</div><h4>Pensé pour les DSI qui ont déjà tout vu</h4><p>Faible impact IT, intégration API en quelques jours, sécurité by design. On ne vous demande pas de refondre votre stack — on s'y connecte.</p></div>
           </div>
         </section>
@@ -3380,7 +3599,7 @@
                 <div class="pq-sticky-sec-inner">
                   <div class="pq-check"></div>
                   <div>
-                    <h4>100% RGPD — natif, pas rajouté</h4>
+                    <h4>100% RGPD, natif, pas rajouté</h4>
                     <p>Conformité totale aux réglementations européennes. Droit à l'oubli, portabilité, transparence : tout est conçu dès le départ, pas patché après coup.</p>
                   </div>
                 </div>
@@ -3390,7 +3609,7 @@
                   <div class="pq-check"></div>
                   <div>
                     <h4>Vos données restent les vôtres</h4>
-                    <p>Les dossiers que vous soumettez enrichissent les modèles de détection — jamais exposés aux autres membres. Ce qui circule, c'est l'intelligence collective. Pas vos données clients.</p>
+                    <p>Les dossiers que vous soumettez enrichissent les modèles de détection, jamais exposés aux autres membres. Ce qui circule, c'est l'intelligence collective. Pas vos données clients.</p>
                   </div>
                 </div>
               </div>
@@ -3399,7 +3618,7 @@
                   <div class="pq-check"></div>
                   <div>
                     <h4>Hébergement souverain en Europe</h4>
-                    <p>Infrastructure certifiée en France et Allemagne. Chiffrement AES-256, TLS 1.3. Continuité d'activité garantie. Vos données ne quittent jamais l'Europe.</p>
+                    <p>Infrastructure certifiée hébergée 100% en France. Continuité d'activité garantie. Vos données ne quittent jamais la France.</p>
                   </div>
                 </div>
               </div>
@@ -3407,8 +3626,8 @@
                 <div class="pq-sticky-sec-inner">
                   <div class="pq-check"></div>
                   <div>
-                    <h4>Transparence totale — vous décidez de tout</h4>
-                    <p>Vous savez exactement comment vos données alimentent les modèles. Aucune utilisation sans votre accord explicite. Audit disponible à tout moment.</p>
+                    <h4>Transparence totale, vous décidez de tout</h4>
+                    <p>Vous savez exactement comment vos données alimentent les modèles, et pourquoi. Aucune utilisation sans votre accord explicite. Audit disponible à tout moment.</p>
                   </div>
                 </div>
               </div>
@@ -3418,13 +3637,13 @@
         <section class="pq-section pq-team" id="pqs6">
           <div class="pq-section-label pq-reveal">Équipe &amp; présence</div>
           <h2 class="pq-section-title pq-reveal-up">Une équipe à taille humaine.<br><em>Une ambition sans frontières.</em></h2>
-          <p class="pq-team-sub pq-reveal-up" style="--d:.1s">Née à Paris, déjà déployée en Europe et aux États-Unis. Assez agiles pour vous répondre aujourd'hui, assez solides pour vous accompagner demain où que vous soyez.</p>
+          <p class="pq-team-sub pq-reveal-up" style="--d:.1s">Basée à Paris et San Francisco, nos équipes sont assez agiles pour vous répondre aujourd'hui, assez solides pour vous accompagner demain où que vous soyez.</p>
           <div class="pq-team-grid">
-            <div class="pq-team-block pq-reveal-up" style="--d:.0s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h4>Proximité</h4><p>Un interlocuteur dédié qui connaît votre dossier, votre secteur, vos contraintes. Pas un centre d'appel — une équipe.</p></div>
-            <div class="pq-team-block pq-reveal-up" style="--d:.1s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div><h4>Réactivité</h4><p>Pas de ticket niveau 1, pas de bot. Vous parlez directement aux bonnes personnes, celles qui ont construit le produit.</p></div>
+            <div class="pq-team-block pq-reveal-up" style="--d:.0s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h4>Proximité</h4><p>Un interlocuteur dédié qui connaît votre dossier, votre secteur, vos contraintes. Pas un centre d'appel, une équipe.</p></div>
+            <div class="pq-team-block pq-reveal-up" style="--d:.1s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div><h4>Réactivité</h4><p>Pas de ticket niveau 1, pas de bot. Vous parlez directement aux bonnes personnes, celles qui ont construit le produit et connaissent votre métier.</p></div>
             <div class="pq-team-block pq-reveal-up" style="--d:.2s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><h4>Agilité</h4><p>On intègre vos retours en semaines, pas en trimestres. Vous n'attendez pas une roadmap annuelle pour voir vos besoins adressés.</p></div>
-            <div class="pq-team-block pq-reveal-up" style="--d:.3s"><div class="pq-team-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Présence internationale</h4><p>Déjà présent des deux côtés de l'Atlantique. Cirkles ne compte pas s'arrêter là.</p></div>
           </div>
+          <p class="pq-team-sub pq-reveal-up" style="--d:.25s;margin-top:1rem;margin-bottom:0">Déjà présent des 2 côtés de l&rsquo;Atlantique, Cirkles ne compte pas arrêter son expansion.</p>
           <div class="pq-flags pq-reveal-up" style="--d:.2s">
             <div class="pq-flag-track">
               <span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span><span>🇫🇷</span><span>🇪🇸</span><span>🇧🇪</span><span>🇮🇹</span><span>🇬🇧</span><span>🇱🇺</span><span>🇩🇪</span><span>🇳🇱</span><span>🇺🇸</span>
@@ -3434,8 +3653,8 @@
             <div class="pq-section-divider"></div>
             <h3 class="pq-cta-title">Rejoignez le réseau.<br><em>La fraude n'attend pas.</em></h3>
             <div class="pq-cta-checks">
-              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sans engagement</span>
-              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Déploiement en jours</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Détection immédiate</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Faux positifs réduits</span>
               <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Résultats dès le premier mois</span>
             </div>
             <a href="demo-booking.html" class="pq-cta-btn" onclick="closePqModal()">
@@ -3591,22 +3810,22 @@
             {
               num: "01",
               title: "Modèle statistique collectif",
-              body: "Nos modèles s'enrichissent en continu des signaux de tout le réseau. Champion / challenger en permanence — chaque nouveau schéma détecté quelque part devient immédiatement une protection pour tous."
+              body: "Nos modèles ne s'entraînent pas uniquement sur vos dossiers, ils s'enrichissent en continu des signaux de tout le réseau. Nous challengeons en permanence, chaque nouveau schéma de fraude détecté quelque part devient immédiatement une protection pour tous les membres."
             },
             {
               num: "02",
-              title: "IA générative & nouvelles menaces",
-              body: "Deepfakes, identités synthétiques, documents falsifiés à l'IA — nous utilisons les mêmes technologies pour les contrer, avec des LLM sécurisés et souverains, jamais exposés à l'extérieur."
+              title: "IA générative & détection des nouvelles menaces",
+              body: "Deepfakes, identités synthétiques, documents falsifiés à l'IA. Toutes les nouvelles typologies de fraude naissent de l'IA générative. Nous utilisons ces mêmes technologies pour les prévenir, avec des LLM sécurisés et souverains, jamais exposés à l'extérieur."
             },
             {
               num: "03",
-              title: "Agent fraude — votre analyste augmenté",
-              body: "Notre agent LLM explique ce qui pèse dans le score, contextualise chaque signal, et vous conseille sur les directions à prendre. Moins de bruit, des décisions plus rapides et mieux fondées."
+              title: "Agent IA fraude : votre analyste augmenté",
+              body: "Notre agent LLM ne se contente pas de scorer. Il explique ce qui pèse dans le score, contextualise chaque signal, et vous conseille sur les directions à prendre. Moins de bruit, moins d'hésitation, des décisions plus rapides et mieux fondées."
             },
             {
               num: "04",
-              title: "IA supervisée — jamais sans filet",
-              body: "Aucun modèle ne tourne sans surveillance humaine. Nos équipes vérifient en continu les performances, traitent les biais, et valident chaque évolution. L'IA fait le travail — l'humain garde le contrôle."
+              title: "IA supervisée, jamais sans filet",
+              body: "Aucun modèle ne tourne sans surveillance humaine. Nos équipes vérifient en continu les performances, traitent les biais, et valident chaque évolution avant déploiement. L'IA fait le travail, l'humain garde le contrôle."
             }
           ];
 
@@ -3833,6 +4052,46 @@
             "Sécurité &amp; conformité \u2014 security@cirkles.ai pour signaler une vulnérabilité (programme de bug bounty actif), dpo@cirkles.ai pour toute demande relative aux données personnelles. Adresse postale : Cirkles SAS, 12 rue de la Paix, 75002 Paris."
           ]
         },
+        "founder-modeles": {
+          icon: "#i-bar",
+          title: "Modèles",
+          lede: "Scoring SIRET-only enrichi par l\u2019intelligence du réseau Cirkles.",
+          body: [
+            "Le scoring SIRET-only évalue un dossier à partir de l\u2019identité légale, des données publiques et de signaux structurels — sans se limiter aux déclarations client.",
+            "L\u2019enrichissement réseau intègre ce que d\u2019autres membres ont observé sur des profils comparables : tendances de défaut, schémas de montage et configurations à risque déjà cartographiées.",
+            "Résultat : un score explicable, auditable et mis à jour en continu, utilisable en origination, renouvellement ou revue de limite."
+          ]
+        },
+        "founder-signal": {
+          icon: "#i-zap",
+          title: "Signal",
+          lede: "Comportemental et réseau — la détection au-delà du statique.",
+          body: [
+            "Les signaux comportementaux capturent la dynamique du dossier : timing, séquence de pièces, micro-incohérences et contexte transactionnel.",
+            "Le signal réseau compare silencieusement à des milliers de dossiers anonymisés pour repérer les configurations qui précèdent statistiquement la fraude.",
+            "Les deux dimensions se combinent dans le moteur Data Science & AI Engine pour produire des alertes précoces, avant qu\u2019un préjudice ne se matérialise."
+          ]
+        },
+        "founder-donnees": {
+          icon: "#i-shield",
+          title: "Données partenaires",
+          lede: "Mutualisées et historisées — la mémoire collective du réseau.",
+          body: [
+            "Chaque membre contribue des empreintes qualifiées : jamais de données client identifiables, uniquement des représentations anonymisées et des issues de dossier.",
+            "L\u2019historisation permet de mesurer l\u2019évolution des risques dans le temps et d\u2019affiner les modèles sans réentraînement manuel lourd.",
+            "Conformité RGPD native, hébergement en Europe, gouvernance claire des accès : vous gardez vos données, le réseau gagne en intelligence."
+          ]
+        },
+        "founder-apprentissage": {
+          icon: "#i-palette",
+          title: "Apprentissage",
+          lede: "Continu et adaptatif — le moteur s\u2019améliore à chaque dossier traité.",
+          body: [
+            "Chaque dossier validé, signalé ou rejeté devient une donnée d\u2019entraînement pour les modèles partagés — sans règle métier à maintenir.",
+            "Les schémas émergents chez un membre enrichissent la protection de tous les autres, en jours et non en mois.",
+            "Plus le réseau grandit, plus la détection gagne en finesse : une performance qui croît avec la communauté, pas seulement avec vos propres données."
+          ]
+        },
         principe: {
           icon: "#i-zap",
           title: "Pourquoi Cirkles",
@@ -3870,7 +4129,7 @@
           body: [
             "La question se pose naturellement : si mes dossiers enrichissent les modèles, qu\u2019est-ce qui est partagé ? La réponse est architecturale : des représentations vectorielles anonymisées, jamais des données identifiables.",
             "Ce qui rejoint le réseau, c\u2019est l\u2019information que « ce type de configuration est associé à ce type de résultat » — sans exposer l\u2019identité, le document, ni les données personnelles qui ont permis de l\u2019établir.",
-            "Hébergement souverain en Europe, RGPD natif, chiffrement de bout en bout. Vos juristes valident en jours, pas en mois."
+            "Hébergement souverain en France, RGPD natif, chiffrement de bout en bout. Vos juristes valident en jours, pas en mois."
           ]
         },
         shield: {
@@ -3968,6 +4227,8 @@
         });
       });
     </script>
+    <script src="js/site-nav.js"></script>
+    <script src="js/hero-reels.js"></script>
     <script src="js/report-popup.js"></script>
     <script src="js/landing-scroll.js"></script>
   </body>

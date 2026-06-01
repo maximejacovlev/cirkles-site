@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/site-nav.css" />
   <style>
     *,
     *::before,
@@ -38,7 +39,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 80px 20px 48px;
+      padding: 24px 20px 48px;
       position: relative;
     }
 
@@ -50,35 +51,6 @@
         radial-gradient(55% 40% at 20% 10%, rgba(0, 0, 0, 0.03) 0%, transparent 60%),
         radial-gradient(50% 40% at 80% 90%, rgba(0, 0, 0, 0.025) 0%, transparent 60%);
       pointer-events: none;
-    }
-
-    .navbar {
-      position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.55);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-back:hover {
-      color: #000;
     }
 
     .card {
@@ -236,16 +208,6 @@
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html" class="nav-back">
-      <span aria-hidden="true">←</span> Retour à l’accueil
-    </a>
-    <div style="display:flex;align-items:center;gap:16px">
-      <a href="articles.html" class="nav-back">Articles</a>
-      <a href="demo-booking.html" class="nav-back">Demandez une Démo →</a>
-    </div>
-  </nav>
-
   <main class="page">
     <div class="card">
       <h1>Nous écrire</h1>
@@ -360,5 +322,6 @@
       });
     })();
   </script>
+  <script src="js/site-nav.js"></script>
 </body>
 </html>

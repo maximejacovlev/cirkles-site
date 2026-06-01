@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/site-nav.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -500,7 +501,7 @@
         Vous vérifiez les documents critiques.<br><em>Le réseau sait ce qu'ils dissimulent.</em>
       </h1>
       <p class="reveal-up" style="--d:.15s; font-size:15px; color:rgba(0,0,0,.55); line-height:1.65; max-width:560px; margin-bottom:36px;">
-        IBAN, fiches de paie, justificatifs de domicile, relevés bancaires. Cirkles ne cherche pas seulement à savoir si un document est authentique. Il analyse des dizaines de paramètres comportementaux, documentaires et contextuels pour détecter les schémas qui précèdent statistiquement la fraude. Avant que vous en soyez victime.
+        IBAN, fiches de paie, justificatifs de domicile, relevés bancaires. Cirkles ne cherche pas seulement à savoir si un document est authentique. Il analyse des dizaines de paramètres documentaires et contextuels pour détecter les schémas qui précèdent statistiquement la fraude. Avant que vous en soyez victime.
       </p>
       <div class="reveal-up" style="--d:.25s;">
         <a href="demo-booking.html"
@@ -521,7 +522,6 @@
     <div class="kyc-knows" id="sec-tension">
       <div class="kyc-knows-left-cell" id="sec-tension-left-cell">
         <div class="kyc-knows-left">
-          <div class="section-label reveal-up" style="margin-bottom:20px;">Tension</div>
           <h2 class="section-title reveal-up" style="--d:.05s;">Les outils de falsification s'améliorent<br><em>plus vite que les méthodes de contrôle.</em></h2>
           <p class="reveal-up" style="--d:.1s; font-size:14px; color:rgba(0,0,0,.5); line-height:1.65; max-width:340px;">
             En 2026, un faux bulletin de paie se génère en 4 minutes. Un relevé bancaire retravaillé ne laisse aucune trace visible à l'œil nu. Un IBAN au nom d'un tiers valide parfaitement dans tous les systèmes classiques. Les contrôles visuels, les vérifications manuelles, les seuils de cohérence, tout ça était conçu pour une autre époque. Et les fraudeurs le savent.
@@ -559,8 +559,8 @@
       </div>
     </div>
     <blockquote class="doc-quote reveal-up" style="--d:.15s;">
-      <p>« Les contrôles documentaires étaient notre principal point faible. Avec Cirkles, les incohérences sont détectées automatiquement — et le réseau nous alerte sur des dossiers qu'on aurait validés sans hésiter. »</p>
-      <cite>Responsable Risque, établissement financier</cite>
+      <p>« La capacité à distinguer les vrais signaux de fraude des faux positifs nous a permis d'optimiser à la fois l'expérience client et l'efficacité opérationnelle. »</p>
+      <cite>Responsable Prévention de la Fraude</cite>
     </blockquote>
   </div>
 </section>
@@ -576,7 +576,7 @@
       <p>C'est ici que Cirkles change de catégorie.</p>
       <p>La plupart des solutions analysent un document pour déterminer s'il est falsifié. C'est nécessaire, et insuffisant. Parce que le document peut être parfaitement authentique. C'est le profil qui ment.</p>
       <p>Nos modèles analysent des dizaines de paramètres en simultané (documentaires, comportementaux, contextuels) et les font varier pour détecter les configurations qui, statistiquement, précèdent la fraude. Pas parce que cet individu est fiché quelque part. Parce que ce qu'il fait ressemble à ce que font ceux qui fraudent.</p>
-      <p>Vous n'êtes pas alerté parce qu'il est connu. Vous êtes alerté parce que son comportement dessine un schéma.</p>
+      <p>Vous n'êtes pas alerté uniquement parce qu'il est connu. Vous êtes alerté parce que son comportement dessine un schéma.</p>
     </div>
     <p class="reveal-up" style="--d:.12s; font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(0,0,0,.35); margin-top:32px; margin-bottom:8px;">Les 3 niveaux d'analyse</p>
     <div class="kyb-diff-grid">
@@ -643,6 +643,7 @@
   <div class="fade-top"></div>
   <div class="fade-bottom"></div>
   <div class="pq-section" style="position:relative; z-index:10;">
+    <div class="section-label reveal-up" style="margin-bottom:20px;">Chiffres clés</div>
     <div class="liquid-glass rounded-3xl" style="padding:48px 56px;">
       <div id="kyc-stat-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px;" class="reveal-up">
         <div><div class="stat-num">Dizaines</div><div class="stat-label">de paramètres analysés en simultané par dossier</div></div>
@@ -681,8 +682,8 @@
     </p>
     <div class="doc-eco-grid">
       <div class="int-block reveal-up" style="--d:.0s;"><h4>Analyse documentaire &amp; IBAN</h4><p>Authenticité, cohérence, schémas comportementaux</p></div>
-      <div class="int-block reveal-up" style="--d:.08s;"><h4>KYC — Vérification d'identité</h4><p>Croisement identité / document / biométrie / réseau</p></div>
-      <div class="int-block reveal-up" style="--d:.16s;"><h4>KYB — Vérification d'entreprise</h4><p>Liasse fiscale, bilans, bénéficiaires effectifs</p></div>
+      <div class="int-block reveal-up" style="--d:.08s;"><h4>Fraude à l'identité</h4><p>Croisement identité / document / biométrie / réseau</p></div>
+      <div class="int-block reveal-up" style="--d:.16s;"><h4>Schéma complexe</h4><p>Liasse fiscale, bilans, bénéficiaires effectifs</p></div>
       <div class="int-block reveal-up" style="--d:.24s;"><h4>Collecte à la source</h4><p>Données certifiées, surface d'attaque nulle</p></div>
     </div>
   </div>
@@ -698,9 +699,6 @@
       <div>
         <div class="section-label reveal-up" style="margin-bottom:20px;">Questions clés</div>
         <h2 class="section-title reveal-up" style="--d:.05s; font-size:clamp(28px,3vw,40px);">Sur l'analyse documentaire<br><em>Cirkles.</em></h2>
-        <p class="reveal-up" style="--d:.1s; font-size:13px; color:rgba(0,0,0,.45); line-height:1.65; max-width:280px; margin-bottom:28px;">
-          Types de documents, détection comportementale, intégration — ce que les équipes risque et conformité nous demandent en premier.
-        </p>
         <a href="demo-booking.html"
            class="reveal-up liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm text-black font-body font-medium" style="--d:.15s;">
           Parler à un expert
@@ -916,5 +914,6 @@ if (typeof ResizeObserver !== "undefined") {
   });
 }
 </script>
+<script src="js/site-nav.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/site-nav.css" />
   <link rel="stylesheet" href="css/report-popup.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,44 +49,15 @@
       mask-composite: exclude;
       pointer-events: none;
     }
-    .site-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      padding: 12px 16px;
-    }
-    @media (min-width: 1024px) {
-      .site-nav { padding: 12px 64px; }
-    }
-    .site-nav-inner {
-      max-width: 48rem;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(0,0,0,.55);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .nav-back:hover { color: #000; }
     main {
       position: relative;
       z-index: 1;
       max-width: 48rem;
       margin: 0 auto;
-      padding: 96px 20px 64px;
+      padding: 24px 20px 64px;
     }
     @media (min-width: 1024px) {
-      main { padding: 104px 24px 80px; }
+      main { padding: 32px 24px 80px; }
     }
     .article-shell {
       padding: 36px 28px 40px;
@@ -97,6 +69,28 @@
     }
     @media (min-width: 640px) {
       .article-shell { padding: 44px 40px 48px; }
+    }
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0,0,0,.5);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .article-back:hover { color: #000; }
+    .article-back svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .article-back-footer {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,.08);
     }
     .article-meta {
       display: flex;
@@ -208,15 +202,11 @@
       <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
       </symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+      </symbol>
     </defs>
   </svg>
-
-  <nav class="site-nav">
-    <div class="site-nav-inner">
-      <a href="articles.html" class="nav-back">← Tous les articles</a>
-      <a href="index.html" class="nav-back">Accueil</a>
-    </div>
-  </nav>
 
   <main id="article-main"></main>
 
@@ -229,13 +219,19 @@
       const articles = window.CIRKLES_ARTICLES || [];
       const article = articles.find(function (a) { return a.slug === slug; });
 
+      var backLink =
+        '<a href="articles.html" class="article-back">' +
+        '<svg aria-hidden="true"><use href="#i-arrow-left"/></svg>' +
+        "Tous les articles</a>";
+
       if (!article) {
         document.title = "Article introuvable — Cirkles.ai";
         main.innerHTML =
           '<div class="not-found liquid-glass article-shell">' +
+          backLink +
           "<h1>Article introuvable</h1>" +
           "<p>Cet article n'existe pas ou a été déplacé.</p>" +
-          '<a href="articles.html">Retour aux articles</a></div>';
+          '<a href="articles.html" class="article-back" style="margin-top:16px">Retour à la liste</a></div>';
         return;
       }
 
@@ -249,6 +245,7 @@
 
       main.innerHTML =
         '<article class="article-shell liquid-glass">' +
+        backLink +
         '<div class="article-meta">' +
         '<span class="article-tag">' + article.category + "</span>" +
         "<span>" + article.date + "</span>" +
@@ -259,9 +256,12 @@
         '<div class="article-footer-cta">' +
         "<p>Recevez une synthèse sur la fraude et l'intelligence collective appliquée à votre secteur.</p>" +
         '<button type="button" data-report-open class="btn-demo">Obtenir le rapport</button>' +
-        "</div></article>";
+        '<div class="article-back-footer">' +
+        backLink +
+        "</div></div></article>";
     })();
   </script>
+  <script src="js/site-nav.js"></script>
   <script src="js/report-popup.js"></script>
 </body>
 </html>

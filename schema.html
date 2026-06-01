@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/clash-display-heading.css" />
+  <link rel="stylesheet" href="css/site-nav.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -516,7 +517,6 @@
       <!-- LEFT -->
       <div class="kyc-knows-left-cell" id="sec-signals-left-cell">
         <div class="kyc-knows-left">
-          <div class="section-label reveal-up" style="margin-bottom:20px;">Regardez mieux</div>
           <h2 class="section-title reveal-up" style="--d:.05s;">Tout semble correct ?<br><em>Regardez ce que le réseau a déjà vu sur cette entreprise.</em></h2>
           <p class="reveal-up" style="--d:.1s; font-size:14px; color:rgba(0,0,0,.5); line-height:1.65; max-width:340px;">
             Un dossier peut paraître irréprochable pour une organisation seule. Le réseau Cirkles, lui, se souvient de ce qu'il a vu sur cette structure — et sur les personnes qui la portent.
@@ -560,7 +560,7 @@
 <section style="padding:32px 0 64px; position:relative;">
   <div class="pq-section" style="padding-top:0; padding-bottom:0; display:flex; flex-direction:column; align-items:center; text-align:center;">
     <p class="reveal-up" style="font-size:13px; color:rgba(0,0,0,.35); font-weight:500; letter-spacing:.06em; text-transform:uppercase; margin-bottom:32px;">
-      Le dossier est solide sur le papier.
+      Le dossier est solide sur le papier. Vous validez ?
     </p>
 
     <!-- flip scene -->
@@ -578,9 +578,8 @@
         <!-- BACK -->
         <div class="flip-face flip-back">
           <div class="flip-back-inner">
-            <div class="fb-tag">Signal réseau</div>
-            <div class="fb-title">Entreprise. 100% frauduleuse.</div>
-            <p class="fb-body">Ce partenaire a été signalé par deux membres du réseau Cirkles au cours des 90 derniers jours. Différentes structures juridiques, même réseau de dirigeants, même schéma de surfacturation. Vous étiez le prochain sur la liste.</p>
+            <div class="fb-tag">Signal réseau — Entreprise. 100% frauduleuse.</div>
+            <p class="fb-body">Des organisations au profil similaire ont été signalées par plusieurs membres du réseau au cours des 90 derniers jours. L'analyse Cirkles a confirmé le schéma&nbsp;: structures juridiques différentes, même réseau de dirigeants, même logique de surfacturation. Ce partenaire en fait partie. Vous avez été alerté avant d'en être victime.</p>
             <p class="fb-body" style="margin-top:12px;">Les fraudeurs B2B ont changé de niveau. Ils créent des structures solides en apparence — bilans enjolivés, dirigeants prête-noms, adresses physiques louées à la journée. La différence, ce n'est pas la profondeur de votre analyse. C'est ce que le réseau a mémorisé sur eux avant même que vous les rencontriez.</p>
           </div>
           <div class="flip-back-close" onclick="event.stopPropagation(); flipCard()">
@@ -660,7 +659,7 @@
             <div class="sc-num">06</div>
             <div class="sc-icon"><svg class="w-4 h-4" aria-hidden="true"><use href="#i-source"/></svg></div>
             <h4>Conformité et bénéficiaires effectifs</h4>
-            <p>Identification des bénéficiaires effectifs, croisement avec les listes de sanctions et PEP, respect des obligations LCB-FT et eIDAS 2. Conformité by design — pas rajoutée après coup.</p>
+            <p>Identification des bénéficiaires effectifs, croisement avec les listes de sanctions et PEP, suivi continu des évolutions réglementaires. Conformité by design — pas rajoutée après coup.</p>
           </div>
 
         </div>
@@ -684,7 +683,7 @@
         </p>
         <div class="plus-callout reveal-up" style="--d:.15s;">
           <div class="pc-label">Le + Cirkles</div>
-          <p>Meelo vous dit ce qu'un seul acteur peut savoir sur une entreprise. Cirkles vous dit ce que l'ensemble de l'écosystème a appris sur elle — y compris ce que vous n'auriez jamais pu détecter seul.</p>
+          <p>Votre outil de scoring vous dit ce qu'un seul acteur peut savoir sur une entreprise. Cirkles vous dit ce que l'ensemble de l'écosystème a appris sur elle — y compris ce que vous n'auriez jamais pu détecter seul.</p>
         </div>
       </div>
       <!-- RIGHT -->
@@ -780,7 +779,7 @@
       <div class="int-block reveal-up" style="--d:.16s;">
         <div class="ib-label">Batch</div>
         <h4>Traitement en masse</h4>
-        <p>Millions de dossiers par mois, SLA exigeant, résultats en temps réel.</p>
+        <p>Traitement en masse, MCP, millions de dossiers par mois, SLA exigeant, résultats en temps réel.</p>
       </div>
     </div>
     <div class="reveal-up" style="--d:.2s; background:rgba(0,0,0,.04); border-radius:16px; padding:24px 28px; display:flex; align-items:flex-start; gap:16px;">
@@ -788,7 +787,7 @@
         <svg class="w-4 h-4" style="color:rgba(0,0,0,.5)" aria-hidden="true"><use href="#i-network"/></svg>
       </div>
       <div>
-        <div style="font-size:14px;font-weight:600;color:#000;margin-bottom:6px;">Vous utilisez déjà une solution de schéma complexe ?</div>
+        <div style="font-size:14px;font-weight:600;color:#000;margin-bottom:6px;">Vous utilisez déjà une solution de vérification B2B ?</div>
         <p style="font-size:13px;color:rgba(0,0,0,.5);line-height:1.6;">Cirkles se connecte en API pour enrichir vos parcours existants avec l'intelligence collective du réseau. Votre investissement actuel devient plus puissant — pas obsolète.</p>
       </div>
     </div>
@@ -827,11 +826,11 @@
         </div>
         <div class="faq-item">
           <button class="faq-btn" onclick="toggleFaq(this)">
-            En combien de temps une analyse de schéma complexe est-elle réalisée ?
+            En combien de temps une analyse est-elle réalisée ?
             <span class="faq-icon"><svg class="w-3 h-3" aria-hidden="true"><use href="#i-plus"/></svg></span>
           </button>
           <div class="faq-body">
-            En moins de 30 secondes dans la majorité des cas. Mais la vraie question n'est pas la vitesse — c'est la profondeur. Un score enrichi par ce que 180 organisations ont appris sur une structure vaut plus qu'une analyse rapide basée sur des données isolées.
+            En moins de 30 secondes dans la majorité des cas. Mais la vraie question n'est pas la vitesse — c'est la profondeur. Un score enrichi par ce que des millions de dossiers nous ont appris sur une structure vaut plus qu'une analyse rapide basée sur des données isolées.
           </div>
         </div>
         <div class="faq-item">
@@ -845,11 +844,11 @@
         </div>
         <div class="faq-item">
           <button class="faq-btn" onclick="toggleFaq(this)">
-            Qu'est-ce que le schéma complexe et pourquoi est-il critique en B2B ?
+            Pourquoi la vérification B2B est-elle critique dans un contexte de fraude organisée ?
             <span class="faq-icon"><svg class="w-3 h-3" aria-hidden="true"><use href="#i-plus"/></svg></span>
           </button>
           <div class="faq-body">
-            Le schéma complexe vise à vérifier la fiabilité d'une entreprise, de ses dirigeants et de ses bénéficiaires effectifs — pour prévenir la fraude, les impayés et les risques juridiques. Avec Cirkles, cette vérification s'appuie sur l'expérience collective de tout un écosystème, pas seulement sur des registres publics.
+            Vérifier la fiabilité d'une entreprise, de ses dirigeants et de ses bénéficiaires effectifs ne suffit plus quand les fraudeurs construisent des structures solides en apparence. Avec Cirkles, cette vérification s'appuie sur l'expérience collective de tout un écosystème — pas seulement sur des registres publics.
           </div>
         </div>
         <div class="faq-item">
@@ -881,7 +880,7 @@
       Testez Cirkles sur vos propres dossiers fournisseurs. Voyez ce que le réseau sait sur eux que vous ne savez pas encore.
     </p>
     <div class="cta-checks reveal-up" style="--d:.15s; margin-bottom:28px;">
-      <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sans engagement</span>
+      <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MCP, API et SaaS</span>
       <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Déploiement en jours</span>
       <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Résultats dès le premier mois</span>
     </div>
@@ -1040,5 +1039,6 @@ if (typeof ResizeObserver !== "undefined") {
   });
 }
 </script>
+<script src="js/site-nav.js"></script>
 </body>
 </html>
