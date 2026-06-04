@@ -486,11 +486,11 @@
           </div>
           <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:rgba(0,0,0,.4);">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Déploiement en jours
+            Déploiement en quelques jours
           </div>
           <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:rgba(0,0,0,.4);">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Résultats dès J+30
+            Résultats ultra rapides
           </div>
         </div>
       </div>
@@ -536,13 +536,6 @@
             <div class="signal-card">
               <div class="s-icon"><svg class="w-5 h-5" aria-hidden="true"><use href="#i-phone"/></svg></div>
               <div><div class="s-label">Numéro de téléphone actif</div><div class="s-sub">Opérateur vérifié, ligne en service, géolocalisation cohérente</div></div>
-            </div>
-          </div>
-
-          <div class="kyc-sticky-card" style="--i:3; --bg-tint:rgb(238,239,242);">
-            <div class="signal-card">
-              <div class="s-icon"><svg class="w-5 h-5" aria-hidden="true"><use href="#i-iban"/></svg></div>
-              <div><div class="s-label">IBAN cohérent avec le nom du client</div><div class="s-sub">Pays, format, titulaire, tout correspond</div></div>
             </div>
           </div>
 
@@ -608,7 +601,7 @@
       <!-- LEFT -->
       <div class="kyc-knows-left-cell" id="sec-modules-left-cell">
         <div class="kyc-knows-left" id="sec-modules-sticky-left">
-          <div class="section-label reveal-up" style="margin-bottom:20px;">6 modules</div>
+          <div class="section-label reveal-up" style="margin-bottom:20px;">3 modules</div>
           <h3 class="section-title reveal-up" style="--d:.05s; font-size:clamp(28px,3.5vw,44px);">Chaque dossier analysé<br>enrichit le réseau.<br><em>Pour tous.</em></h3>
           <p class="reveal-up" style="--d:.1s; font-size:13px; color:rgba(0,0,0,.45); line-height:1.65; max-width:300px; margin-top:16px;">
             Déjà des millions de dossiers. Un modèle qui apprend de chacun d'eux — et vous en fait bénéficier en temps réel.
@@ -635,63 +628,11 @@
 
           <div class="kyc-sticky-card" style="--i:2; --bg-tint:rgb(242,243,245);">
             <div class="sc-num">03</div>
-            <div class="sc-icon"><svg class="w-4 h-4" aria-hidden="true"><use href="#i-eye"/></svg></div>
-            <h4>Analyse biométrique</h4>
-            <p>Reconnaissance faciale, lecture de puce NFC, détection de deepfakes — avec une base d'apprentissage enrichie par chaque tentative de contournement observée dans le réseau.</p>
-          </div>
-
-          <div class="kyc-sticky-card" style="--i:3; --bg-tint:rgb(238,239,242);">
-            <div class="sc-num">04</div>
-            <div class="sc-icon"><svg class="w-4 h-4" aria-hidden="true"><use href="#i-cursor"/></svg></div>
-            <h4>Tracking comportemental</h4>
-            <p>Empreinte numérique, comportement utilisateur, détection VPN/proxy — les schémas suspects identifiés chez un membre deviennent immédiatement un signal d'alerte pour tous les autres.</p>
-          </div>
-
-          <div class="kyc-sticky-card" style="--i:4; --bg-tint:rgb(234,235,239);">
-            <div class="sc-num">05</div>
             <div class="sc-icon"><svg class="w-4 h-4" aria-hidden="true"><use href="#i-doc"/></svg></div>
             <h4>Analyse documentaire</h4>
             <p>IBAN, fiches de paie, justificatifs de domicile, attestations — vérification de cohérence et d'authenticité, croisée avec les patterns de falsification documentaire les plus récents du réseau.</p>
           </div>
 
-          <div class="kyc-sticky-card" style="--i:5; --bg-tint:rgb(230,231,236);">
-            <div class="sc-num">06</div>
-            <div class="sc-icon"><svg class="w-4 h-4" aria-hidden="true"><use href="#i-source"/></svg></div>
-            <h4>Collecte à la source</h4>
-            <p>Avis d'imposition, facture TELECOM, IBAN certifié — données récupérées directement à leur source, sans risque de falsification. Zéro friction pour vos clients légitimes.</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════
-     STATS BAR
-═════════════════════════════════════ -->
-<section style="position:relative; overflow:hidden;">
-  <div class="video-placeholder is-mono"></div>
-  <div class="fade-top"></div>
-  <div class="fade-bottom"></div>
-  <div class="pq-section" style="position:relative; z-index:10;">
-    <div class="liquid-glass rounded-3xl" style="padding:48px 56px;">
-      <div id="kyc-stat-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px;" class="reveal-up">
-        <div style="opacity:.4;">
-          <div class="stat-num" style="text-decoration:line-through;">180+</div>
-          <div class="stat-label" style="text-decoration:line-through;">Membres du réseau</div>
-        </div>
-        <div>
-          <div class="stat-num">98%</div>
-          <div class="stat-label">Précision de détection</div>
-        </div>
-        <div>
-          <div class="stat-num">€42M</div>
-          <div class="stat-label">Pertes évitées / an</div>
-        </div>
-        <div>
-          <div class="stat-num">&lt; 30s</div>
-          <div class="stat-label">Délai moyen d'alerte</div>
         </div>
       </div>
     </div>
@@ -722,13 +663,6 @@
           <div class="ai-check-row">
             <div class="ai-check-dot"></div>
             <div>
-              <div class="ai-check-title">Détection des deepfakes et documents falsifiés</div>
-              <div class="ai-check-desc">Y compris les techniques émergentes repérées la semaine dernière par un autre membre du réseau.</div>
-            </div>
-          </div>
-          <div class="ai-check-row">
-            <div class="ai-check-dot"></div>
-            <div>
               <div class="ai-check-title">Analyse des schémas de fraude organisés</div>
               <div class="ai-check-desc">Cartographiés à l'échelle du réseau, pas d'un seul acteur. Ce que vous ne voyez pas, un pair l'a déjà vu.</div>
             </div>
@@ -744,7 +678,7 @@
             <div class="ai-check-dot"></div>
             <div>
               <div class="ai-check-title">Chaque score expliqué, chaque signal détaillé</div>
-              <div class="ai-check-desc">Auditable à tout moment. AI Act compliant dès aujourd'hui — par conviction, pas par obligation.</div>
+              <div class="ai-check-desc">Auditable à tout moment. Transparent par conviction, pas par obligation.</div>
             </div>
           </div>
         </div>
@@ -760,12 +694,12 @@
   <div class="pq-section">
     <div style="text-align:center; margin-bottom:56px;">
       <div class="section-label reveal-up" style="justify-content:center; margin-bottom:20px;">Intégration</div>
-      <h2 class="section-title reveal-up" style="--d:.05s; text-align:center;">Une intégration en jours.<br><em>Pas en semaines.</em></h2>
+      <h2 class="section-title reveal-up" style="--d:.05s; text-align:center;">Une intégration en quelques jours.<br><em>Pas en semaines.</em></h2>
       <p class="reveal-up" style="--d:.1s; font-size:15px; color:rgba(0,0,0,.5); line-height:1.65; max-width:520px; margin:0 auto;">
         Faible impact IT. On ne refond pas votre stack — on s'y connecte. Et une fois connecté, vous bénéficiez automatiquement de toutes les améliorations du réseau.
       </p>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px;" class="int-grid">
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:32px;" class="int-grid">
       <div class="int-block reveal-up" style="--d:.0s;">
         <div class="ib-label">Portail</div>
         <h4>Interface clé en main</h4>
@@ -776,19 +710,23 @@
         <h4>Intégration native</h4>
         <p>APIs REST modernes, documentation complète, sandbox disponible. Votre équipe IT ne voit rien — vos analystes bénéficient de tout.</p>
       </div>
-      <div class="int-block reveal-up" style="--d:.16s;">
-        <div class="ib-label">Batch</div>
-        <h4>Traitement en masse</h4>
-        <p>Millions de dossiers par mois. SLA exigeant. Résultats en temps réel, sans dégradation de performance.</p>
-      </div>
     </div>
-    <div class="reveal-up" style="--d:.2s; background:rgba(0,0,0,.04); border-radius:16px; padding:24px 28px; display:flex; align-items:flex-start; gap:16px;">
-      <div style="width:36px;height:36px;border-radius:12px;background:rgba(0,0,0,.06);display:grid;place-items:center;flex-shrink:0;">
-        <svg class="w-4 h-4" style="color:rgba(0,0,0,.5)" aria-hidden="true"><use href="#i-network"/></svg>
+    <div class="reveal-up" style="--d:.2s;">
+      <div style="background:rgba(0,0,0,.04); border-radius:16px; padding:24px 28px; display:flex; align-items:flex-start; gap:16px;">
+        <div style="width:36px;height:36px;border-radius:12px;background:rgba(0,0,0,.06);display:grid;place-items:center;flex-shrink:0;">
+          <svg class="w-4 h-4" style="color:rgba(0,0,0,.5)" aria-hidden="true"><use href="#i-network"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#000;margin-bottom:6px;">Vous avez déjà un dispositif anti-fraude identité ?</div>
+          <p style="font-size:13px;color:rgba(0,0,0,.5);line-height:1.6;margin:0;">Cirkles se connecte en API pour enrichir vos parcours existants avec l'intelligence du réseau — sans tout reconstruire. Votre investissement actuel devient plus puissant, pas obsolète.</p>
+        </div>
       </div>
-      <div>
-        <div style="font-size:14px;font-weight:600;color:#000;margin-bottom:6px;">Vous avez déjà un dispositif anti-fraude identité ?</div>
-        <p style="font-size:13px;color:rgba(0,0,0,.5);line-height:1.6;">Cirkles se connecte en API pour enrichir vos parcours existants avec l'intelligence du réseau — sans tout reconstruire. Votre investissement actuel devient plus puissant, pas obsolète.</p>
+      <div style="margin-top:20px; display:flex; justify-content:center;">
+        <a href="demo-booking.html"
+           class="liquid-glass-strong rounded-full px-5 py-3 inline-flex items-center gap-2 text-sm text-black font-body font-medium">
+          Demandez une démo
+          <svg class="w-3.5 h-3.5" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -839,7 +777,7 @@
             <span class="faq-icon"><svg class="w-3 h-3" aria-hidden="true"><use href="#i-plus"/></svg></span>
           </button>
           <div class="faq-body">
-            La majorité des analyses sont réalisées en moins de 30 secondes. Mais la vraie question n'est pas la vitesse de la réponse — c'est la qualité de ce qu'elle intègre. Un score enrichi par des millions de dossiers en temps réel vaut plus qu'une réponse rapide basée sur des données isolées.
+            La majorité des analyses sont réalisées en quelques secondes. Mais la vraie question n'est pas la vitesse de la réponse — c'est la qualité de ce qu'elle intègre. Un score enrichi par des analyses de dossiers en temps réel vaut plus qu'une réponse rapide basée sur des données isolées.
           </div>
         </div>
         <div class="faq-item">
@@ -874,7 +812,7 @@
   <div class="fade-bottom"></div>
   <div class="pq-section" style="position:relative; z-index:10;">
     <div class="liquid-glass rounded-3xl" style="padding:56px;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="testi-grid">
+      <div class="testi-grid" style="max-width:640px; margin:0 auto;">
         <div>
           <div class="section-label reveal-up" style="margin-bottom:20px;">Témoignage</div>
           <blockquote>
@@ -884,20 +822,6 @@
           </blockquote>
           <div class="reveal-up" style="--d:.1s;">
             <div style="font-size:14px; font-weight:600; color:#000;">CEO, Société de financement mobilité</div>
-          </div>
-        </div>
-        <div class="reveal-up" style="--d:.1s; display:flex; flex-direction:column; gap:16px;">
-          <div class="liquid-glass rounded-2xl" style="padding:20px 24px;">
-            <div style="font-family:'Clash Display',sans-serif; font-size:28px; color:#000; font-weight: 600; line-height:1;">–68%</div>
-            <div style="font-size:12px; color:rgba(0,0,0,.45); margin-top:6px;">de pertes sur les arnaques au faux conseiller dès le 1er trimestre</div>
-          </div>
-          <div class="liquid-glass rounded-2xl" style="padding:20px 24px;">
-            <div style="font-family:'Clash Display',sans-serif; font-size:28px; color:#000; font-weight: 600; line-height:1;">–41%</div>
-            <div style="font-size:12px; color:rgba(0,0,0,.45); margin-top:6px;">d'ouvertures de comptes mules</div>
-          </div>
-          <div class="liquid-glass rounded-2xl" style="padding:20px 24px;">
-            <div style="font-family:'Clash Display',sans-serif; font-size:28px; color:#000; font-weight: 600; line-height:1;">–19%</div>
-            <div style="font-size:12px; color:rgba(0,0,0,.45); margin-top:6px;">de faux positifs sur les premiers 3 mois</div>
           </div>
         </div>
       </div>
@@ -919,11 +843,6 @@
     <p class="reveal-up" style="--d:.1s; font-size:15px; color:rgba(0,0,0,.5); line-height:1.65; max-width:480px; margin:0 auto 36px;">
       Testez Cirkles sur vos propres dossiers. Voyez ce que le réseau détecte que vous ne voyez pas encore.
     </p>
-    <div class="cta-checks reveal-up" style="--d:.15s; margin-bottom:28px;">
-      <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Des millions de datas</span>
-      <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Déploiement en jours</span>
-      <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Résultats dès le premier mois</span>
-    </div>
     <a href="demo-booking.html"
        class="reveal-up inline-flex items-center gap-2 bg-black text-white rounded-full px-8 py-4 text-sm font-medium hover:bg-black/85 transition" style="--d:.2s;">
       Demandez une démo
@@ -1032,7 +951,8 @@ function patchGrids() {
   const isMobile = window.matchMedia("(max-width:640px)").matches;
   const isTablet = window.matchMedia("(max-width:900px)").matches;
   document.querySelectorAll(".int-grid").forEach(g => {
-    g.style.gridTemplateColumns = isTablet ? "1fr" : "repeat(3,1fr)";
+    const cols = g.children.length || 2;
+    g.style.gridTemplateColumns = isTablet ? "1fr" : "repeat(" + cols + ",1fr)";
   });
   document.querySelectorAll(".kyc-ia-grid").forEach(g => {
     g.style.gridTemplateColumns = isTablet ? "1fr" : "1fr 1fr";

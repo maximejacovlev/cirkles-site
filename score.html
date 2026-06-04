@@ -752,12 +752,12 @@
   <div class="pq-section">
     <div style="text-align:center; margin-bottom:56px;">
       <div class="section-label reveal-up" style="justify-content:center; margin-bottom:20px;">Intégration</div>
-      <h2 class="section-title reveal-up" style="--d:.05s; text-align:center;">Une intégration en jours.<br><em>Pas en 4 semaines.</em></h2>
+      <h2 class="section-title reveal-up" style="--d:.05s; text-align:center;">Une intégration en quelques jours.<br><em>Pas en 4 semaines.</em></h2>
       <p class="reveal-up" style="--d:.1s; font-size:15px; color:rgba(0,0,0,.5); line-height:1.65; max-width:520px; margin:0 auto;">
         Faible impact IT. On ne refond pas votre stack — on s'y connecte. Et une fois connecté, chaque score de fraude calculé enrichit les modèles du réseau pour tous.
       </p>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px;" class="int-grid">
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:32px;" class="int-grid">
       <div class="int-block reveal-up" style="--d:.0s;">
         <div class="ib-label">Portail</div>
         <h4>Interface clé en main</h4>
@@ -767,11 +767,6 @@
         <div class="ib-label">API</div>
         <h4>Intégration native</h4>
         <p>APIs REST modernes, personnalisable selon votre politique crédit.</p>
-      </div>
-      <div class="int-block reveal-up" style="--d:.16s;">
-        <div class="ib-label">Batch</div>
-        <h4>Traitement en masse</h4>
-        <p>Volumes élevés, SLA exigeant et MCP.</p>
       </div>
     </div>
     <div class="reveal-up" style="--d:.2s; background:rgba(0,0,0,.04); border-radius:16px; padding:24px 28px; display:flex; align-items:flex-start; gap:16px;">
@@ -976,7 +971,8 @@ function patchGrids() {
   const isMobile = window.matchMedia("(max-width:640px)").matches;
   const isTablet = window.matchMedia("(max-width:900px)").matches;
   document.querySelectorAll(".int-grid").forEach(g => {
-    g.style.gridTemplateColumns = isTablet ? "1fr" : "repeat(3,1fr)";
+    const cols = g.children.length || 2;
+    g.style.gridTemplateColumns = isTablet ? "1fr" : "repeat(" + cols + ",1fr)";
   });
   document.querySelectorAll(".kyc-ia-grid").forEach(g => {
     g.style.gridTemplateColumns = isTablet ? "1fr" : "1fr 1fr";
