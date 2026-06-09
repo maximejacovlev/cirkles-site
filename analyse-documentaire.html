@@ -196,14 +196,22 @@
     .kyc-sticky-card p { font-family:'Inter Tight',sans-serif; font-size:13px; color:rgba(0,0,0,.55); line-height:1.6; }
 
     @media(max-width:768px){
-      .kyc-knows { grid-template-columns:1fr; gap:32px; }
+      .kyc-knows { grid-template-columns:1fr; gap:20px; }
       .kyc-knows-left-cell { min-height:0!important; }
       .kyc-knows-left { position:relative; top:auto; }
-      .kyc-sticky-card {
-        top:clamp(56px,22dvh,120px);
-        margin-bottom:clamp(40px,10vh,64px);
+      .kyc-stack-wrapper {
+        flex:none;
+        padding-bottom:0;
+        gap:12px;
       }
-      .kyc-stack-wrapper { flex:none; padding-bottom:clamp(28px,8vh,48px); }
+      .kyc-sticky-card {
+        position:relative;
+        top:auto !important;
+        margin-bottom:0;
+        padding:16px;
+      }
+      .kyc-sticky-card .sc-num { font-size:22px; margin-bottom:8px; }
+      .kyc-sticky-card .sc-icon { width:32px; height:32px; margin-bottom:10px; }
     }
 
     /* ─────────────────────────────────────
@@ -385,15 +393,16 @@
        SECTION WRAPPER
     ───────────────────────────────────── */
     .pq-section { padding:120px 64px; max-width:1100px; margin:0 auto; }
-    @media(max-width:768px){ .pq-section{ padding:80px 24px; } }
+    @media(max-width:768px){ .pq-section{ padding:40px 20px; } }
     /* Blocs sticky stack : padding vertical réduit (évite 120px bas sous la grille) */
     .pq-section.kyc-stack-pad {
       padding:40px 64px 28px;
     }
     @media(max-width:768px){
       .pq-section.kyc-stack-pad {
-        padding:32px 24px 24px;
+        padding:24px 20px 12px;
       }
+      .stack-section-head { margin-bottom:20px !important; }
     }
     .section-title {
       font-family:'Clash Display',sans-serif; font-size:clamp(32px,4vw,52px); font-weight: 600;
@@ -591,7 +600,7 @@
 ═════════════════════════════════════ -->
 <section style="position:relative; background:linear-gradient(180deg,#fff 0%,rgba(0,0,0,.015) 30%,rgba(0,0,0,.015) 70%,#fff 100%);">
   <div class="pq-section kyc-stack-pad">
-    <div style="text-align:center; margin-bottom:48px;">
+    <div class="stack-section-head" style="text-align:center; margin-bottom:48px;">
       <div class="section-label reveal-up" style="justify-content:center; margin-bottom:20px;">Modules</div>
       <h2 class="section-title reveal-up" style="--d:.05s; text-align:center;">Trois capacités.<br><em>Un seul modèle qui les fait parler ensemble.</em></h2>
     </div>

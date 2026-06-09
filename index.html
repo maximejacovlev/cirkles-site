@@ -1690,7 +1690,7 @@
       @media (max-width: 768px) {
         .pq-knows {
           grid-template-columns: 1fr;
-          gap: 32px;
+          gap: 20px;
         }
         .pq-knows-left-cell {
           min-height: 0 !important;
@@ -1699,17 +1699,24 @@
           position: relative;
           top: auto;
         }
-        .pq-sticky-card {
-          top: clamp(56px, 22dvh, 120px);
-          margin-bottom: clamp(100px, 28vh, 200px);
-        }
-        /* Colonne seule : pas d’extension flex (évite trous), mais garde runway sticky */
         .pq-stack-wrapper {
           flex: none;
-          padding-bottom: clamp(64px, 14vh, 120px);
+          padding-bottom: 0;
+          gap: 12px;
+        }
+        .pq-sticky-card {
+          position: relative;
+          top: auto !important;
+          margin-bottom: 0;
+          padding: 16px;
         }
         .pq-stack-wrapper > .pq-sticky-card:last-child {
-          margin-bottom: clamp(32px, 8vh, 56px);
+          margin-bottom: 0;
+        }
+        .pq-sticky-card .pq-sc-icon {
+          width: 32px;
+          height: 32px;
+          margin-bottom: 10px;
         }
       }
       .pq-quote {
