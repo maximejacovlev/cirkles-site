@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- 
-  <!-- Page principale -->
+  <!-- Preview Vercel — remplacer par https://cirkles.ai lors de la bascule DNS. -->
   <url>
-    <loc>https://cirkles.ai/</loc>
+    <loc>https://cirkles-site.vercel.app/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,28 +10,28 @@
  
   <!-- Pages produit / fonctionnalités -->
   <url>
-    <loc>https://cirkles.ai/fraude-id.html</loc>
+    <loc>https://cirkles-site.vercel.app/fraude-id.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
  
   <url>
-    <loc>https://cirkles.ai/analyse-documentaire.html</loc>
+    <loc>https://cirkles-site.vercel.app/analyse-documentaire.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
  
   <url>
-    <loc>https://cirkles.ai/schema.html</loc>
+    <loc>https://cirkles-site.vercel.app/schema.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
  
   <url>
-    <loc>https://cirkles.ai/score.html</loc>
+    <loc>https://cirkles-site.vercel.app/score.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -40,49 +39,49 @@
  
   <!-- Blog / Articles -->
   <url>
-    <loc>https://cirkles.ai/articles.html</loc>
+    <loc>https://cirkles-site.vercel.app/articles.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=intelligence-collective-fraude</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=intelligence-collective-fraude</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=fraude-documentaire-signaux</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=fraude-documentaire-signaux</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=schemas-complexes-b2b</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=schemas-complexes-b2b</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=score-fraude-declarations</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=score-fraude-declarations</loc>
     <lastmod>2026-02-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=ia-explicable-conformite</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=ia-explicable-conformite</loc>
     <lastmod>2026-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/article.html?slug=fraude-identite-reseau</loc>
+    <loc>https://cirkles-site.vercel.app/article.html?slug=fraude-identite-reseau</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -90,14 +89,14 @@
  
   <!-- Conversion -->
   <url>
-    <loc>https://cirkles.ai/demo-booking.html</loc>
+    <loc>https://cirkles-site.vercel.app/demo-booking.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
  
   <url>
-    <loc>https://cirkles.ai/contact.html</loc>
+    <loc>https://cirkles-site.vercel.app/contact.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -105,7 +104,7 @@
  
   <!-- Légal -->
   <url>
-    <loc>https://cirkles.ai/confidentialite.html</loc>
+    <loc>https://cirkles-site.vercel.app/confidentialite.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

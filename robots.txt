@@ -1,15 +1,15 @@
-# robots.txt — cirkles.ai
-# https://cirkles.ai/robots.txt
- 
+# robots.txt — preview Vercel (staging)
+# https://cirkles-site.vercel.app/robots.txt
+# À migrer vers cirkles.ai lors de la bascule DNS.
+
 User-agent: *
- 
+
 # Pages publiques : autorisées par défaut
- 
+
 # Pages à exclure de l'index
 Disallow: /api/
 Disallow: /uploads/
 Disallow: /fraud_network_final.html
- 
+
 # Sitemap
-Sitemap: https://cirkles.ai/sitemap.xml
- 
+Sitemap: https://cirkles-site.vercel.app/sitemap.xml
