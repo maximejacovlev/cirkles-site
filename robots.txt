@@ -1,0 +1,15 @@
+# robots.txt — cirkles.ai
+# https://cirkles.ai/robots.txt
+ 
+User-agent: *
+ 
+# Pages publiques : autorisées par défaut
+ 
+# Pages à exclure de l'index
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /fraud_network_final.html
+ 
+# Sitemap
+Sitemap: https://cirkles.ai/sitemap.xml
+ 
