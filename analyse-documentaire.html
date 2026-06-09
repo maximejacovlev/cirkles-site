@@ -123,7 +123,7 @@
        STICKY STACK (signals + modules)
     ───────────────────────────────────── */
     /* Grille « Pourquoi Cirkles » / Expertise terrain (.pq-knows) */
-    .kyc-knows { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .kyc-knows { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
     .kyc-knows-left-cell {
       align-self:start;
       justify-self:stretch;
@@ -141,18 +141,18 @@
       display:flex;
       flex-direction:column;
       /* Runway après la dernière carte : plus court qu’avant pour rapprocher le bloc suivant */
-      padding-bottom:clamp(56px,12vh,100px);
+      padding-bottom:clamp(32px,6vh,56px);
     }
     .kyc-sticky-card {
       flex-shrink:0;
       position:sticky;
       top:max(
         6px,
-        calc(50dvh - clamp(5.75rem,17vmin,8.75rem) + var(--i) * 14px)
+        calc(50dvh - clamp(5.75rem,17vmin,8.75rem) + var(--i) * 10px)
       );
       border-radius:20px;
-      padding:28px;
-      margin-bottom:clamp(96px,14vh,168px);
+      padding:20px;
+      margin-bottom:clamp(48px,8vh,72px);
       z-index:calc(40 + var(--i));
       background:
         linear-gradient(
@@ -196,14 +196,14 @@
     .kyc-sticky-card p { font-family:'Inter Tight',sans-serif; font-size:13px; color:rgba(0,0,0,.55); line-height:1.6; }
 
     @media(max-width:768px){
-      .kyc-knows { grid-template-columns:1fr; gap:48px; }
+      .kyc-knows { grid-template-columns:1fr; gap:32px; }
       .kyc-knows-left-cell { min-height:0!important; }
       .kyc-knows-left { position:relative; top:auto; }
       .kyc-sticky-card {
         top:clamp(56px,22dvh,120px);
-        margin-bottom:clamp(72px,18vh,140px);
+        margin-bottom:clamp(40px,10vh,64px);
       }
-      .kyc-stack-wrapper { flex:none; padding-bottom:clamp(48px,14vh,120px); }
+      .kyc-stack-wrapper { flex:none; padding-bottom:clamp(28px,8vh,48px); }
     }
 
     /* ─────────────────────────────────────
@@ -388,11 +388,11 @@
     @media(max-width:768px){ .pq-section{ padding:80px 24px; } }
     /* Blocs sticky stack : padding vertical réduit (évite 120px bas sous la grille) */
     .pq-section.kyc-stack-pad {
-      padding:56px 64px 40px;
+      padding:40px 64px 28px;
     }
     @media(max-width:768px){
       .pq-section.kyc-stack-pad {
-        padding:40px 24px 32px;
+        padding:32px 24px 24px;
       }
     }
     .section-title {

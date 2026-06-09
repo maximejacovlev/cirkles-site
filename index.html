@@ -767,6 +767,7 @@
       /* Cas d'usage — carte socle fondateur (pleine largeur) */
       .founder-platform-card {
         width: 100%;
+        margin-top: clamp(1.25rem, 3vw, 1.75rem);
         margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
         padding: clamp(1.25rem, 3vw, 2rem);
         border-radius: 1.25rem;
@@ -2520,7 +2521,7 @@
 
             <!-- Subtext -->
             <p class="mt-5 max-w-xl text-center text-sm md:text-base text-black/60 font-body font-light leading-tight fade-up" data-delay="800">
-              Chaque dossier frauduleux détecté dans l’écosystème renforce la protection de tous ses membres. Plus le réseau grandit, plus la fraude recule.
+              Eradiquez la fraude grâce à la Datascience. Chaque dossier frauduleux détecté dans l'écosystème renforce la protection de tous ses membres.
             </p>
 
             <!-- CTA -->
@@ -2544,7 +2545,7 @@
             <div class="relative z-10 px-6 lg:px-16 flex flex-col items-center justify-center text-center landing-hero-band max-w-4xl mx-auto w-full">
               <h2 data-blur-text data-text="Un seul réseau. Une protection partagée." class="text-4xl md:text-5xl lg:text-6xl font-heading text-black tracking-tight leading-[0.9] max-w-3xl"></h2>
               <p class="mt-5 max-w-xl text-black/55 font-body font-light text-sm md:text-base fade-up" data-delay="300">
-                Vos équipes détectent. Notre IA corrèle. Le réseau alerte. Chaque signal devient une défense pour l’ensemble de l’écosystème.
+                Vos équipes renseignent, notre IA détecte et le réseau corrèle. Chaque signal devient une défense pour l’ensemble de l’écosystème.
               </p>
               <button type="button" class="why-card mt-6 liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm text-black font-body font-medium fade-up" data-delay="500" data-card="principe" aria-haspopup="dialog">
                 Pourquoi Cirkles
@@ -2563,55 +2564,6 @@
                   Quatre fronts sur lesquels nos membres reculent la fraude, ensemble.
                 </p>
               </div>
-
-              <article class="founder-platform-card liquid-glass fade-up" data-delay="280" aria-labelledby="founder-platform-title">
-                <div class="founder-platform-head">
-                  <div class="founder-platform-icon liquid-glass-strong" aria-hidden="true">
-                    <svg><use href="#i-engine" /></svg>
-                  </div>
-                  <div>
-                    <p class="founder-platform-eyebrow">Socle fondateur</p>
-                    <h3 id="founder-platform-title" class="founder-platform-title">Data Science &amp; AI Engine</h3>
-                  </div>
-                </div>
-                <p class="founder-platform-lede">
-                  6 domaines, 20+ sources de données hétérogènes, corrélées en temps réel par nos modèles. Un seul appel API. Un profil de risque complet — identité, entreprise, document, conformité.
-                </p>
-                <div class="founder-platform-grid">
-                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-modeles" aria-haspopup="dialog">
-                    <p class="founder-platform-cell-label">Modèles</p>
-                    <p class="founder-platform-cell-value">Scoring SIRET-only enrichi par l&rsquo;intelligence du réseau Cirkles.</p>
-                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
-                      En savoir plus
-                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                    </span>
-                  </button>
-                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-signal" aria-haspopup="dialog">
-                    <p class="founder-platform-cell-label">Signal</p>
-                    <p class="founder-platform-cell-value">Comportemental et réseau — la détection au-delà du statique.</p>
-                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
-                      En savoir plus
-                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                    </span>
-                  </button>
-                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-donnees" aria-haspopup="dialog">
-                    <p class="founder-platform-cell-label">Données partenaires</p>
-                    <p class="founder-platform-cell-value">Mutualisées et historisées — la mémoire collective du réseau.</p>
-                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
-                      En savoir plus
-                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                    </span>
-                  </button>
-                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-apprentissage" aria-haspopup="dialog">
-                    <p class="founder-platform-cell-label">Apprentissage</p>
-                    <p class="founder-platform-cell-value">Continu et adaptatif — le moteur s&rsquo;améliore à chaque dossier traité.</p>
-                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
-                      En savoir plus
-                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
-                    </span>
-                  </button>
-                </div>
-              </article>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="fraude-id.html" class="why-card liquid-glass rounded-2xl p-6 text-left" aria-label="Fraude à l'identité — page dédiée">
@@ -2662,6 +2614,55 @@
                   </span>
                 </a>
               </div>
+
+              <article class="founder-platform-card liquid-glass fade-up" data-delay="280" aria-labelledby="founder-platform-title">
+                <div class="founder-platform-head">
+                  <div class="founder-platform-icon liquid-glass-strong" aria-hidden="true">
+                    <svg><use href="#i-engine" /></svg>
+                  </div>
+                  <div>
+                    <p class="founder-platform-eyebrow">Socle fondateur</p>
+                    <h3 id="founder-platform-title" class="founder-platform-title">Data Science &amp; AI Engine</h3>
+                  </div>
+                </div>
+                <p class="founder-platform-lede">
+                  6 domaines, 20+ sources de données hétérogènes, corrélées en temps réel par nos modèles. Un seul appel API. Un profil de risque complet — identité, entreprise, document, conformité.
+                </p>
+                <div class="founder-platform-grid">
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-modeles" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Modèles</p>
+                    <p class="founder-platform-cell-value">Scoring SIRET-only enrichi par l&rsquo;intelligence du réseau Cirkles.</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-signal" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Signal</p>
+                    <p class="founder-platform-cell-value">Comportemental et réseau — la détection au-delà du statique.</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-donnees" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Données partenaires</p>
+                    <p class="founder-platform-cell-value">Mutualisées et historisées — la mémoire collective du réseau.</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                  <button type="button" class="founder-platform-cell why-card liquid-glass" data-card="founder-apprentissage" aria-haspopup="dialog">
+                    <p class="founder-platform-cell-label">Apprentissage</p>
+                    <p class="founder-platform-cell-value">Continu et adaptatif — le moteur s&rsquo;améliore à chaque dossier traité.</p>
+                    <span class="read-more inline-flex items-center gap-1 text-xs text-black/60 font-body font-medium">
+                      En savoir plus
+                      <svg class="w-3 h-3" aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
             </div>
           </section>
 
@@ -3219,7 +3220,7 @@
 
           <div class="article-section">
             <h4>Confidentialité par design</h4>
-            <p>Aucune donnée client identifiable ne circule entre membres. Seules des empreintes anonymisées et des schémas frauduleux enrichissent les modèles — conformité RGPD native, hébergement souverain en Europe.</p>
+            <p>Aucune donnée client identifiable ne circule entre membres. Seules des empreintes anonymisées et des schémas frauduleux enrichissent les modèles — conformité RGPD native, hébergement souverain en France.</p>
           </div>
         </div>
         <div class="article-modal-footer">
