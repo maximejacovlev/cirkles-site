@@ -96,6 +96,13 @@
   </url>
  
   <url>
+    <loc>https://cirkles-site.vercel.app/onboarding.html</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://cirkles-site.vercel.app/contact.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
