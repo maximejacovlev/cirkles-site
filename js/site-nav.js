@@ -1,5 +1,5 @@
 /**
- * Barre de navigation globale (logo + Accueil, Articles, Contact, Démo).
+ * Barre de navigation globale (logo + Accueil, Articles, Contact, Onboarding, Démo).
  */
 (function () {
   var ARROW_SVG =
@@ -56,6 +56,9 @@
       '<a href="contact.html"' +
       activeClass("contact.html", current) +
       ">Contact</a>" +
+      '<a href="onboarding.html"' +
+      activeClass("onboarding.html", current) +
+      ">Onboarding</a>" +
       '<a href="demo-booking.html" class="site-nav-cta">Demandez une Démo ' +
       ARROW_SVG +
       "</a>" +
