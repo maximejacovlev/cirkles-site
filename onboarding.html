@@ -214,13 +214,17 @@
     <div class="card">
       <h1>Onboarding accéléré</h1>
       <p class="lede">
-        Dites-nous où vous en êtes&nbsp;: notre équipe vous recontacte sous 24&nbsp;h ouvrées pour une mise en route en quelques jours.
+        Vous avez déjà assisté à une démo et êtes tenté par un essai gratuit&nbsp;? Remplissez ce formulaire pour un onboarding rapide.
       </p>
 
       <form id="onboarding-form" action="#" method="post" autocomplete="on" novalidate>
         <div class="field">
-          <label for="onboarding-name">Nom</label>
-          <input id="onboarding-name" name="name" type="text" required maxlength="200" autocomplete="name" />
+          <label for="onboarding-firstname">Prénom</label>
+          <input id="onboarding-firstname" name="firstname" type="text" required maxlength="100" autocomplete="given-name" />
+        </div>
+        <div class="field">
+          <label for="onboarding-lastname">Nom</label>
+          <input id="onboarding-lastname" name="lastname" type="text" required maxlength="100" autocomplete="family-name" />
         </div>
         <div class="field">
           <label for="onboarding-email">E-mail professionnel</label>
@@ -248,10 +252,6 @@
       <div class="msg err" id="onboarding-error" role="alert"></div>
       <div class="msg ok" id="onboarding-success" role="status"></div>
 
-      <p class="footer-note">
-        Vous préférez réserver un créneau&nbsp;?
-        <a href="demo-booking.html">Demandez une démo</a>
-      </p>
     </div>
   </main>
 
@@ -284,14 +284,16 @@
         e.preventDefault();
         hideMsgs();
 
-        const name = document.getElementById("onboarding-name").value.trim();
+        const firstName = document.getElementById("onboarding-firstname").value.trim();
+        const lastName = document.getElementById("onboarding-lastname").value.trim();
+        const name = (firstName + " " + lastName).trim();
         const email = document.getElementById("onboarding-email").value.trim();
         const company = document.getElementById("onboarding-company").value.trim();
         const message = document.getElementById("onboarding-message").value.trim();
         const website = document.getElementById("onboarding-website").value;
 
-        if (!name || !email || !company) {
-          showErr("Merci de remplir le nom, l’e-mail et la société.");
+        if (!firstName || !lastName || !email || !company) {
+          showErr("Merci de remplir le prénom, le nom, l’e-mail et la société.");
           return;
         }
 
