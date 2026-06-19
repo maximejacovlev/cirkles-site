@@ -234,10 +234,6 @@
           <label for="onboarding-company">Société</label>
           <input id="onboarding-company" name="company" type="text" required maxlength="200" autocomplete="organization" />
         </div>
-        <div class="field">
-          <label for="onboarding-message">Votre contexte <span class="opt">(optionnel)</span></label>
-          <textarea id="onboarding-message" name="message" maxlength="8000" placeholder="Votre secteur, vos volumes de dossiers, vos délais souhaités…"></textarea>
-        </div>
 
         <div class="hp" aria-hidden="true">
           <label for="onboarding-website">Ne pas remplir</label>
@@ -289,7 +285,6 @@
         const name = (firstName + " " + lastName).trim();
         const email = document.getElementById("onboarding-email").value.trim();
         const company = document.getElementById("onboarding-company").value.trim();
-        const message = document.getElementById("onboarding-message").value.trim();
         const website = document.getElementById("onboarding-website").value;
 
         if (!firstName || !lastName || !email || !company) {
@@ -308,9 +303,7 @@
               name,
               email,
               company,
-              // Préfixe pour distinguer les demandes onboarding dans l'e-mail reçu
-              // (le contexte est optionnel ; le préfixe garantit un message non vide pour l'API)
-              message: "[Onboarding]" + (message ? "\n\n" + message : "\n\n(Pas de contexte renseigné)"),
+              message: "[Onboarding]",
               website,
             }),
           });
