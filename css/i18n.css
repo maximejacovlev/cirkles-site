@@ -1,0 +1,55 @@
+/* Bascule de langue FR / EN — pastille flottante */
+.cirkles-lang-switch {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  font-family: "Inter Tight", system-ui, sans-serif;
+}
+.cirkles-lang-switch button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+.cirkles-lang-switch button:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+.cirkles-lang-switch button.is-active {
+  color: #fff;
+  background: #000;
+}
+.cirkles-lang-switch .cls-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.12);
+}
+@media (max-width: 520px) {
+  .cirkles-lang-switch {
+    bottom: 14px;
+    right: 14px;
+  }
+}
+
+/* Masqué sur la modale « Pourquoi Cirkles » (CTA flottant au même emplacement) */
+body:has(#pq-modal.open) .cirkles-lang-switch {
+  display: none;
+}

@@ -547,7 +547,8 @@
       display: none;
     }
   </style>
-</head>
+  <link rel="stylesheet" href="css/i18n.css" />
+  </head>
 
 <body>
 
@@ -728,8 +729,47 @@
     /** clé jour local YYYY-MM-DD → tableaux start_time ISO, triés */
     let slotsByDay = {};
 
-    const DAYS_FR = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-    const MONTHS_FR = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    function calLocale() {
+      try {
+        return localStorage.getItem("cirkles-lang") === "en" ? "en-GB" : "fr-FR";
+      } catch (_) {
+        return "fr-FR";
+      }
+    }
+
+    function formatMonthYear(y, mo) {
+      return new Date(y, mo, 1).toLocaleDateString(calLocale(), {
+        month: "long",
+        year: "numeric",
+      });
+    }
+
+    function weekdayShort(index) {
+      return new Date(2026, 0, 5 + index)
+        .toLocaleDateString(calLocale(), { weekday: "short" })
+        .replace(/\.$/, "");
+    }
+
+    function timeSeparator() {
+      return calLocale() === "en-GB" ? " at " : " à ";
+    }
+
+    function refreshSelectedSlotDisplay() {
+      if (!selectedSlot) return;
+      var el = document.getElementById("selectedSlotDisplay");
+      if (!el) return;
+      var t = new Date(selectedSlot);
+      var prefix =
+        calLocale() === "en-GB" ? "Selected slot: " : "Créneau sélectionné : ";
+      el.innerHTML =
+        prefix +
+        "<strong>" +
+        t.toLocaleDateString(calLocale(), { weekday: "long", day: "numeric", month: "long" }) +
+        timeSeparator() +
+        t.toLocaleTimeString(calLocale(), { hour: "2-digit", minute: "2-digit" }) +
+        "</strong>";
+      if (window.cirklesI18n) window.cirklesI18n.apply();
+    }
 
     // ── Dates (toujours en calendrier local visiteur) ─────────────────────
     function localYMD(dt) {
@@ -1028,17 +1068,17 @@
     // ── Calendrier ────────────────────────────────────────────────────────
     function renderCalendar() {
       document.getElementById("calMonthTitle").textContent =
-        MONTHS_FR[currentMonth] + " " + currentYear;
+        formatMonthYear(currentYear, currentMonth);
 
       const grid = document.getElementById("calGrid");
       grid.innerHTML = "";
 
-      DAYS_FR.forEach(d => {
+      for (let wi = 0; wi < 7; wi++) {
         const el = document.createElement("div");
         el.className = "cal-day-name";
-        el.textContent = d;
+        el.textContent = weekdayShort(wi);
         grid.appendChild(el);
-      });
+      }
 
       const firstDay = new Date(currentYear, currentMonth, 1);
       const startOffset = (firstDay.getDay() + 6) % 7;
@@ -1087,7 +1127,7 @@
       document.getElementById("btnNext1").disabled = true;
 
       document.getElementById("slotsSection").style.display = "block";
-      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString("fr-FR", {
+      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString(calLocale(), {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -1143,7 +1183,7 @@
       const grid = document.getElementById("slotsGrid");
       grid.innerHTML = "";
 
-      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString("fr-FR", {
+      document.getElementById("slotsTitle").textContent = parseDayKey(dayKey).toLocaleDateString(calLocale(), {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -1224,13 +1264,7 @@
     document.getElementById("btnNext1").addEventListener("click", function () {
       if (!selectedSlot) return;
       goToStep(2);
-      const t = new Date(selectedSlot);
-      document.getElementById("selectedSlotDisplay").innerHTML =
-        "Créneau sélectionné : <strong>" +
-        t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
-        " à " +
-        t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) +
-        "</strong>";
+      refreshSelectedSlotDisplay();
     });
 
     document.getElementById("btnBack").addEventListener("click", function () {
@@ -1318,14 +1352,23 @@
         await calendlyPost("/invitees", inviteeBody);
 
         const t = new Date(selectedSlot);
+        var successIntro =
+          calLocale() === "en-GB"
+            ? "A confirmation email was sent to "
+            : "Un email de confirmation a été envoyé à ";
+        var successWhen =
+          calLocale() === "en-GB" ? "Meeting on " : "Rendez-vous le ";
         document.getElementById("successText").innerHTML =
-          "Un email de confirmation a été envoyé à <strong>" +
+          successIntro +
+          "<strong>" +
           email +
-          "</strong>.<br>Rendez-vous le " +
-          t.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }) +
-          " à " +
-          t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) +
+          "</strong>.<br>" +
+          successWhen +
+          t.toLocaleDateString(calLocale(), { weekday: "long", day: "numeric", month: "long" }) +
+          timeSeparator() +
+          t.toLocaleTimeString(calLocale(), { hour: "2-digit", minute: "2-digit" }) +
           ".";
+        if (window.cirklesI18n) window.cirklesI18n.apply();
 
         document.getElementById("step2").classList.remove("active");
         document.getElementById("successState").classList.add("show");
@@ -1337,7 +1380,15 @@
         document.getElementById("submitSpinner").style.display = "none";
         errorEl.textContent = "Une erreur est survenue : " + (e.message || "réessayez.");
         errorEl.classList.add("show");
+        if (window.cirklesI18n) window.cirklesI18n.apply();
       }
+    });
+
+    document.addEventListener("cirkles-lang-change", function () {
+      renderCalendar();
+      if (selectedDate) chooseDay(selectedDate);
+      refreshSelectedSlotDisplay();
+      if (window.cirklesI18n) window.cirklesI18n.apply();
     });
 
     // ── Démarrage ──────────────────────────────────────────────────────────
@@ -1365,6 +1416,8 @@
     })();
   </script>
   <script src="js/site-nav.js"></script>
-</body>
+  <script src="js/i18n-en.js"></script>
+<script src="js/i18n.js"></script>
+  </body>
 
 </html>

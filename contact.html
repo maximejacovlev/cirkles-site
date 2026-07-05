@@ -208,7 +208,8 @@
       color: rgba(0, 0, 0, 0.5);
     }
   </style>
-</head>
+  <link rel="stylesheet" href="css/i18n.css" />
+  </head>
 <body>
   <main class="page">
     <div class="card">
@@ -297,6 +298,7 @@
 
         btn.disabled = true;
         label.textContent = "Envoi en cours…";
+        if (window.cirklesI18n) window.cirklesI18n.apply();
 
         try {
           const res = await fetch("/api/contact", {
@@ -320,10 +322,13 @@
         } finally {
           btn.disabled = false;
           label.textContent = "Envoyer le message";
+          if (window.cirklesI18n) window.cirklesI18n.apply();
         }
       });
     })();
   </script>
   <script src="js/site-nav.js"></script>
-</body>
+  <script src="js/i18n-en.js"></script>
+<script src="js/i18n.js"></script>
+  </body>
 </html>

@@ -86,6 +86,7 @@
 
       btn.disabled = true;
       label.textContent = "Envoi en cours…";
+      if (window.cirklesI18n) window.cirklesI18n.apply();
 
       fetch("/api/report", {
         method: "POST",
@@ -111,6 +112,7 @@
         .finally(function () {
           btn.disabled = false;
           label.textContent = "Recevoir le rapport";
+          if (window.cirklesI18n) window.cirklesI18n.apply();
         });
     });
   }
