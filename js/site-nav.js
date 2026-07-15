@@ -1,3 +1,41 @@
+/** Shared pathname helpers for clean URLs (no .html extension). */
+(function (g) {
+  var PRODUCT = ["fraude-id", "schema", "score", "analyse-documentaire"];
+
+  function segment() {
+    var p = (g.location.pathname || "").split("/").filter(Boolean).pop() || "";
+    return p.replace(/\.html$/i, "");
+  }
+
+  function pageSlug() {
+    var s = segment();
+    return !s || s === "index" ? "index" : s;
+  }
+
+  function isHome() {
+    return pageSlug() === "index";
+  }
+
+  function hrefSlug(href) {
+    if (!href || /^https?:/i.test(href) || href.charAt(0) === "#") return null;
+    var path = href.split("#")[0].split("?")[0].replace(/^\.?\/?/, "");
+    if (!path) return "index";
+    return path.replace(/\.html$/i, "");
+  }
+
+  function isProduct(slug) {
+    return PRODUCT.indexOf(slug || pageSlug()) !== -1;
+  }
+
+  g.cirklesPagePath = {
+    PRODUCT: PRODUCT,
+    pageSlug: pageSlug,
+    isHome: isHome,
+    hrefSlug: hrefSlug,
+    isProduct: isProduct,
+  };
+})(window);
+
 /**
  * Barre de navigation globale (logo + Accueil, Articles, Contact, Onboarding, Démo).
  */
@@ -5,27 +43,21 @@
   var ARROW_SVG =
     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>';
 
-  var PRODUCT_PAGE =
-    /^(fraude-id|schema|score|analyse-documentaire)\.html$/i;
-
-  function pageName() {
-    var path = window.location.pathname || "";
-    var file = path.split("/").pop() || "index.html";
-    if (file === "" || file === "/") return "index.html";
-    return file;
+  function currentSlug() {
+    return window.cirklesPagePath.pageSlug();
   }
 
-  function activeClass(name, current) {
-    return name === current ? ' class="is-active"' : "";
+  function activeClass(slug, current) {
+    return slug === current ? ' class="is-active"' : "";
   }
 
   function mount() {
     if (document.querySelector("[data-site-nav-global]")) return;
 
-    var current = pageName();
-    var onHome = current === "index.html";
-    var homeHref = onHome ? "#accueil" : "index.html";
-    var logoHref = onHome ? "#accueil" : "index.html";
+    var current = currentSlug();
+    var onHome = current === "index";
+    var homeHref = onHome ? "#accueil" : "/";
+    var logoHref = onHome ? "#accueil" : "/";
 
     var root = document.getElementById("site-nav-root");
     if (!root) {
@@ -46,31 +78,31 @@
       '<a href="' +
       homeHref +
       '"' +
-      activeClass("index.html", current) +
+      activeClass("index", current) +
       ">Accueil</a>" +
-      '<a href="articles.html"' +
-      (current === "articles.html" || current === "article.html"
+      '<a href="/articles"' +
+      (current === "articles" || current === "article"
         ? ' class="is-active"'
         : "") +
       ">Articles</a>" +
-      '<a href="contact.html"' +
-      activeClass("contact.html", current) +
+      '<a href="/contact"' +
+      activeClass("contact", current) +
       ">Contact</a>" +
-      '<a href="onboarding.html"' +
-      activeClass("onboarding.html", current) +
+      '<a href="/onboarding"' +
+      activeClass("onboarding", current) +
       ">Onboarding</a>" +
-      '<a href="demo-booking.html" class="site-nav-cta">Demandez une Démo ' +
+      '<a href="/demo-booking" class="site-nav-cta">Demandez une Démo ' +
       ARROW_SVG +
       "</a>" +
       "</div>" +
-      '<a href="demo-booking.html" class="site-nav-cta-mobile">Demandez une Démo ' +
+      '<a href="/demo-booking" class="site-nav-cta-mobile">Demandez une Démo ' +
       ARROW_SVG +
       "</a>" +
       "</div></nav>";
 
     document.body.classList.add("has-site-nav");
 
-    if (!PRODUCT_PAGE.test(current) && current !== "index.html") {
+    if (!window.cirklesPagePath.isProduct(current) && current !== "index") {
       document.body.classList.add("has-site-nav-body-pad");
     }
   }

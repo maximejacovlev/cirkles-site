@@ -223,7 +223,7 @@
       const article = articles.find(function (a) { return a.slug === slug; });
 
       var backLink =
-        '<a href="articles.html" class="article-back">' +
+        '<a href="/articles" class="article-back">' +
         '<svg aria-hidden="true"><use href="#i-arrow-left"/></svg>' +
         "Tous les articles</a>";
 
@@ -234,7 +234,7 @@
           backLink +
           "<h1>Article introuvable</h1>" +
           "<p>Cet article n'existe pas ou a été déplacé.</p>" +
-          '<a href="articles.html" class="article-back" style="margin-top:16px">Retour à la liste</a></div>';
+          '<a href="/articles" class="article-back" style="margin-top:16px">Retour à la liste</a></div>';
         return;
       }
 

@@ -4,19 +4,23 @@
  */
 (function () {
   const STORAGE_KEY = "cirkles-landing-scroll";
-  const PRODUCT_PAGES = ["fraude-id.html", "schema.html", "score.html", "analyse-documentaire.html"];
 
   function isLandingPage() {
+    if (window.cirklesPagePath) return window.cirklesPagePath.isHome();
     const last = window.location.pathname.split("/").filter(Boolean).pop() || "";
-    return last === "" || last === "index.html";
+    const slug = last.replace(/\.html$/i, "");
+    return slug === "" || slug === "index";
   }
 
   function isProductHref(href) {
     if (!href || href.startsWith("http") || href.startsWith("#")) return false;
-    const path = href.split("#")[0].split("?")[0];
-    return PRODUCT_PAGES.some(
-      (p) => path === p || path.endsWith("/" + p) || path.endsWith("\\" + p)
-    );
+    if (window.cirklesPagePath) {
+      const slug = window.cirklesPagePath.hrefSlug(href);
+      return slug != null && window.cirklesPagePath.isProduct(slug);
+    }
+    const path = href.split("#")[0].split("?")[0].replace(/^\.?\/?/, "");
+    const slug = path.replace(/\.html$/i, "");
+    return ["fraude-id", "schema", "score", "analyse-documentaire"].includes(slug);
   }
 
   function restoreScroll() {

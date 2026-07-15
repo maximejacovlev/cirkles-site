@@ -1,6 +1,6 @@
 /**
  * Notification « Onboarding accéléré » — page d'accueil uniquement.
- * Apparaît en haut à droite après un court délai ; « Oui » ouvre onboarding.html,
+ * Apparaît en haut à droite après un court délai ; « Oui » ouvre /onboarding,
  * la croix ferme et mémorise le refus pour la session (sessionStorage).
  */
 (function () {
@@ -63,7 +63,7 @@
       '<button type="button" class="ot-close" aria-label="Fermer la notification">\u00d7</button>' +
       '<div class="ot-body">' +
       '<p class="ot-text">Besoin d\u2019un onboarding acc\u00e9l\u00e9r\u00e9\u00a0?</p>' +
-      '<a class="ot-yes" href="onboarding.html">Oui</a>' +
+      '<a class="ot-yes" href="/onboarding">Oui</a>' +
       "</div>";
     document.body.appendChild(toast);
 

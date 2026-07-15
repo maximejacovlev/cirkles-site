@@ -9,7 +9,7 @@ User-agent: *
 # Pages à exclure de l'index
 Disallow: /api/
 Disallow: /uploads/
-Disallow: /fraud_network_final.html
+Disallow: /fraud_network_final
 
 # Sitemap
 Sitemap: https://cirkles-site.vercel.app/sitemap.xml

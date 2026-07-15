@@ -10,28 +10,28 @@
  
   <!-- Pages produit / fonctionnalités -->
   <url>
-    <loc>https://cirkles-site.vercel.app/fraude-id.html</loc>
+    <loc>https://cirkles-site.vercel.app/fraude-id</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
  
   <url>
-    <loc>https://cirkles-site.vercel.app/analyse-documentaire.html</loc>
+    <loc>https://cirkles-site.vercel.app/analyse-documentaire</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
  
   <url>
-    <loc>https://cirkles-site.vercel.app/schema.html</loc>
+    <loc>https://cirkles-site.vercel.app/schema</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
  
   <url>
-    <loc>https://cirkles-site.vercel.app/score.html</loc>
+    <loc>https://cirkles-site.vercel.app/score</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -39,49 +39,49 @@
  
   <!-- Blog / Articles -->
   <url>
-    <loc>https://cirkles-site.vercel.app/articles.html</loc>
+    <loc>https://cirkles-site.vercel.app/articles</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=intelligence-collective-fraude</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=intelligence-collective-fraude</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=fraude-documentaire-signaux</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=fraude-documentaire-signaux</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=schemas-complexes-b2b</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=schemas-complexes-b2b</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=score-fraude-declarations</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=score-fraude-declarations</loc>
     <lastmod>2026-02-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=ia-explicable-conformite</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=ia-explicable-conformite</loc>
     <lastmod>2026-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/article.html?slug=fraude-identite-reseau</loc>
+    <loc>https://cirkles-site.vercel.app/article?slug=fraude-identite-reseau</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -89,21 +89,21 @@
  
   <!-- Conversion -->
   <url>
-    <loc>https://cirkles-site.vercel.app/demo-booking.html</loc>
+    <loc>https://cirkles-site.vercel.app/demo-booking</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
  
   <url>
-    <loc>https://cirkles-site.vercel.app/onboarding.html</loc>
+    <loc>https://cirkles-site.vercel.app/onboarding</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles-site.vercel.app/contact.html</loc>
+    <loc>https://cirkles-site.vercel.app/contact</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -111,14 +111,13 @@
  
   <!-- Légal -->
   <url>
-    <loc>https://cirkles-site.vercel.app/confidentialite.html</loc>
+    <loc>https://cirkles-site.vercel.app/confidentialite</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
  
-  <!-- NOTE : fraud_network_final.html est exclu — page interne/démo,
+  <!-- NOTE : fraud_network_final est exclu — page interne/démo,
        à ne pas indexer. Ajoutez-la si elle est publique et utile. -->
  
 </urlset>
- 

@@ -1,9 +1,13 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "redirects": [
-    { "source": "/kyc.html", "destination": "/fraude-id.html", "permanent": true },
-    { "source": "/kyb.html", "destination": "/schema.html", "permanent": true },
-    { "source": "/solvabilite.html", "destination": "/score.html", "permanent": true }
+    { "source": "/kyc.html", "destination": "/fraude-id", "permanent": true },
+    { "source": "/kyc", "destination": "/fraude-id", "permanent": true },
+    { "source": "/kyb.html", "destination": "/schema", "permanent": true },
+    { "source": "/kyb", "destination": "/schema", "permanent": true },
+    { "source": "/solvabilite.html", "destination": "/score", "permanent": true },
+    { "source": "/solvabilite", "destination": "/score", "permanent": true }
   ],
   "functions": {
     "api/**/*.js": {

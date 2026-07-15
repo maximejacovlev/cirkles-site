@@ -222,9 +222,9 @@
     <footer class="site-footer">
       <span>© Cirkles.ai</span>
       <div style="display:flex;gap:16px">
-        <a href="index.html">Accueil</a>
-        <a href="confidentialite.html">Confidentialité</a>
-        <a href="contact.html">Contact</a>
+        <a href="/">Accueil</a>
+        <a href="/confidentialite">Confidentialité</a>
+        <a href="/contact">Contact</a>
       </div>
     </footer>
   </main>
@@ -236,7 +236,7 @@
       const articles = window.CIRKLES_ARTICLES || [];
       articles.forEach(function (a) {
         const card = document.createElement("a");
-        card.href = "article.html?slug=" + encodeURIComponent(a.slug);
+        card.href = "/article?slug=" + encodeURIComponent(a.slug);
         card.className = "article-card liquid-glass";
         card.setAttribute("role", "listitem");
         card.innerHTML =

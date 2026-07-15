@@ -2,6 +2,7 @@
  * Serveur local : fichiers statiques + /api/calendly + POST /api/contact (e-mail).
  * Usage : cp .env.example .env puis npm run dev
  */
+const fs = require("fs");
 const path = require("path");
 
 require("dotenv").config({ path: path.join(__dirname, ".env") });
@@ -128,6 +129,31 @@ app.post("/api/report", async function (req, res) {
   }
 });
 
+app.use(function (req, res, next) {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  var p = req.path;
+  if (p.startsWith("/api/")) return next();
+  if (/^\/index\.html$/i.test(p)) {
+    return res.redirect(301, "/");
+  }
+  if (/\.html$/i.test(p)) {
+    var qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+    return res.redirect(301, p.replace(/\.html$/i, "") + qs);
+  }
+  next();
+});
+
+app.use(function (req, res, next) {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  var p = req.path;
+  if (p.startsWith("/api/") || p === "/" || p.includes(".")) return next();
+  var file = path.join(ROOT, p.replace(/^\//, "") + ".html");
+  if (fs.existsSync(file)) {
+    return res.sendFile(file);
+  }
+  next();
+});
+
 app.use(express.static(ROOT));
 
 function listenFrom(port, attempt) {
@@ -140,7 +166,7 @@ function listenFrom(port, attempt) {
     console.log(
       "Cirkles local → http://localhost:" +
         port +
-        "  |  landing: /index.html  démo: /demo-booking.html  contact: /contact.html"
+        "  |  landing: /  démo: /demo-booking  contact: /contact"
     );
   });
 

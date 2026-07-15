@@ -233,9 +233,11 @@
 
   // ------- Bouton flottant FR / EN (page d'accueil uniquement) -------
   function isIndexPage() {
+    if (window.cirklesPagePath) return window.cirklesPagePath.isHome();
     var path = window.location.pathname || "";
-    var file = path.split("/").pop() || "index.html";
-    return file === "" || file === "index.html";
+    var file = path.split("/").pop() || "";
+    file = file.replace(/\.html$/i, "");
+    return file === "" || file === "index";
   }
 
   function buildButton() {
