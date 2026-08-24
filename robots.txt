@@ -1,4 +1,4 @@
-# robots.txt — https://cirkles.ai
+# robots.txt — https://www.cirkles.ai
 
 User-agent: *
 
@@ -10,4 +10,4 @@ Disallow: /uploads/
 Disallow: /fraud_network_final
 
 # Sitemap
-Sitemap: https://cirkles.ai/sitemap.xml
+Sitemap: https://www.cirkles.ai/sitemap.xml

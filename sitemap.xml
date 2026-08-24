@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cirkles.ai/</loc>
+    <loc>https://www.cirkles.ai/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -9,28 +9,28 @@
 
   <!-- Pages produit / fonctionnalités -->
   <url>
-    <loc>https://cirkles.ai/fraude-id</loc>
+    <loc>https://www.cirkles.ai/fraude-id</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/analyse-documentaire</loc>
+    <loc>https://www.cirkles.ai/analyse-documentaire</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/schema</loc>
+    <loc>https://www.cirkles.ai/schema</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/score</loc>
+    <loc>https://www.cirkles.ai/score</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -38,49 +38,49 @@
 
   <!-- Blog / Articles -->
   <url>
-    <loc>https://cirkles.ai/articles</loc>
+    <loc>https://www.cirkles.ai/articles</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/intelligence-collective-fraude</loc>
+    <loc>https://www.cirkles.ai/articles/intelligence-collective-fraude</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/fraude-documentaire-signaux</loc>
+    <loc>https://www.cirkles.ai/articles/fraude-documentaire-signaux</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/schemas-complexes-b2b</loc>
+    <loc>https://www.cirkles.ai/articles/schemas-complexes-b2b</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/score-fraude-declarations</loc>
+    <loc>https://www.cirkles.ai/articles/score-fraude-declarations</loc>
     <lastmod>2026-02-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/ia-explicable-conformite</loc>
+    <loc>https://www.cirkles.ai/articles/ia-explicable-conformite</loc>
     <lastmod>2026-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/articles/fraude-identite-reseau</loc>
+    <loc>https://www.cirkles.ai/articles/fraude-identite-reseau</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -88,21 +88,21 @@
 
   <!-- Conversion -->
   <url>
-    <loc>https://cirkles.ai/demo-booking</loc>
+    <loc>https://www.cirkles.ai/demo-booking</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/onboarding</loc>
+    <loc>https://www.cirkles.ai/onboarding</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://cirkles.ai/contact</loc>
+    <loc>https://www.cirkles.ai/contact</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -110,7 +110,7 @@
 
   <!-- Légal -->
   <url>
-    <loc>https://cirkles.ai/confidentialite</loc>
+    <loc>https://www.cirkles.ai/confidentialite</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
