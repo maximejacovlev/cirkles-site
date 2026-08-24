@@ -1,13 +1,39 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     { "source": "/kyc.html", "destination": "/fraude-id", "permanent": true },
     { "source": "/kyc", "destination": "/fraude-id", "permanent": true },
     { "source": "/kyb.html", "destination": "/schema", "permanent": true },
     { "source": "/kyb", "destination": "/schema", "permanent": true },
     { "source": "/solvabilite.html", "destination": "/score", "permanent": true },
-    { "source": "/solvabilite", "destination": "/score", "permanent": true }
+    { "source": "/solvabilite", "destination": "/score", "permanent": true },
+    {
+      "source": "/article",
+      "has": [{ "type": "query", "key": "slug", "value": "(?<slug>.+)" }],
+      "destination": "/articles/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "cirkles-site.vercel.app" }],
+      "destination": "https://cirkles.ai/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/articles/:slug", "destination": "/article.html?slug=:slug" }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    }
   ],
   "functions": {
     "api/**/*.js": {
