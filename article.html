@@ -4,9 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Article — Cirkles.ai</title>
+  <meta name="description" content="Articles Cirkles.ai — fraude, intelligence collective et conformité." />
+  <link rel="canonical" href="https://cirkles.ai/articles" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Cirkles.ai" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Article — Cirkles.ai" />
+  <meta property="og:description" content="Articles Cirkles.ai — fraude, intelligence collective et conformité." />
+  <meta property="og:image" content="https://cirkles.ai/images/cirkles-cover-fr.png" />
+  <meta property="og:url" content="https://cirkles.ai/articles" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Article — Cirkles.ai" />
+  <meta name="twitter:description" content="Articles Cirkles.ai — fraude, intelligence collective et conformité." />
+  <meta name="twitter:image" content="https://cirkles.ai/images/cirkles-cover-fr.png" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="images/favicon.png" />
-  <meta name="description" content="Article Cirkles.ai — fraude et intelligence collective" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -214,11 +226,12 @@
   <main id="article-main"></main>
 
   <script src="js/articles-data.js"></script>
+  <script src="js/seo-meta.js"></script>
   <script>
     (function () {
       const main = document.getElementById("article-main");
-      const params = new URLSearchParams(window.location.search);
-      const slug = params.get("slug");
+      const seo = window.CIRKLES_SEO;
+      const slug = seo.getArticleSlug();
       const articles = window.CIRKLES_ARTICLES || [];
       const article = articles.find(function (a) { return a.slug === slug; });
 
@@ -227,8 +240,35 @@
         '<svg aria-hidden="true"><use href="#i-arrow-left"/></svg>' +
         "Tous les articles</a>";
 
+      function setArticleJsonLd(data) {
+        var existing = document.getElementById("article-jsonld");
+        if (existing) existing.remove();
+        var script = document.createElement("script");
+        script.id = "article-jsonld";
+        script.type = "application/ld+json";
+        script.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: data.title,
+          description: data.excerpt,
+          datePublished: data.date,
+          author: { "@type": "Organization", name: "Cirkles.ai" },
+          publisher: {
+            "@type": "Organization",
+            name: "Cirkles.ai",
+            logo: { "@type": "ImageObject", url: seo.OG_IMAGE }
+          },
+          mainEntityOfPage: { "@type": "WebPage", "@id": data.url }
+        });
+        document.head.appendChild(script);
+      }
+
       if (!article) {
-        document.title = "Article introuvable — Cirkles.ai";
+        seo.applyPageMeta({
+          title: "Article introuvable — Cirkles.ai",
+          description: "Cet article n'existe pas ou a été déplacé.",
+          url: seo.SITE + "/articles"
+        });
         main.innerHTML =
           '<div class="not-found liquid-glass article-shell">' +
           backLink +
@@ -238,9 +278,20 @@
         return;
       }
 
-      document.title = article.title + " — Cirkles.ai";
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute("content", article.excerpt);
+      var pageTitle = article.title + " — Cirkles.ai";
+      var pageUrl = seo.SITE + "/articles/" + article.slug;
+      seo.applyPageMeta({
+        title: pageTitle,
+        description: article.excerpt,
+        url: pageUrl,
+        type: "article"
+      });
+      setArticleJsonLd({
+        title: article.title,
+        excerpt: article.excerpt,
+        date: article.date,
+        url: pageUrl
+      });
 
       const bodyHtml = article.body.map(function (p) {
         return "<p>" + p + "</p>";
