@@ -18,7 +18,7 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "cirkles-site.vercel.app" }],
-      "destination": "https://cirkles.ai/:path*",
+      "destination": "https://www.cirkles.ai/:path*",
       "permanent": true
     }
   ],

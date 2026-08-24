@@ -1,7 +1,7 @@
 /** Helpers SEO partagés — mise à jour dynamique des balises head (articles). */
 window.CIRKLES_SEO = {
-  SITE: "https://cirkles.ai",
-  OG_IMAGE: "https://cirkles.ai/images/cirkles-cover-fr.png",
+  SITE: "https://www.cirkles.ai",
+  OG_IMAGE: "https://www.cirkles.ai/images/cirkles-cover-fr.png",
 
   setMeta: function (attr, key, content) {
     var sel = "meta[" + attr + '="' + key + '"]';
